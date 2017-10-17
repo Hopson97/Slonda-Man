@@ -7,6 +7,7 @@
 
 #include "Util/FPSCounter.h"
 #include "States/StateBase.h"
+#include "Context.h"
 
 class Game
 {
@@ -28,7 +29,8 @@ class Game
 
         StateBase& getCurrentState();
 
-        sf::RenderWindow m_window;
+        Context m_context;
+        sf::RenderWindow& m_window;
         std::vector<std::unique_ptr<StateBase>> m_states;
 
         FPSCounter m_fpsCounter;

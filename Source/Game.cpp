@@ -3,7 +3,8 @@
 #include "States/StatePlaying.h"
 
 Game::Game()
-:   m_window ({1280, 720}, "GameNameHere")
+:   m_context       ()
+,   m_window        (m_context.window)
 ,   m_fpsCounter    ("FPS", {10, 10})
 ,   m_tpsCounter    ("TPS", {8,  25})
 {
@@ -13,9 +14,9 @@ Game::Game()
 
 void Game::run()
 {
-    constexpr unsigned TPS = 5; //ticks per seconds
-    const sf::Time     timePerUpdate = sf::seconds(1.0f / float(TPS));
-    unsigned ticks = 0;
+    constexpr   unsigned    TPS             = 5; //ticks per seconds
+    const       sf::Time    timePerUpdate   = sf::seconds(1.0f / float(TPS));
+    unsigned                ticks           = 0;
 
     sf::Clock timer;
     auto lastTime = sf::Time::Zero;
