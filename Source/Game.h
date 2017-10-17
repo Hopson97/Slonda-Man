@@ -31,7 +31,8 @@ class Game
         sf::RenderWindow m_window;
         std::vector<std::unique_ptr<StateBase>> m_states;
 
-        FPSCounter counter;
+        FPSCounter m_fpsCounter;
+        FPSCounter m_tpsCounter;
 
         bool m_shouldPop = false;
 

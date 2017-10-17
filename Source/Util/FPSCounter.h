@@ -6,7 +6,7 @@
 class FPSCounter
 {
     public:
-        FPSCounter();
+        FPSCounter(const std::string& name, const sf::Vector2f& position);
 
         void update();
 
@@ -22,6 +22,8 @@ class FPSCounter
         float m_fps = 0;
 
         int m_frameCount = 0;
+
+        std::string m_name;
 };
 
 #endif // FPSCOUNTER_H_INCLUDED

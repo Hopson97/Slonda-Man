@@ -3,7 +3,9 @@
 #include "States/StatePlaying.h"
 
 Game::Game()
-:   m_window    ({1280, 720}, "GameNameHere")
+:   m_window ({1280, 720}, "GameNameHere")
+,   m_fpsCounter    ("FPS", {10, 10})
+,   m_tpsCounter    ("TPS", {8,  25})
 {
     m_window.setVerticalSyncEnabled(true);
     pushState<StatePlaying>(*this);
@@ -11,7 +13,7 @@ Game::Game()
 
 void Game::run()
 {
-    constexpr unsigned TPS = 5;                            //ticks per seconds
+    constexpr unsigned TPS = 5; //ticks per seconds
     const sf::Time     timePerUpdate = sf::seconds(1.0f / float(TPS));
     unsigned ticks = 0;
 
@@ -33,7 +35,7 @@ void Game::run()
         //Real time update
         state.handleInput();
         state.update(elapsed);
-        counter.update();
+        m_fpsCounter.update();
 
         //Fixed time update
         while (lag >= timePerUpdate)
@@ -41,12 +43,14 @@ void Game::run()
             ticks++;
             lag -= timePerUpdate;
             state.fixedUpdate(elapsed);
+            m_tpsCounter.update();
         }
 
         //Render
         m_window.clear();
         state.render(m_window);
-        counter.draw(m_window);
+        m_fpsCounter.draw(m_window);
+        m_tpsCounter.draw(m_window);
         m_window.display();
 
 
