@@ -29,6 +29,9 @@ class QuadRenderer
 
         Model   m_quad;
         Shader  m_primShader;
+
+        GLuint  m_locModelMatrix;
+        GLuint  m_locProjViewMatrix;
 };
 
 #endif // PRIMITIVERENDERER_H_INCLUDED

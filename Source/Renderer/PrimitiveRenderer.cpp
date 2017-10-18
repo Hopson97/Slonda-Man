@@ -1,5 +1,9 @@
 #include "PrimitiveRenderer.h"
 
+#include "../GLLib/GLFunctions.h"
+#include "../Maths/Matrix.h"
+#include "../Camera.h"
+
 QuadRenderer::QuadRenderer()
 :   m_primShader    ("Primitive", "Primitive")
 {
@@ -19,7 +23,8 @@ QuadRenderer::QuadRenderer()
 
     m_quad.create(vert, indices);
 
-    //init shader
+    m_locModelMatrix    = GL::getUniformLocation(m_primShader.getShaderID(), "modelMatrix");
+    m_locProjViewMatrix = GL::getUniformLocation(m_primShader.getShaderID(), "projectionViewMatrix");
 }
 
 void QuadRenderer::add(const glm::vec3& location)
@@ -32,9 +37,11 @@ void QuadRenderer::render(const Camera& camera)
     m_quad.bindVAO();
     m_primShader.useProgram();
 
+    GL::loadUniform(m_locProjViewMatrix, camera.getProjViewMatrix());
+
     for (auto& quad : m_quadLocations)
     {
-        //matrix maths
+        GL::loadUniform(m_locModelMatrix, createModelMatrix(quad, {0, 0, 0}));
         GL::drawElements(m_quad.getIndicesCount());
     }
     m_quadLocations.clear();

@@ -34,5 +34,5 @@ void StatePlaying::fixedUpdate(sf::Time deltaTime)
 
 void StatePlaying::render(MasterRenderer& renderer)
 {
-    renderer.addObject({0, 0, 0}, Primitive::Quad);
+    renderer.addObject({0, 0.5, 0}, Primitive::Quad);
 }
