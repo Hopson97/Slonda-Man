@@ -57,7 +57,7 @@ void Game::run()
         m_fpsCounter.draw(m_renderer);
         m_tpsCounter.draw(m_renderer);
 
-        m_renderer.render(m_window);
+        m_renderer.render(m_window, m_camera);
 
         m_window.display();
 

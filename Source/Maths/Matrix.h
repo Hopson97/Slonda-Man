@@ -7,6 +7,6 @@ class Camera;
 
 glm::mat4 createModelMatrix     (const glm::vec3& position, const glm::vec3& rotation);
 glm::mat4 createViewMatrix      (const Camera& camera);
-glm::mat4 makeProjectionMatrix  ();
+glm::mat4 createProjectionMatrix  ();
 
 #endif // MATRIX_H_INCLUDED

@@ -27,11 +27,11 @@ void QuadRenderer::add(const glm::vec3& location)
    m_quadLocations.push_back(location);
 }
 
-void QuadRenderer::render()
+void QuadRenderer::render(const Camera& camera)
 {
     m_quad.bindVAO();
     m_primShader.useProgram();
-    //uniform locations
+
     for (auto& quad : m_quadLocations)
     {
         //matrix maths

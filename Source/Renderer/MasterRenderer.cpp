@@ -15,8 +15,8 @@ void MasterRenderer::addObject(const sf::Drawable& drawable)
     m_sfmlRenderer.add(drawable);
 }
 
-void MasterRenderer::render(sf::RenderWindow& target)
+void MasterRenderer::render(sf::RenderWindow& target, const Camera& camera)
 {
-    m_quadRenderer.render();
+    m_quadRenderer.render(camera);
     m_sfmlRenderer.render(target);
 }

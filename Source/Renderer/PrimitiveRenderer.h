@@ -8,6 +8,8 @@
 #include "../Model.h"
 #include "../Shaders/Shader.h"
 
+class Camera;
+
 enum class Primitive
 {
     Quad,
@@ -20,7 +22,7 @@ class QuadRenderer
 
         void add(const glm::vec3& location);
 
-        void render();
+        void render(const Camera& camera);
 
     private:
         std::vector<glm::vec3> m_quadLocations;

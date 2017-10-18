@@ -9,6 +9,7 @@
 #include "States/StateBase.h"
 #include "Context.h"
 #include "Renderer/MasterRenderer.h"
+#include "Camera.h"
 
 class Game
 {
@@ -37,6 +38,7 @@ class Game
         FPSCounter      m_fpsCounter;
         FPSCounter      m_tpsCounter;
         MasterRenderer  m_renderer;
+        Camera          m_camera;
 
         bool m_shouldPop = false;
 
