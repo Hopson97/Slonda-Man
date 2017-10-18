@@ -3,6 +3,6 @@
 
 #include <string>
 
-std::string getFileContent(const std::string& filePath, bool throws);
+std::string getFileContent(const std::string& filePath, bool throws = true);
 
 #endif // FILEUTIL_H_INCLUDED

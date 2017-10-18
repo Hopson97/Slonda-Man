@@ -1,6 +1,7 @@
 #include "PrimitiveRenderer.h"
 
 QuadRenderer::QuadRenderer()
+:   m_primShader    ("Primitive", "Primitive")
 {
     std::vector<GLfloat> vert
     {
@@ -29,7 +30,7 @@ void QuadRenderer::add(const glm::vec3& location)
 void QuadRenderer::render()
 {
     m_quad.bindVAO();
-    //init shader
+    m_primShader.useProgram();
     //uniform locations
     for (auto& quad : m_quadLocations)
     {

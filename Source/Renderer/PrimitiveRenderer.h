@@ -6,6 +6,7 @@
 #include "../GLLib/GLFunctions.h"
 #include "../Maths/GlmIncludes.h"
 #include "../Model.h"
+#include "../Shaders/Shader.h"
 
 enum class Primitive
 {
@@ -24,7 +25,8 @@ class QuadRenderer
     private:
         std::vector<glm::vec3> m_quadLocations;
 
-        Model m_quad;
+        Model   m_quad;
+        Shader  m_primShader;
 };
 
 #endif // PRIMITIVERENDERER_H_INCLUDED
