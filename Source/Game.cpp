@@ -16,7 +16,7 @@ Game::Game()
 
 void Game::run()
 {
-    constexpr   unsigned    TPS             = 5; //ticks per seconds
+    constexpr   unsigned    TPS             = 25; //ticks per seconds
     const       sf::Time    timePerUpdate   = sf::seconds(1.0f / float(TPS));
     unsigned                ticks           = 0;
 
@@ -39,6 +39,7 @@ void Game::run()
         state.handleInput();
         state.update(elapsed);
         m_fpsCounter.update();
+        m_camera.update();
 
         //Fixed time update
         while (lag >= timePerUpdate)
@@ -51,7 +52,7 @@ void Game::run()
 
         //Render
         glClearColor(0.5, 0.5, 0.5, 1);
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         state.render(m_renderer);
         m_fpsCounter.draw(m_renderer);

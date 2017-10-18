@@ -23,8 +23,8 @@ QuadRenderer::QuadRenderer()
 
     m_quad.create(vert, indices);
 
-    m_locModelMatrix    = GL::getUniformLocation(m_primShader.getShaderID(), "modelMatrix");
-    m_locProjViewMatrix = GL::getUniformLocation(m_primShader.getShaderID(), "projectionViewMatrix");
+    m_locModelMatrix    = m_primShader.getUniformLocation("modelMatrix");
+    m_locProjViewMatrix = m_primShader.getUniformLocation("projectionViewMatrix");
 }
 
 void QuadRenderer::add(const glm::vec3& location)

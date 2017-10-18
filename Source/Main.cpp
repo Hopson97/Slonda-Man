@@ -13,6 +13,7 @@
     }
 #endif // __WIN32
 */
+
 int main()
 {
     Game game;

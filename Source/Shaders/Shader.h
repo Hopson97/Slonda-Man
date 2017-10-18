@@ -17,6 +17,7 @@ class Shader : public NonCopyable, public NonMovable
         void useProgram() const;
 
         GLuint getShaderID() const;
+        GLuint getUniformLocation(const GLchar* name) const;
 
     private:
         GLuint m_shaderProgram;

@@ -21,3 +21,8 @@ GLuint Shader::getShaderID() const
 {
     return m_shaderProgram;
 }
+
+GLuint Shader::getUniformLocation(const GLchar* name) const
+{
+    glGetUniformLocation(m_shaderProgram, name);
+}
