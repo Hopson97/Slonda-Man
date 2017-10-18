@@ -93,6 +93,17 @@ void Game::handleEvent()
                 m_window.close();
                 break;
 
+            case sf::Event::KeyPressed:
+                switch(e.key.code)
+                {
+                    case sf::Keyboard::Q:
+                        m_window.close();
+                        break;
+
+                    default:
+                        break;
+                }
+
             default:
                 break;
 
