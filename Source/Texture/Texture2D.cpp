@@ -16,7 +16,7 @@ Texture2D::~Texture2D()
 void Texture2D::create(const std::string& texName)
 {
     sf::Image i;
-    i.loadFromFile("Res/Textures/" + texName + ".png");
+    i.loadFromFile("res/txrs/" + texName + ".png");
 
     glGenTextures(1, &m_texID);
     glActiveTexture(GL_TEXTURE0);

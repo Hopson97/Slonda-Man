@@ -7,6 +7,7 @@
 #include "../Maths/GlmIncludes.h"
 #include "../Model.h"
 #include "../Shaders/Shader.h"
+#include "../Texture/Texture2D.h"
 
 class Camera;
 
@@ -39,6 +40,8 @@ class QuadRenderer
 
         GLuint  m_locModelMatrix;
         GLuint  m_locProjViewMatrix;
+
+        Texture2D m_textureTest;
 };
 
 #endif // PRIMITIVERENDERER_H_INCLUDED

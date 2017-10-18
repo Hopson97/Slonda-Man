@@ -3,18 +3,21 @@
 #include <iostream>
 
 Model::Model(const std::vector<GLfloat>& vertexPositions,
+             const std::vector<GLfloat>& textureCoordinates,
              const std::vector<GLuint>&  indices)
 {
-    create(vertexPositions, indices);
+    create(vertexPositions, textureCoordinates, indices);
 }
 
 void Model::create(const std::vector<GLfloat>& vertexPositions,
+                   const std::vector<GLfloat>& textureCoordinates,
                    const std::vector<GLuint>&  indices)
 {
     glGenVertexArrays(1, &m_VAO);
     glBindVertexArray(m_VAO);
 
     addVBO(3, vertexPositions);
+    addVBO(2, textureCoordinates);
     createEBO(indices);
 }
 

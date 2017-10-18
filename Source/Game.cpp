@@ -35,8 +35,11 @@ void Game::run()
         lastTime = time;
         lag += elapsed;
 
-        //Real time update
+        //Real time input
         state.handleInput();
+        m_camera.handleInput(m_window);
+
+        //Real time update
         state.update(elapsed);
         m_fpsCounter.update();
         m_camera.update();

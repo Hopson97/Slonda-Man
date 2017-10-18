@@ -6,6 +6,7 @@
 
 QuadRenderer::QuadRenderer()
 :   m_primShader    ("Primitive", "Primitive")
+,   m_textureTest   ("face")
 {
     std::vector<GLfloat> vert
     {
@@ -15,13 +16,21 @@ QuadRenderer::QuadRenderer()
          0.5,  0.5, 0,
     };
 
+    std::vector<GLfloat> texure
+    {
+        0, 0,
+        0, 1,
+        1, 1,
+        1, 0
+    };
+
     std::vector<GLuint> indices
     {
         0, 1, 2,
         2, 3, 0,
     };
 
-    m_quad.create(vert, indices);
+    m_quad.create(vert, texure, indices);
 
     m_locModelMatrix    = m_primShader.getUniformLocation("modelMatrix");
     m_locProjViewMatrix = m_primShader.getUniformLocation("projectionViewMatrix");
@@ -36,6 +45,7 @@ void QuadRenderer::render(const Camera& camera)
 {
     m_quad.bindVAO();
     m_primShader.useProgram();
+    m_textureTest.bind();
 
     GL::loadUniform(m_locProjViewMatrix, camera.getProjViewMatrix());
 
