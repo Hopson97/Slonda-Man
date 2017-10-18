@@ -12,7 +12,7 @@ class Camera;
 class MasterRenderer
 {
     public:
-        void addObject(const glm::vec3& location, Primitive type);
+        void addObject(const glm::vec3& location, const glm::vec3& rotation, Primitive type);
         void addObject(const sf::Drawable& drawable);
 
         void render(sf::RenderWindow& target, const Camera& camera);

@@ -1,11 +1,11 @@
 #include "MasterRenderer.h"
 
-void MasterRenderer::addObject(const glm::vec3& location, Primitive type)
+void MasterRenderer::addObject(const glm::vec3& location, const glm::vec3& rotation, Primitive type)
 {
     switch(type)
     {
         case Primitive::Quad:
-            m_quadRenderer.add(location);
+            m_quadRenderer.add(location, rotation);
             break;
     }
 }

@@ -15,17 +15,24 @@ enum class Primitive
     Quad,
 };
 
+struct PrimitiveTransform
+{
+    glm::vec3 location;
+    glm::vec3 rotation;
+
+};
+
 class QuadRenderer
 {
     public:
         QuadRenderer();
 
-        void add(const glm::vec3& location);
+        void add(const glm::vec3& location, const glm::vec3& rotation);
 
         void render(const Camera& camera);
 
     private:
-        std::vector<glm::vec3> m_quadLocations;
+        std::vector<PrimitiveTransform> m_quadLocations;
 
         Model   m_quad;
         Shader  m_primShader;

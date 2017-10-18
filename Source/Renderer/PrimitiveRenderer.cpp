@@ -27,9 +27,9 @@ QuadRenderer::QuadRenderer()
     m_locProjViewMatrix = m_primShader.getUniformLocation("projectionViewMatrix");
 }
 
-void QuadRenderer::add(const glm::vec3& location)
+void QuadRenderer::add(const glm::vec3& location, const glm::vec3& rotation)
 {
-   m_quadLocations.push_back(location);
+   m_quadLocations.push_back({location, rotation});
 }
 
 void QuadRenderer::render(const Camera& camera)
@@ -41,7 +41,7 @@ void QuadRenderer::render(const Camera& camera)
 
     for (auto& quad : m_quadLocations)
     {
-        GL::loadUniform(m_locModelMatrix, createModelMatrix(quad, {0, 0, 0}));
+        GL::loadUniform(m_locModelMatrix, createModelMatrix(quad.location, quad.rotation));
         GL::drawElements(m_quad.getIndicesCount());
     }
     m_quadLocations.clear();

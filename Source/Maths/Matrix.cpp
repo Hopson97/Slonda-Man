@@ -5,11 +5,13 @@
 glm::mat4 createModelMatrix(const glm::vec3& position, const glm::vec3& rotation)
 {
     glm::mat4 matrix;
+
+    matrix = glm::translate(matrix, position);
     matrix = glm::rotate(matrix, glm::radians(rotation.x), {1, 0, 0});
     matrix = glm::rotate(matrix, glm::radians(rotation.y), {0, 1, 0});
     matrix = glm::rotate(matrix, glm::radians(rotation.z), {0, 0, 1});
 
-    matrix = glm::translate(matrix, position);
+
 
     return matrix;
 }

@@ -23,6 +23,7 @@ void StatePlaying::handleInput()
 }
 
 glm::vec3 pos;
+glm::vec3 rot;
 void StatePlaying::update(sf::Time deltaTime)
 {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
@@ -58,5 +59,6 @@ void StatePlaying::fixedUpdate(sf::Time deltaTime)
 
 void StatePlaying::render(MasterRenderer& renderer)
 {
-    renderer.addObject(pos, Primitive::Quad);
+    rot.y++;
+    renderer.addObject(pos, rot, Primitive::Quad);
 }
