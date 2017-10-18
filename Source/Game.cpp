@@ -2,6 +2,8 @@
 
 #include "States/StatePlaying.h"
 
+#include <GL/glew.h>
+
 Game::Game()
 :   m_context       ()
 ,   m_window        (m_context.window)
@@ -48,10 +50,26 @@ void Game::run()
         }
 
         //Render
-        m_window.clear();
+        glClearColor(0.5, 0.5, 0.5, 1);
+        glClear(GL_COLOR_BUFFER_BIT);
         state.render(m_window);
+
+        //prep for SFML drawing
+        glDisable(GL_DEPTH_TEST);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        glBindVertexArray(0);
+        glBindTexture(GL_TEXTURE_2D, 0);
+        glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+        glUseProgram(0);
+        //reset gl states
+        m_window.pushGLStates();
+        m_window.resetGLStates();
         m_fpsCounter.draw(m_window);
         m_tpsCounter.draw(m_window);
+        m_window.popGLStates();
+        m_window.resetGLStates();
+        //end sfml drawing
+
         m_window.display();
 
 

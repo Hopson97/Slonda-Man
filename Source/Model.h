@@ -10,19 +10,25 @@ class Model : public NonCopyable
 {
     public:
         Model() = default;
-        Model(const std::vector<GLfloat>& vertexPositions);
+        Model(const std::vector<GLfloat>& vertexPositions,
+              const std::vector<GLuint>&  indices);
 
-        void create(const std::vector<GLfloat>& vertexPositions);
+        void create(const std::vector<GLfloat>& vertexPositions,
+                    const std::vector<GLuint>&  indices);
 
         void addVBO(int dim, const std::vector<GLfloat>& data);
 
-        void bindVAO();
+        void bindVAO() const ;
+        GLuint getIndicesCount() const;
 
         ~Model();
 
     private:
+        void createEBO(const std::vector<GLuint>&  indices);
+
         std::vector<GLuint> m_VBOs;
         GLuint m_VAO = 0;
+        GLuint m_indicesCount = 0;
 
 
 };
