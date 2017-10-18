@@ -11,20 +11,7 @@ Model m;
 
 StatePlaying::StatePlaying(Game& game)
 :   StateBase   (game)
-{
-
-    m.create(
-    {
-        -0.5,  0.5, 0,
-        -0.5, -0.5, 0,
-         0.5, -0.5, 0,
-         0.5,  0.5, 0,
-    },
-    {
-        0, 1, 2,
-        2, 3, 0
-    });
-}
+{ }
 
 void StatePlaying::handleEvent(sf::Event e)
 {
@@ -45,8 +32,7 @@ void StatePlaying::fixedUpdate(sf::Time deltaTime)
 
 }
 
-void StatePlaying::render(sf::RenderTarget& renderer)
+void StatePlaying::render(MasterRenderer& renderer)
 {
-    m.bindVAO();
-    glDrawElements(GL_TRIANGLES, m.getIndicesCount(), GL_UNSIGNED_INT, nullptr);
+    renderer.addObject({0, 0, 0}, Primitive::Quad);
 }

@@ -13,7 +13,7 @@ class StatePlaying : public StateBase
         void handleInput    ()                              override;
         void update         (sf::Time deltaTime)            override;
         void fixedUpdate    (sf::Time deltaTime)            override;
-        void render         (sf::RenderTarget& renderer)    override;
+        void render         (MasterRenderer& renderer)    override;
 
     private:
 };

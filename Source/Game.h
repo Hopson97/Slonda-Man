@@ -8,6 +8,7 @@
 #include "Util/FPSCounter.h"
 #include "States/StateBase.h"
 #include "Context.h"
+#include "Renderer/MasterRenderer.h"
 
 class Game
 {
@@ -33,10 +34,13 @@ class Game
         sf::RenderWindow& m_window;
         std::vector<std::unique_ptr<StateBase>> m_states;
 
-        FPSCounter m_fpsCounter;
-        FPSCounter m_tpsCounter;
+        FPSCounter      m_fpsCounter;
+        FPSCounter      m_tpsCounter;
+        MasterRenderer  m_renderer;
 
         bool m_shouldPop = false;
+
+
 
 };
 

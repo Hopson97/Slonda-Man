@@ -52,7 +52,9 @@ void Game::run()
         //Render
         glClearColor(0.5, 0.5, 0.5, 1);
         glClear(GL_COLOR_BUFFER_BIT);
-        state.render(m_window);
+        state.render(m_renderer);
+
+        m_renderer.render();
 
         //prep for SFML drawing
         glDisable(GL_DEPTH_TEST);
