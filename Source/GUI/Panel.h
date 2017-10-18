@@ -15,7 +15,7 @@ namespace gui
             void addWidget(std::unique_ptr<Widget>);
 
             void handleEvent   (sf::Event e, const sf::RenderWindow& window);
-            void render         (sf::RenderTarget& renderer);
+            void render         (sf::RenderWindow& renderer);
 
         private:
             void initWidget(Widget& w);

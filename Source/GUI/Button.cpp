@@ -52,7 +52,7 @@ void Button::handleEvent(sf::Event e, const sf::RenderWindow& window)
     }
 }
 
-void Button::render(sf::RenderTarget& renderer)
+void Button::render(sf::RenderWindow& renderer)
 {
     renderer.draw(m_button);
     renderer.draw(m_text);

@@ -10,7 +10,13 @@ void MasterRenderer::addObject(const glm::vec3& location, Primitive type)
     }
 }
 
-void MasterRenderer::render()
+void MasterRenderer::addObject(const sf::Drawable& drawable)
+{
+    m_sfmlRenderer.add(drawable);
+}
+
+void MasterRenderer::render(sf::RenderWindow& target)
 {
     m_quadRenderer.render();
+    m_sfmlRenderer.render(target);
 }

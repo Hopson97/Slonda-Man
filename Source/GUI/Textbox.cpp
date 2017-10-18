@@ -22,7 +22,7 @@ void TextBox::handleEvent(sf::Event e, const sf::RenderWindow& window)
     handleTextInput (e);
 }
 
-void TextBox::render(sf::RenderTarget& renderer)
+void TextBox::render(sf::RenderWindow& renderer)
 {
     if (!m_isActive)
     {

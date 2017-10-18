@@ -3,6 +3,8 @@
 
 #include <SFML/Graphics.hpp>
 
+class MasterRenderer;
+
 class FPSCounter
 {
     public:
@@ -10,7 +12,7 @@ class FPSCounter
 
         void update();
 
-        void draw(sf::RenderTarget& renderer);
+        void draw(MasterRenderer& renderer);
 
     private:
         sf::Text m_text;

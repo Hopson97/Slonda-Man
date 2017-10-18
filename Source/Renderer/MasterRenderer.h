@@ -3,17 +3,21 @@
 
 #include <GL/glew.h>
 #include "../Maths/GlmIncludes.h"
+
 #include "PrimitiveRenderer.h"
+#include "SfmlRenderer.h"
 
 class MasterRenderer
 {
     public:
         void addObject(const glm::vec3& location, Primitive type);
+        void addObject(const sf::Drawable& drawable);
 
-        void render();
+        void render(sf::RenderWindow& target);
 
     private:
-        QuadRenderer m_quadRenderer;
+        QuadRenderer    m_quadRenderer;
+        SfmlRenderer    m_sfmlRenderer;
 
 };
 

@@ -1,7 +1,7 @@
 #include "FPSCounter.h"
 
 #include "../ResourceManager/ResourceHolder.h"
-
+#include "../Renderer/MasterRenderer.h"
 #include <iostream>
 
 FPSCounter::FPSCounter(const std::string& name, const sf::Vector2f& position)
@@ -28,8 +28,8 @@ void FPSCounter::update()
     }
 }
 
-void FPSCounter::draw(sf::RenderTarget& renderer)
+void FPSCounter::draw(MasterRenderer& renderer)
 {
     m_text.setString(m_name + ": " + std::to_string((int)m_fps));
-    renderer.draw(m_text);
+    renderer.addObject(m_text);
 }

@@ -68,7 +68,7 @@ void StackMenu::handleEvent(sf::Event e, const sf::RenderWindow& window)
     }
 }
 
-void StackMenu::render(sf::RenderTarget& renderer)
+void StackMenu::render(sf::RenderWindow& renderer)
 {
     renderer.draw(m_background);
     for (auto& widget : m_widgets)
