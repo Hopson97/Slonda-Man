@@ -5,14 +5,8 @@
 #include <string>
 #include <GL/glew.h>
 
-struct OutMesh
-{
-    std::vector<GLfloat> vertexCoords;
-    std::vector<GLfloat> texCoords;
-    std::vector<GLfloat> normals;
-    std::vector<GLuint>  indices;
-};
+#include "Mesh.h"
 
-OutMesh loadObjModel(const std::string& fileName);
+Mesh loadObjModel(const std::string& fileName);
 
 #endif // MODELLOADER_H_INCLUDED

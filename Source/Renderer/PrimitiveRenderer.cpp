@@ -33,7 +33,7 @@ QuadRenderer::QuadRenderer()
         2, 3, 0,
     };
 
-    m_quad.create(vert, texure, indices);
+    m_quad.create({vert, texure, {}, indices});
 
     m_locModelMatrix    = m_primShader.getUniformLocation("modelMatrix");
     m_locProjViewMatrix = m_primShader.getUniformLocation("projectionViewMatrix");

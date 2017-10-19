@@ -3,24 +3,21 @@
 #include <iostream>
 
 #include "../GLlib/GLFunctions.h"
+#include "Mesh.h"
 
-Model::Model(const std::vector<GLfloat>& vertexPositions,
-             const std::vector<GLfloat>& textureCoordinates,
-             const std::vector<GLuint>&  indices)
+Model::Model(const Mesh& mesh)
 {
-    create(vertexPositions, textureCoordinates, indices);
+    create(mesh);
 }
 
-void Model::create(const std::vector<GLfloat>& vertexPositions,
-                   const std::vector<GLfloat>& textureCoordinates,
-                   const std::vector<GLuint>&  indices)
+void Model::create(const Mesh& mesh)
 {
     glGenVertexArrays(1, &m_VAO);
     glBindVertexArray(m_VAO);
 
-    addVBO(3, vertexPositions);
-    addVBO(2, textureCoordinates);
-    createEBO(indices);
+    addVBO(3, mesh.vertexCoords);
+    addVBO(2, mesh.texCoords);
+    createEBO(mesh.indices);
 }
 
 void Model::addVBO(int dim, const std::vector<GLfloat>& data)

@@ -46,9 +46,8 @@ void insertIntoStringVector(std::vector<std::string>* vec, std::istringstream* s
         vec->push_back(x[i]);
 }
 
-OutMesh loadObjModel(const std::string& fileName)
+Mesh loadObjModel(const std::string& fileName)
 {
-    std::cout << "loading\n";
     // OBJ File Vectors
     std::vector<vector3f> vertices, normals;
     std::vector<vector2f> textureCoordinates;
@@ -65,12 +64,12 @@ OutMesh loadObjModel(const std::string& fileName)
 
     // Attempt to read file, if error occurs it returns a nullptr
     try{
-        objFile.open(fileName);
+        objFile.open("res/models/" + fileName + ".obj");
         obj << objFile.rdbuf();
         objFile.close();
 
     } catch (std::ios_base::failure e) {
-        std::cout << "Error loading " << fileName << std::endl;
+        std::cout << "Error loading " << "res/models/" + fileName + ".obj" << std::endl;
         //return nullptr;
     }
 

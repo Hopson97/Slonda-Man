@@ -6,17 +6,15 @@
 #include "../Util/NonCopyable.h"
 #include <GL/glew.h>
 
+class Mesh;
+
 class Model : public NonCopyable
 {
     public:
         Model() = default;
-        Model(const std::vector<GLfloat>& vertexPositions,
-              const std::vector<GLfloat>& textureCoordinates,
-              const std::vector<GLuint>&  indices);
+        Model(const Mesh& mesh);
 
-        void create(const std::vector<GLfloat>& vertexPositions,
-                    const std::vector<GLfloat>& textureCoordinates,
-                    const std::vector<GLuint>&  indices);
+        void create(const Mesh& mesh);
 
         void addVBO(int dim, const std::vector<GLfloat>& data);
 
