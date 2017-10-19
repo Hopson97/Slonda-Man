@@ -13,6 +13,9 @@ class Texture2D : public NonCopyable, public NonMovable
         Texture2D() = default;
         Texture2D(const std::string& texName);
 
+        Texture2D(const Texture2D& other);
+        Texture2D(Texture2D&& other);
+
         ~Texture2D();
 
         void create(const std::string& texName);
