@@ -20,7 +20,7 @@ class StatePlaying : public StateBase
 
     private:
         TexturedModel m_testModel;
-        //Entity m_testEntity;
+        TexturedModel m_testModel2;
 
         std::vector<Entity> m_entities;
 

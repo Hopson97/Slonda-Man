@@ -11,51 +11,52 @@
 #include <GL/glew.h>
 #include <array>
 
-typedef std::array<GLfloat, 3> vector3f;
-typedef std::array<float, 2> vector2f;
-typedef std::array<std::string, 3> faceArray;
-
-//The code below this comment was not written by me, so all credit goes to github use Ruixel
-template<typename T>
-void insertIntoFloatVector(std::vector<T>* vec, std::istringstream* ss,
-                            size_t arraySize)
- {
-    std::array<std::string, 3> x;
-    ss->seekg(2);
-
-    if (arraySize == 2)
-        *ss >> x[0] >> x[1];
-    else
-        *ss >> x[0] >> x[1] >> x[2];
-
-    T tArray;
-    for(size_t i = 0; i<arraySize; i++)
-        tArray[i] = stof(x[i]);
-    vec->push_back(tArray);
-
-}
-
-void insertIntoStringVector(std::vector<std::string>* vec, std::istringstream* ss)
+namespace
 {
-    std::array<std::string, 3> x;
-    ss->seekg(2);
+    using Vector3   = std::array<GLfloat, 3>;
+    using Vector2   = std::array<GLfloat, 2>;
+    using FaceArray = std::array<std::string, 3>;
 
-    *ss >> x[0] >> x[1] >> x[2];
+    //The code below this comment was not written by me, so all credit goes to github use Ruixel
+    template<typename T>
+    void insertIntoFloatVector(std::vector<T>& vec, std::istringstream& ss,
+                                size_t arraySize)
+     {
+        std::array<std::string, 3> x;
+        ss.seekg(2);
 
-    for(int i = 0; i<3; i++)
-        vec->push_back(x[i]);
+        if (arraySize == 2)
+            ss >> x[0] >> x[1];
+        else
+            ss >> x[0] >> x[1] >> x[2];
+
+        T tArray;
+        for(size_t i = 0; i<arraySize; i++)
+            tArray[i] = stof(x[i]);
+        vec.push_back(tArray);
+
+    }
+
+    void insertIntoStringVector(std::vector<std::string>& vec, std::istringstream& inStream)
+    {
+        std::array<std::string, 3> x;
+        inStream.seekg(2);
+
+        inStream >> x[0] >> x[1] >> x[2];
+
+        for(int i = 0; i< 3; i++)
+            vec.push_back(x[i]);
+    }
 }
 
 Mesh loadObjModel(const std::string& fileName)
 {
     // OBJ File Vectors
-    std::vector<vector3f> vertices, normals;
-    std::vector<vector2f> textureCoordinates;
+    std::vector<Vector3> vertices, normals;
+    std::vector<Vector2> textureCoordinates;
     std::vector<std::string> faces;
 
-    // VBO Arrays
-    std::vector<GLfloat> a_vertices, a_texCoords, a_normals;
-    std::vector<GLuint>  a_indices;
+    Mesh outMesh;
 
     // File Buffer Objects
     std::ifstream objFile;
@@ -63,12 +64,15 @@ Mesh loadObjModel(const std::string& fileName)
     objFile.exceptions( std::ifstream::badbit );
 
     // Attempt to read file, if error occurs it returns a nullptr
-    try{
+    try
+    {
         objFile.open("res/models/" + fileName + ".obj");
         obj << objFile.rdbuf();
         objFile.close();
 
-    } catch (std::ios_base::failure e) {
+    }
+    catch (std::ios_base::failure e)
+    {
         std::cout << "Error loading " << "res/models/" + fileName + ".obj" << std::endl;
         //return nullptr;
     }
@@ -85,20 +89,20 @@ Mesh loadObjModel(const std::string& fileName)
 
             // Vertex
             if (ss.peek() == ' ')
-                insertIntoFloatVector(&vertices, &ss, 3);
+                insertIntoFloatVector(vertices, ss, 3);
             else if (ss.peek() == 't')
-                insertIntoFloatVector(&textureCoordinates, &ss, 2);
+                insertIntoFloatVector(textureCoordinates, ss, 2);
             else if (ss.peek() == 'n')
-                insertIntoFloatVector(&normals, &ss, 3);
+                insertIntoFloatVector(normals, ss, 3);
         }
 
         if (ss.peek() == 'f')
-            insertIntoStringVector(&faces, &ss);
+            insertIntoStringVector(faces, ss);
     }
 
     // From vector<array>s into single <arrays>
-    faceArray a;
-    GLfloat glf[3];
+    FaceArray a;
+    GLfloat face[3];
     int pointAt, indexCount = 0;
     std::string str;
     for (auto& i : faces)
@@ -106,38 +110,28 @@ Mesh loadObjModel(const std::string& fileName)
         std::istringstream ss(i);
 
         pointAt = 0;
-        while (getline(ss, str, '/')) {
-                glf[pointAt] = stoi(str);
+        while (getline(ss, str, '/'))
+        {
+                face[pointAt] = stoi(str);
                 pointAt++;
         }
 
-        // VBO
         for (int v = 0; v < 3; v++)
-            a_vertices.push_back(vertices.at(glf[0]-1).at(v));
+            outMesh.vertexCoords.push_back(vertices.at(face[0]-1).at(v));
 
         for (int v = 0; v < 2; v++)
-        {
-            a_texCoords.push_back(textureCoordinates.at(glf[1]-1).at(v));
-        }
+            outMesh.texCoords.push_back(textureCoordinates.at(face[1]-1).at(v));
 
-        for (int v = 0; v < 3; v++) {
-            a_normals.push_back(normals.at(glf[2]-1).at(v));
-        }
 
-        for (int v = 0; v < 3; v++) {
-            a_indices.push_back(indexCount);
-            indexCount++;
-        }
+        for (int v = 0; v < 3; v++)
+            outMesh.normals.push_back(normals.at(face[2]-1).at(v));
 
+
+        for (int v = 0; v < 3; v++)
+            outMesh.indices.push_back(indexCount++);
     }
-    std::cout << a_indices.size() << std::endl;
-    return
-    {
-        a_vertices,
-        a_texCoords,
-        a_normals,
-        a_indices
-    };
+
+    return outMesh;
 }
 
 

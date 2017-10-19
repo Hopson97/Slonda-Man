@@ -2,14 +2,22 @@
 
 #include "ModelLoader.h"
 
-int TexturedModel::id = 0;
-
 TexturedModel::TexturedModel(const std::string& modelFileName, const std::string& textureFileName)
 :   m_texture   (textureFileName)
 {
     auto mesh = loadObjModel(modelFileName);
     m_model.create(mesh);
-    m_id = id++;
+}
+
+void TexturedModel::create(const std::string& modelFileName, const std::string& textureFileName)
+{
+    auto mesh = loadObjModel(modelFileName);
+    m_model.create(mesh);
+}
+
+void TexturedModel::create(Mesh& mesh, const std::string& textureFileName)
+{
+    m_model.create(mesh);
 }
 
 const Model& TexturedModel::getModel() const
@@ -20,10 +28,5 @@ const Model& TexturedModel::getModel() const
 const Texture2D& TexturedModel::getTexture() const
 {
     return m_texture;
-}
-
-int TexturedModel::getID()
-{
-    return m_id;
 }
 

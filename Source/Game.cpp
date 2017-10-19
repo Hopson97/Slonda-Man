@@ -10,7 +10,7 @@ Game::Game()
 ,   m_fpsCounter    ("FPS", {10, 10})
 ,   m_tpsCounter    ("TPS", {8,  25})
 {
-    m_window.setVerticalSyncEnabled(true);
+    //m_window.setVerticalSyncEnabled(true);
     pushState<StatePlaying>(*this);
 }
 
