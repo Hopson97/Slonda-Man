@@ -8,10 +8,7 @@
 class SfmlRenderer
 {
     public:
-        SfmlRenderer();
-
         void add(const sf::Drawable& drawable);
-
         void render(sf::RenderWindow& RenderWindow);
 
     private:

@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+#include "GLlib/GLFunctions.h"
+
 Model::Model(const std::vector<GLfloat>& vertexPositions,
              const std::vector<GLfloat>& textureCoordinates,
              const std::vector<GLuint>&  indices)
@@ -26,10 +28,7 @@ void Model::addVBO(int dim, const std::vector<GLfloat>& data)
     GLuint vbo;
     glGenBuffers(1, &vbo);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    glBufferData(GL_ARRAY_BUFFER,
-                 data.size() * sizeof(GLfloat),
-                 data.data(),
-                 GL_STATIC_DRAW);
+    GL::bufferData(GL::BufferType::Array, data);
 
     glVertexAttribPointer(m_VBOs.size(), dim, GL_FLOAT, GL_FALSE, 0, (GLvoid*)0);
     glEnableVertexAttribArray(m_VBOs.size());
@@ -44,10 +43,8 @@ void Model::createEBO(const std::vector<GLuint>& indices)
     GLuint ebo;
     glGenBuffers(1, &ebo);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER,
-                 indices.size() * sizeof(GLuint),
-                 indices.data(),
-                 GL_STATIC_DRAW);
+    GL::bufferData(GL::BufferType::Element, indices);
+
     m_VBOs.push_back(ebo);
 }
 

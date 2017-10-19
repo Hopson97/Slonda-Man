@@ -1,6 +1,7 @@
 #include "Context.h"
 
 #include <GL/glew.h>
+#include "GLLib/GLFunctions.h"
 
 Context::Context()
 {
@@ -22,5 +23,5 @@ Context::Context()
     }
 
     glViewport(0, 0, window.getSize().x, window.getSize().y);
-    glEnable(GL_DEPTH_TEST);
+    GL::enable(GL::Cap::DepthTest);
 }
