@@ -3,12 +3,13 @@
 #include "../GLLib/GLFunctions.h"
 #include "../Maths/Matrix.h"
 #include "../Camera.h"
+#include "../Model/ModelLoader.h"
 
-Model modelTest;
+#include <iostream>
 
 QuadRenderer::QuadRenderer()
 :   m_primShader    ("Primitive", "Primitive")
-,   m_textureTest   ("face")
+,   m_textureTest   ("world")
 {
     std::vector<GLfloat> vert
     {
@@ -45,10 +46,10 @@ void QuadRenderer::add(const glm::vec3& location, const glm::vec3& rotation)
 
 void QuadRenderer::render(const Camera& camera)
 {
+    GL::enable(GL::Cap::DepthTest);
     m_quad.bindVAO();
     m_primShader.useProgram();
     m_textureTest.bind();
-
     GL::loadUniform(m_locProjViewMatrix, camera.getProjViewMatrix());
 
     for (auto& quad : m_quadLocations)
@@ -56,5 +57,6 @@ void QuadRenderer::render(const Camera& camera)
         GL::loadUniform(m_locModelMatrix, createModelMatrix(quad.location, quad.rotation));
         GL::drawElements(m_quad.getIndicesCount());
     }
+
     m_quadLocations.clear();
 }

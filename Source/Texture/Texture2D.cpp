@@ -17,6 +17,7 @@ void Texture2D::create(const std::string& texName)
 {
     sf::Image i;
     i.loadFromFile("res/txrs/" + texName + ".png");
+    i.flipVertically();
 
     glGenTextures(1, &m_texID);
     glActiveTexture(GL_TEXTURE0);

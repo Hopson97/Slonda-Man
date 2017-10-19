@@ -1,10 +1,6 @@
 #include "StatePlaying.h"
 
-#include "../GUI/Button.h"
-#include "../GUI/Textbox.h"
 #include "../Game.h"
-#include "../Model.h"
-#include "../GLLib/GLFunctions.h"
 #include <iostream>
 
 StatePlaying::StatePlaying(Game& game)

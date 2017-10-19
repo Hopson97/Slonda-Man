@@ -3,7 +3,6 @@
 #include <iostream>
 
 #include "Util/Random.h"
-#include "deps/tiny_obj_loader.h"
 /*
 #ifdef __WIN32
     extern "C"

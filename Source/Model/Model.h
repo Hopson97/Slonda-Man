@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include "Util/NonCopyable.h"
+#include "../Util/NonCopyable.h"
 #include <GL/glew.h>
 
 class Model : public NonCopyable

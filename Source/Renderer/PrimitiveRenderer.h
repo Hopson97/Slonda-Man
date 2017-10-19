@@ -5,7 +5,7 @@
 
 #include "../GLLib/GLFunctions.h"
 #include "../Maths/GlmIncludes.h"
-#include "../Model.h"
+#include "../Model/Model.h"
 #include "../Shaders/Shader.h"
 #include "../Texture/Texture2D.h"
 

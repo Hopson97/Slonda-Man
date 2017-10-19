@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-#include "GLlib/GLFunctions.h"
+#include "../GLlib/GLFunctions.h"
 
 Model::Model(const std::vector<GLfloat>& vertexPositions,
              const std::vector<GLfloat>& textureCoordinates,
