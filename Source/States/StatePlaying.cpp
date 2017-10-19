@@ -7,11 +7,11 @@
 #include "../GLLib/GLFunctions.h"
 #include <iostream>
 
-Model m;
-
 StatePlaying::StatePlaying(Game& game)
 :   StateBase   (game)
-{ }
+{
+
+}
 
 void StatePlaying::handleEvent(sf::Event e)
 {

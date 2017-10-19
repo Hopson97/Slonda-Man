@@ -4,6 +4,8 @@
 #include "../Maths/Matrix.h"
 #include "../Camera.h"
 
+Model modelTest;
+
 QuadRenderer::QuadRenderer()
 :   m_primShader    ("Primitive", "Primitive")
 ,   m_textureTest   ("face")
