@@ -25,6 +25,7 @@ class TerrainRenderer
         GLuint  m_locModelMatrix;
         GLuint  m_locProjViewMatrix;
         GLuint  m_locLightPosition;
+        GLuint  m_locLightDirection;
 
         Texture2D m_floorTexture;
 

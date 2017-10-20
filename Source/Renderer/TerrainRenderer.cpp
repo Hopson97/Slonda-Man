@@ -14,6 +14,7 @@ TerrainRenderer::TerrainRenderer()
     m_locModelMatrix    = m_terrainShader.getUniformLocation("modelMatrix");
     m_locProjViewMatrix = m_terrainShader.getUniformLocation("projectionViewMatrix");
     m_locLightPosition  = m_terrainShader.getUniformLocation("lightPosition");
+    m_locLightDirection  = m_terrainShader.getUniformLocation("lightDirection");
 }
 
 void TerrainRenderer::add(const Terrain& terrain)
@@ -28,6 +29,7 @@ void TerrainRenderer::render(const Camera& camera)
 
     GL::loadUniform(m_locProjViewMatrix, camera.getProjViewMatrix());
     GL::loadUniform(m_locLightPosition, camera.getPosition());
+    GL::loadUniform(m_locLightDirection, camera.getRotation());
 
     for (auto& terrain : m_terrains)
     {

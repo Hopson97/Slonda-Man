@@ -13,6 +13,7 @@ EntityRenderer::EntityRenderer()
     m_locModelMatrix    = m_shader.getUniformLocation("modelMatrix");
     m_locProjViewMatrix = m_shader.getUniformLocation("projectionViewMatrix");
     m_locLightPosition  = m_shader.getUniformLocation("lightPosition");
+    m_locLightDirection = m_shader.getUniformLocation("lightDirection");
 }
 
 void EntityRenderer::add(const Entity& entity)
@@ -34,6 +35,7 @@ void EntityRenderer::render(const Camera& camera)
 {
     m_shader.useProgram();
     GL::loadUniform(m_locLightPosition, camera.getPosition());
+    GL::loadUniform(m_locLightDirection, camera.getRotation());
     GL::loadUniform(m_locProjViewMatrix, camera.getProjViewMatrix());
     for (auto& modelEntity : m_entities)
     {

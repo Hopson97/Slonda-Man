@@ -27,6 +27,7 @@ class EntityRenderer
         GLuint  m_locModelMatrix;
         GLuint  m_locProjViewMatrix;
         GLuint  m_locLightPosition;
+        GLuint  m_locLightDirection;
 };
 
 #endif // ENTITYRENDERER_H_INCLUDED

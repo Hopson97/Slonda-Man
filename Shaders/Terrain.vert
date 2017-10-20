@@ -13,6 +13,7 @@ uniform mat4 projectionViewMatrix;
 out vec2 passTexCoord;
 out vec3 passNormalDirection;
 out vec3 passToLight;
+out vec3 passLightDir;
 
 
 void main()
@@ -24,4 +25,5 @@ void main()
     passToLight         = lightPosition - worldPosition.xyz;
 
     passTexCoord = inTextureCoord * 2048;
+    passLightDir = lightDirection;
 }
