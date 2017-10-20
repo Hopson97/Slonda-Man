@@ -6,7 +6,7 @@
 #include <iomanip>
 
 Camera::Camera()
-:   m_position  (0, 0.5, 1)
+:   m_position  (50, 0.5, 50)
 ,   m_rotation  (0, 0, 0)
 {
     m_projectionMatrix = createProjectionMatrix();
