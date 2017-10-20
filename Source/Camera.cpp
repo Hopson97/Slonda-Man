@@ -13,7 +13,7 @@ Camera::Camera()
 
 void Camera::update()
 {
-    std::cout << m_rotation.x << " " << m_rotation.y << " " << m_rotation.z << "\n";
+    //std::cout << m_rotation.x << " " << m_rotation.y << " " << m_rotation.z << "\n";
 
     m_viewMatrix = createViewMatrix(*this);
     m_projectionViewMatrix = m_projectionMatrix * m_viewMatrix;
@@ -45,7 +45,7 @@ void Camera::handleInput(const sf::RenderWindow& window, float dt)
         static const auto right     = sf::Keyboard::D;
         static const auto up        = sf::Keyboard::Z;
         static const auto down      = sf::Keyboard::X;
-        static const auto speed     = 0.01f;
+        static const auto speed     = 2.1f;
         glm::vec3 translate;
 
         if (sf::Keyboard::isKeyPressed(forwards))
@@ -80,6 +80,7 @@ void Camera::handleInput(const sf::RenderWindow& window, float dt)
         }
 
         m_position += translate * dt;
+        std::cout << "DT: " << dt << "\n";
     }
     //Mouse
     {

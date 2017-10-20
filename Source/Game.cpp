@@ -37,7 +37,7 @@ void Game::run()
 
         //Real time input
         state.handleInput();
-        m_camera.handleInput(m_window, time.asSeconds());
+        m_camera.handleInput(m_window, elapsed.asSeconds());
 
         //Real time update
         state.update(elapsed);
