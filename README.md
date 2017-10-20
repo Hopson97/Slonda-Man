@@ -31,3 +31,19 @@ End of day 2 stats:
 | Total Lines of Code    	| 575                                                           |
 
 ### Day 3
+
+Today I did not get much done due to some kind of flu.
+
+However, what I did do was get model loading in the game. This uses a parser my friend wrote a while back while following the ThinMatrix OpenGL tutorial.
+
+Before this, I tried using TinyOBJ and Assimp, but neither of those worked.
+
+![Day 3](https://i.imgur.com/vOuaSIT.png)
+
+| Title                  	| Data                                                       	|
+|------------------------	|------------------------------------------------------------	|
+| Time programming Today 	| 2:52:41                                            	|
+| Lines of Code Today    	| 369                                                           |
+| Total Time Programming 	| 6:08:29                                                    	|
+| Total Lines of Code    	| 944                                                           |
+
