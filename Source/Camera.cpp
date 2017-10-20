@@ -15,7 +15,6 @@ void Camera::update()
     m_projectionViewMatrix = m_projectionMatrix * m_viewMatrix;
 }
 
-
 const glm::vec3& Camera::getPosition() const
 {
     return m_position;
@@ -40,7 +39,7 @@ void Camera::handleInput(const sf::RenderWindow& window, float dt)
         static const auto back       = sf::Keyboard::S;
         static const auto left       = sf::Keyboard::A;
         static const auto right      = sf::Keyboard::D;
-        static const auto speed      = 0.005f;
+        static const auto speed      = 0.03f;
         glm::vec3 translate;
 
         if (sf::Keyboard::isKeyPressed(forwards))

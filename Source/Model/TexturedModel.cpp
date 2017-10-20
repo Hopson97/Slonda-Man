@@ -13,11 +13,13 @@ void TexturedModel::create(const std::string& modelFileName, const std::string& 
 {
     auto mesh = loadObjModel(modelFileName);
     m_model.create(mesh);
+    m_texture.create(textureFileName);
 }
 
 void TexturedModel::create(Mesh& mesh, const std::string& textureFileName)
 {
     m_model.create(mesh);
+    m_texture.create(textureFileName);
 }
 
 const Model& TexturedModel::getModel() const

@@ -33,12 +33,24 @@ void Texture2D::create(const std::string& texName)
                  i.getPixelsPtr());
     glGenerateMipmap(GL_TEXTURE_2D);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_LOD_BIAS, -1);;
 }
 
 void Texture2D::bind() const
 {
     glBindTexture(GL_TEXTURE_2D, m_texID);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
