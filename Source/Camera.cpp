@@ -2,6 +2,8 @@
 
 #include "Maths/Matrix.h"
 
+#include <iostream>
+
 Camera::Camera()
 :   m_position  (0, 0.5, 1)
 ,   m_rotation  (0, 0, 0)
@@ -11,6 +13,8 @@ Camera::Camera()
 
 void Camera::update()
 {
+    std::cout << m_rotation.x << " " << m_rotation.y << " " << m_rotation.z << "\n";
+
     m_viewMatrix = createViewMatrix(*this);
     m_projectionViewMatrix = m_projectionMatrix * m_viewMatrix;
 }
@@ -89,13 +93,13 @@ void Camera::handleInput(const sf::RenderWindow& window, float dt)
         m_rotation.x += mouseMove.y * 0.05;
 
 
-/*
+
         if      (m_rotation.x >  BOUND) m_rotation.x =  BOUND;
         else if (m_rotation.x < -BOUND) m_rotation.x = -BOUND;
 
         if      (m_rotation.y > 360) m_rotation.y = 0;
         else if (m_rotation.y < 0)   m_rotation.y = 360;
-*/
+
         sf::Mouse::setPosition(CENTER, window);
         lastMousePosition = sf::Mouse::getPosition(window);
 

@@ -14,7 +14,7 @@ out vec2 passTexCoord;
 out vec3 passNormalDirection;
 out vec3 passToLight;
 out vec3 passLightDir;
-
+out float passDistanceToLight;
 
 void main()
 {
@@ -26,4 +26,5 @@ void main()
 
     passTexCoord = inTextureCoord;
     passLightDir = lightDirection;
+    passDistanceToLight = distance(worldPosition.xyz, lightPosition);
 }
