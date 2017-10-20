@@ -35,8 +35,9 @@ void EntityRenderer::render(const Camera& camera)
 {
     m_shader.useProgram();
     GL::loadUniform(m_locLightPosition, camera.getPosition());
-    GL::loadUniform(m_locLightDirection, camera.getRotation());
+    GL::loadUniform(m_locLightDirection, camera.getDirection());
     GL::loadUniform(m_locProjViewMatrix, camera.getProjViewMatrix());
+
     for (auto& modelEntity : m_entities)
     {
         modelEntity.first->getModel().bindVAO();

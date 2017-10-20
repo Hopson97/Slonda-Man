@@ -12,7 +12,8 @@ Context::Context()
     settings.depthBits = 24;
     settings.stencilBits = 8;
 
-    window.create({1280, 720}, "Slender", sf::Style::Close, settings);
+    window.create(sf::VideoMode::getDesktopMode(), "Slender", sf::Style::Fullscreen, settings);
+    window.create({1422, 800}, "Slender", sf::Style::Close, settings);
 
     glewExperimental = GL_TRUE;
     GLenum error = glewInit();

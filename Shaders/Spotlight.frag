@@ -3,31 +3,58 @@
 out vec4 outColour;
 
 in vec2 passTexCoord;
-
 in vec3 passNormalDirection;
-in vec3 passToLight;
-in vec3 passLightDir;
+in vec3 passVectorToLight;
+in vec3 passLightDirection;
 in float passDistanceToLight;
 
 uniform sampler2D tex;
-
 const int MAX_DISTANCE = 50;
 
-void main()
+float getLight()
 {
-    vec3 nNormal    = normalize(passNormalDirection);
-    vec3 nToLight   = normalize(passToLight);
-
     if (passDistanceToLight >= MAX_DISTANCE)
     {
-        outColour = 0.01f * texture(tex, passTexCoord);
+        return 0.01f;
     }
     else
     {
-        float dist = 1 - (passDistanceToLight / MAX_DISTANCE);// / passDistanceToLight;
-        float dir = dot(nNormal, nToLight) * dist;
-        float light = max(dir, 0.01);
+        vec3 nNormal        = normalize(passNormalDirection);
+        vec3 nVectorToLight = normalize(passVectorToLight);
 
-        outColour = light * texture(tex, passTexCoord);
+        float angle = dot(passLightDirection, nVectorToLight);
+        if (angle < 0.7)
+        {
+            return 0.01f;
+        }
+        else
+        {
+            float dist = 1 - (passDistanceToLight / MAX_DISTANCE);// / passDistanceToLight;
+            float dir = dot(nNormal, nVectorToLight) * dist;
+
+            float light = max(dir, 0.01);
+
+            return light;
+        }
     }
 }
+
+void main()
+{
+    float light = getLight();
+
+    outColour = light * texture(tex, passTexCoord);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -3,6 +3,7 @@
 #include "Maths/Matrix.h"
 
 #include <iostream>
+#include <iomanip>
 
 Camera::Camera()
 :   m_position  (0, 0.5, 1)
@@ -13,7 +14,22 @@ Camera::Camera()
 
 void Camera::update()
 {
-    //std::cout << m_rotation.x << " " << m_rotation.y << " " << m_rotation.z << "\n";
+    float yaw   = glm::radians(m_rotation.y);
+    float roll  = glm::radians(m_rotation.x);
+    float pitch = glm::radians(m_rotation.z);
+
+    m_direction.x = (-cos(yaw) * sin(pitch) * sin(roll) - sin(yaw) * cos(roll));
+    m_direction.z = (-sin(yaw) * sin(pitch) * sin(roll) + cos(yaw) * cos(roll));
+    m_direction.y = (cos(pitch) * sin(roll));
+
+    static sf::Clock c;
+    if (c.getElapsedTime().asSeconds() > 0.5)
+    {
+        c.restart();
+        std::cout << "Rotation:  " << std::setprecision(4) << m_rotation.x   << " " << m_rotation.y << " " << m_rotation.z << "\n";
+        std::cout << "Position:  " << std::setprecision(4) << m_position.x   << " " << m_position.y << " " << m_position.z << "\n";
+        std::cout << "Direction: " << std::setprecision(4) << m_direction.x  << " " << m_direction.y << " " << m_direction.z << "\n\n\n";
+    }
 
     m_viewMatrix = createViewMatrix(*this);
     m_projectionViewMatrix = m_projectionMatrix * m_viewMatrix;
@@ -27,6 +43,11 @@ const glm::vec3& Camera::getPosition() const
 const glm::vec3& Camera::getRotation() const
 {
     return m_rotation;
+}
+
+const glm::vec3& Camera::getDirection() const
+{
+    return m_direction;
 }
 
 const glm::mat4& Camera::getProjViewMatrix() const
@@ -45,7 +66,8 @@ void Camera::handleInput(const sf::RenderWindow& window, float dt)
         static const auto right     = sf::Keyboard::D;
         static const auto up        = sf::Keyboard::Z;
         static const auto down      = sf::Keyboard::X;
-        static const auto speed     = 2.1f;
+        auto speed     = 2.1f * sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) ? 3 : 1;
+
         glm::vec3 translate;
 
         if (sf::Keyboard::isKeyPressed(forwards))
@@ -80,7 +102,6 @@ void Camera::handleInput(const sf::RenderWindow& window, float dt)
         }
 
         m_position += translate * dt;
-        std::cout << "DT: " << dt << "\n";
     }
     //Mouse
     {

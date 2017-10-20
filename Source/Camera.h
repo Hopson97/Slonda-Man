@@ -16,12 +16,14 @@ class Camera
 
         const glm::vec3& getPosition() const;
         const glm::vec3& getRotation() const;
+        const glm::vec3& getDirection() const;
 
         const glm::mat4& getProjViewMatrix() const;
 
     private:
         glm::vec3 m_position;
         glm::vec3 m_rotation;
+        glm::vec3 m_direction;
 
         glm::mat4 m_projectionMatrix;
         glm::mat4 m_viewMatrix;

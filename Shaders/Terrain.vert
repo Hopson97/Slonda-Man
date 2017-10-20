@@ -12,10 +12,9 @@ uniform mat4 projectionViewMatrix;
 
 out vec2 passTexCoord;
 out vec3 passNormalDirection;
-out vec3 passToLight;
-out vec3 passLightDir;
+out vec3 passVectorToLight;
+out vec3 passLightDirection;
 out float passDistanceToLight;
-
 
 void main()
 {
@@ -23,9 +22,9 @@ void main()
     gl_Position = projectionViewMatrix *  worldPosition;
 
     passNormalDirection = (modelMatrix * vec4(inNormal, 0.0f)).xyz;
-    passToLight         = lightPosition - worldPosition.xyz;
+    passVectorToLight   = lightPosition - worldPosition.xyz;
 
-    passTexCoord = inTextureCoord * 2048;
-    passLightDir = lightDirection;
+    passTexCoord = inTextureCoord * 1024;
+    passLightDirection = lightDirection;
     passDistanceToLight = distance(worldPosition.xyz, lightPosition);
 }
