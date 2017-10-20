@@ -24,4 +24,6 @@ Context::Context()
 
     glViewport(0, 0, window.getSize().x, window.getSize().y);
     GL::enable(GL::Cap::DepthTest);
+    GL::enable(GL::Cap::CullFace);
+    glCullFace(GL_BACK);
 }

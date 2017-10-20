@@ -31,7 +31,7 @@ const glm::mat4& Camera::getProjViewMatrix() const
     return m_projectionViewMatrix;
 }
 
-void Camera::handleInput(const sf::RenderWindow& window)
+void Camera::handleInput(const sf::RenderWindow& window, float dt)
 {
     //FPS Camera stuff
     //Keyboard
@@ -40,8 +40,8 @@ void Camera::handleInput(const sf::RenderWindow& window)
         static const auto back       = sf::Keyboard::S;
         static const auto left       = sf::Keyboard::A;
         static const auto right      = sf::Keyboard::D;
-        static const auto speed      = 0.1f;
-        auto& translate  = m_position;
+        static const auto speed      = 0.005f;
+        glm::vec3 translate;
 
         if (sf::Keyboard::isKeyPressed(forwards))
         {
@@ -64,6 +64,8 @@ void Camera::handleInput(const sf::RenderWindow& window)
             translate.x += glm::cos(glm::radians(m_rotation.y)) * speed;
             translate.z += glm::sin(glm::radians(m_rotation.y)) * speed;
         }
+
+        m_position += translate * dt;
     }
     //Mouse
     {

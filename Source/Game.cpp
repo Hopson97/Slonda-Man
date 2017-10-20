@@ -10,7 +10,7 @@ Game::Game()
 ,   m_fpsCounter    ("FPS", {10, 10})
 ,   m_tpsCounter    ("TPS", {8,  25})
 {
-    //m_window.setVerticalSyncEnabled(true);
+    m_window.setVerticalSyncEnabled(true);
     pushState<StatePlaying>(*this);
 }
 
@@ -37,7 +37,7 @@ void Game::run()
 
         //Real time input
         state.handleInput();
-        m_camera.handleInput(m_window);
+        m_camera.handleInput(m_window, time.asSeconds());
 
         //Real time update
         state.update(elapsed);

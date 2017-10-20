@@ -3,7 +3,7 @@
 #include <iostream>
 
 #include "Util/Random.h"
-/*
+
 #ifdef __WIN32
     extern "C"
     {
@@ -12,7 +12,7 @@
         __declspec(dllexport) bool AmdPowerXpressRequestHighPerformance = true;
     }
 #endif // __WIN32
-*/
+
 
 int main()
 {

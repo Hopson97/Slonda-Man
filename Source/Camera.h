@@ -11,7 +11,7 @@ class Camera
     public:
         Camera();
 
-        void handleInput(const sf::RenderWindow& window);
+        void handleInput(const sf::RenderWindow& window, float dt);
         void update();
 
         const glm::vec3& getPosition() const;

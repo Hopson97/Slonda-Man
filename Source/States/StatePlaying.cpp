@@ -8,23 +8,24 @@
 
 StatePlaying::StatePlaying(Game& game)
 :   StateBase       (game)
-,   m_testModel2    ("test", "world")
+,   m_testModel2    ("tree1", "world")
 {
-    Mesh mesh = loadObjModel("test");
+    Mesh mesh = loadObjModel("tree1");
     std::vector<glm::vec3> pos;
     for (int x = 0; x < 10; x++)
     {
         for (int z = 0; z < 10; z++)
         {
-            pos.emplace_back(x * 5, -8, z * 5);
-            //m_entities.emplace_back(m_testModel2);
-            //m_entities.back().position = {x * 5, 0, z* 5};
+            pos.emplace_back(x * 15, -8, z * 15);
+            m_entities.emplace_back(m_testModel2);
+            m_entities.back().position = pos.back();
         }
     }
+    /*
     Mesh newMesh = createMegaMesh(mesh, pos);
     m_testModel.create(newMesh, "world");
     std::cout << "SIZE: " << newMesh.vertexCoords.size() << " " << mesh.vertexCoords.size() << "\n";
-    m_entities.emplace_back(m_testModel);
+    m_entities.emplace_back(m_testModel);*/
 }
 
 void StatePlaying::handleEvent(sf::Event e)
