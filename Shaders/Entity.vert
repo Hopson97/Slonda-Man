@@ -23,5 +23,5 @@ void main()
     passNormalDirection = (modelMatrix * vec4(inNormal, 0.0f)).xyz;
     passToLight         = lightPosition - worldPosition.xyz;
 
-    passTexCoord = inTextureCoord * 2048;
+    passTexCoord = inTextureCoord;
 }

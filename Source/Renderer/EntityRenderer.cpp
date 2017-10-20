@@ -8,10 +8,11 @@
 #include "../Maths/Matrix.h"
 
 EntityRenderer::EntityRenderer()
-:   m_primShader    ("Primitive", "Primitive")
+:   m_shader    ("Entity", "Spotlight")
 {
-    m_locModelMatrix    = m_primShader.getUniformLocation("modelMatrix");
-    m_locProjViewMatrix = m_primShader.getUniformLocation("projectionViewMatrix");
+    m_locModelMatrix    = m_shader.getUniformLocation("modelMatrix");
+    m_locProjViewMatrix = m_shader.getUniformLocation("projectionViewMatrix");
+    m_locLightPosition  = m_shader.getUniformLocation("lightPosition");
 }
 
 void EntityRenderer::add(const Entity& entity)
@@ -31,6 +32,9 @@ void EntityRenderer::add(const Entity& entity)
 
 void EntityRenderer::render(const Camera& camera)
 {
+    m_shader.useProgram();
+    GL::loadUniform(m_locLightPosition, camera.getPosition());
+    GL::loadUniform(m_locProjViewMatrix, camera.getProjViewMatrix());
     for (auto& modelEntity : m_entities)
     {
         modelEntity.first->getModel().bindVAO();

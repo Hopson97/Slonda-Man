@@ -22,10 +22,11 @@ class EntityRenderer
     private:
         std::unordered_map<const TexturedModel*, std::vector<const Entity*>> m_entities;
 
-        Shader  m_primShader;
+        Shader  m_shader;
 
         GLuint  m_locModelMatrix;
         GLuint  m_locProjViewMatrix;
+        GLuint  m_locLightPosition;
 };
 
 #endif // ENTITYRENDERER_H_INCLUDED

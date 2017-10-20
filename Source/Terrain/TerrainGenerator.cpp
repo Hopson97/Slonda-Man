@@ -23,7 +23,6 @@ namespace
                 GLfloat fz = static_cast<GLfloat>(z);
                 GLfloat fx = static_cast<GLfloat>(x);
 
-
                 vertexCoords[vertexPtr * 3]     = fx / fEDGE_VERTEX_COUNT * SIZE;
                 vertexCoords[vertexPtr * 3 + 1] = -1;
                 vertexCoords[vertexPtr * 3 + 2] = fz / fEDGE_VERTEX_COUNT * SIZE;

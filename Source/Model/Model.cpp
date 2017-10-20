@@ -17,6 +17,7 @@ void Model::create(const Mesh& mesh)
 
     addVBO(3, mesh.vertexCoords);
     addVBO(2, mesh.texCoords);
+    addVBO(3, mesh.normals);
     createEBO(mesh.indices);
 }
 

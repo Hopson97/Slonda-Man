@@ -8,11 +8,12 @@
 #include <iostream>
 
 TerrainRenderer::TerrainRenderer()
-:   m_terrainShader ("terrain", "primitive")
+:   m_terrainShader ("Terrain", "Spotlight")
 ,   m_floorTexture  ("floor")
 {
     m_locModelMatrix    = m_terrainShader.getUniformLocation("modelMatrix");
     m_locProjViewMatrix = m_terrainShader.getUniformLocation("projectionViewMatrix");
+    m_locLightPosition  = m_terrainShader.getUniformLocation("lightPosition");
 }
 
 void TerrainRenderer::add(const Terrain& terrain)
@@ -26,6 +27,7 @@ void TerrainRenderer::render(const Camera& camera)
     m_terrainShader.useProgram();
 
     GL::loadUniform(m_locProjViewMatrix, camera.getProjViewMatrix());
+    GL::loadUniform(m_locLightPosition, camera.getPosition());
 
     for (auto& terrain : m_terrains)
     {
