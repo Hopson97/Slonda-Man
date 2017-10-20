@@ -10,19 +10,27 @@ void MasterRenderer::addObject(const glm::vec3& location, const glm::vec3& rotat
     }
 }
 
-void MasterRenderer::addObject(const sf::Drawable& drawable)
-{
-    m_sfmlRenderer.add(drawable);
-}
-
 void MasterRenderer::render(sf::RenderWindow& target, const Camera& camera)
 {
     m_quadRenderer.render(camera);
     m_entityRenderer.render(camera);
+    m_terrainRenderer.render(camera);
+
+
     m_sfmlRenderer.render(target);
 }
 
 void MasterRenderer::addObject(const Entity& entity)
 {
     m_entityRenderer.add(entity);
+}
+
+void MasterRenderer::addObject(const sf::Drawable& drawable)
+{
+    m_sfmlRenderer.add(drawable);
+}
+
+void MasterRenderer::addObject(const Terrain& terrain)
+{
+    m_terrainRenderer.add(terrain);
 }

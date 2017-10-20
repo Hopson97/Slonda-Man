@@ -9,6 +9,7 @@
 
 StatePlaying::StatePlaying(Game& game)
 :   StateBase       (game)
+,   m_terrainTest   ({0, 0, 0})
 ,   m_testModel2    ("tree1", "bark")
 {
     Mesh mesh = generateTerrain();
@@ -23,8 +24,7 @@ StatePlaying::StatePlaying(Game& game)
             m_entities.back().position = pos.back();
         }
     }
-    m_testModel.create(mesh, "floor");
-    m_entities.emplace_back(m_testModel);
+
     std::cout << "Function end\n";
 }
 
@@ -53,6 +53,7 @@ void StatePlaying::render(MasterRenderer& renderer)
 {
     rot.y++;
     renderer.addObject(pos, rot, Primitive::Quad);
+    renderer.addObject(m_terrainTest);
 
     for (auto& entity : m_entities)
         renderer.addObject(entity);

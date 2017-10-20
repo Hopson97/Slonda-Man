@@ -7,14 +7,17 @@
 #include "PrimitiveRenderer.h"
 #include "SfmlRenderer.h"
 #include "EntityRenderer.h"
+#include "TerrainRenderer.h"
 
 class Camera;
+class Terrain;
 
 class MasterRenderer
 {
     public:
         void addObject(const glm::vec3& location, const glm::vec3& rotation, Primitive type);
         void addObject(const sf::Drawable& drawable);
+        void addObject(const Terrain& terrain);
         void addObject(const Entity& entity);
 
         void render(sf::RenderWindow& target, const Camera& camera);
@@ -23,6 +26,7 @@ class MasterRenderer
         QuadRenderer    m_quadRenderer;
         SfmlRenderer    m_sfmlRenderer;
         EntityRenderer  m_entityRenderer;
+        TerrainRenderer m_terrainRenderer;
 
 };
 

@@ -6,6 +6,7 @@
 
 #include "../World/Entity.h"
 #include "../Model/TexturedModel.h"
+#include "../Terrain/Terrain.h"
 
 class StatePlaying : public StateBase
 {
@@ -19,7 +20,7 @@ class StatePlaying : public StateBase
         void render         (MasterRenderer& renderer)    override;
 
     private:
-        TexturedModel m_testModel;
+        Terrain       m_terrainTest;
         TexturedModel m_testModel2;
 
         std::vector<Entity> m_entities;

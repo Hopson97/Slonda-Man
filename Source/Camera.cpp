@@ -35,11 +35,13 @@ void Camera::handleInput(const sf::RenderWindow& window, float dt)
     //FPS Camera stuff
     //Keyboard
     {
-        static const auto forwards   = sf::Keyboard::W;
-        static const auto back       = sf::Keyboard::S;
-        static const auto left       = sf::Keyboard::A;
-        static const auto right      = sf::Keyboard::D;
-        static const auto speed      = 0.03f;
+        static const auto forwards  = sf::Keyboard::W;
+        static const auto back      = sf::Keyboard::S;
+        static const auto left      = sf::Keyboard::A;
+        static const auto right     = sf::Keyboard::D;
+        static const auto up        = sf::Keyboard::Z;
+        static const auto down      = sf::Keyboard::X;
+        static const auto speed     = 0.03f;
         glm::vec3 translate;
 
         if (sf::Keyboard::isKeyPressed(forwards))
@@ -62,6 +64,15 @@ void Camera::handleInput(const sf::RenderWindow& window, float dt)
         {
             translate.x += glm::cos(glm::radians(m_rotation.y)) * speed;
             translate.z += glm::sin(glm::radians(m_rotation.y)) * speed;
+        }
+
+        if (sf::Keyboard::isKeyPressed(up))
+        {
+            translate.y += 0.01;
+        }
+        else if (sf::Keyboard::isKeyPressed(down))
+        {
+            translate.y -= 0.01;
         }
 
         m_position += translate * dt;
