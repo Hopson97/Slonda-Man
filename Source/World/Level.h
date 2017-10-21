@@ -22,6 +22,8 @@ class Level
         bool collidableAt(int x, int z) const;
 
     private:
+        void loadLevel();
+
         Terrain       m_terrain;
         TexturedModel m_treeModel;
 
