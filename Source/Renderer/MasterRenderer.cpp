@@ -19,15 +19,15 @@ void MasterRenderer::addObject(const glm::vec3& location, const glm::vec3& rotat
 
 void MasterRenderer::render(sf::RenderWindow& target, const Camera& camera)
 {
-    m_postFXRenderer.begin();
+    //m_postFXRenderer.begin();
 
     m_quadRenderer   .render(camera);
     m_entityRenderer .render(camera);
     m_terrainRenderer.render(camera);
 
-    m_postFXRenderer.render();
+    //m_postFXRenderer.render();
 
-    //m_sfmlRenderer.render(target);
+    m_sfmlRenderer.render(target);
 }
 
 void MasterRenderer::addObject(const Entity& entity)

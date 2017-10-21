@@ -28,7 +28,7 @@ void TerrainRenderer::render(const Camera& camera)
     m_terrainShader.useProgram();
 
     GL::loadUniform(m_locProjViewMatrix, camera.getProjViewMatrix());
-    GL::loadUniform(m_locLightPosition, camera.getPosition());
+    GL::loadUniform(m_locLightPosition, camera.getTorchPosition());
     GL::loadUniform(m_locLightDirection, camera.getDirection());
 
     for (auto& terrain : m_terrains)

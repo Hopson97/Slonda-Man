@@ -22,7 +22,7 @@ float getLight()
 
     if (angle < 0.7)
     {
-        return 0.01f;
+        return 0;
     }
 
     //apply an attenuation factor
@@ -32,13 +32,15 @@ float getLight()
     float dir = dot(nNormal, nVectorToLight) * dist;
 
     //apply ambient light
-    float light = max(dir, 0.05) * angle;
+    float light = max(dir, 0.05);
 
     return light;
 }
 
 void main()
 {
+    float light = max(getLight(), 0.075);
+
     outColour = getLight() * texture(tex, passTexCoord);
 }
 

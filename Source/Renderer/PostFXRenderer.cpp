@@ -69,7 +69,7 @@ void PostFXRenderer::createBuffers(GLuint windowWidth, GLuint windowHeight)
     glGenTextures(1, &m_fboTexture);
     glBindTexture(GL_TEXTURE_2D, m_fboTexture);
 
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB32F, windowWidth, windowHeight, 0, GL_RGB, GL_FLOAT, NULL);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB32F, windowWidth, windowHeight, 0, GL_RGB, GL_FLOAT, nullptr);
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -82,7 +82,7 @@ void PostFXRenderer::createBuffers(GLuint windowWidth, GLuint windowHeight)
 
     glGenTextures(1, &m_fboDepthTex);
     glBindTexture(GL_TEXTURE_2D, m_fboDepthTex);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32F, windowWidth , windowHeight, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32F, windowWidth , windowHeight, 0, GL_DEPTH_COMPONENT, GL_FLOAT, nullptr);
     glGenerateMipmap(GL_TEXTURE_2D);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);

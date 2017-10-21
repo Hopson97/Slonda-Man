@@ -34,7 +34,7 @@ void EntityRenderer::add(const Entity& entity)
 void EntityRenderer::render(const Camera& camera)
 {
     m_shader.useProgram();
-    GL::loadUniform(m_locLightPosition, camera.getPosition());
+    GL::loadUniform(m_locLightPosition, camera.getTorchPosition());
     GL::loadUniform(m_locLightDirection, camera.getDirection());
     GL::loadUniform(m_locProjViewMatrix, camera.getProjViewMatrix());
 

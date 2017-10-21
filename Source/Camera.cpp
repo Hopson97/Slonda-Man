@@ -26,16 +26,13 @@ void Camera::update()
     m_direction.z = cos(yaw) * cos(pitch);
     m_direction.y = sin(pitch);
 
-    /*
-    static sf::Clock c;
-    if (c.getElapsedTime().asSeconds() > 0.5)
-    {
-        c.restart();
-        std::cout << "Rotation:  " << std::setprecision(4) << m_rotation.x   << " " << m_rotation.y << " " << m_rotation.z << "\n";
-        std::cout << "Position:  " << std::setprecision(4) << m_position.x   << " " << m_position.y << " " << m_position.z << "\n";
-        std::cout << "Direction: " << std::setprecision(4) << m_direction.x  << " " << m_direction.y << " " << m_direction.z << "\n\n\n";
-    }
-    */
+    glm::vec3 translate;
+    translate.x += glm::cos(glm::radians(m_rotation.y)) * 0.5;
+    translate.z += glm::sin(glm::radians(m_rotation.y)) * 0.5;
+    translate.x += -glm::cos(glm::radians(m_rotation.y + 90)) * 0.2;
+    translate.z += -glm::sin(glm::radians(m_rotation.y + 90)) * 0.2;
+    translate.y -= 0.1;
+    m_torchPosition = m_position + translate;
 
     m_viewMatrix = createViewMatrix(*this);
     m_projectionViewMatrix = m_projectionMatrix * m_viewMatrix;
@@ -45,6 +42,12 @@ const glm::vec3& Camera::getPosition() const
 {
     return m_position;
 }
+
+const glm::vec3& Camera::getTorchPosition() const
+{
+    return m_torchPosition;
+}
+
 
 const glm::vec3& Camera::getRotation() const
 {
