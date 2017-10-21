@@ -40,7 +40,7 @@ void Game::run()
         m_camera.handleInput(m_window, elapsed.asSeconds());
 
         //Real time update
-        state.update(elapsed);
+        state.update(elapsed, m_camera);
         m_fpsCounter.update();
         m_camera.update();
 

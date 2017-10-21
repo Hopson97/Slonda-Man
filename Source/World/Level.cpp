@@ -65,7 +65,7 @@ void Level::render(MasterRenderer& renderer) const
         renderer.addObject(entity);
 }
 
-bool Level::collidableAt(int x, int y) const
+bool Level::collidableAt(int x, int z) const
 {
-    return m_collideMap.at(y * m_mapSizeZ * SCALE + x * SCALE);
+    return m_collideMap.at(z * m_mapSizeZ * SCALE + x * SCALE);
 }

@@ -109,7 +109,17 @@ void Camera::handleInput(const sf::RenderWindow& window, float dt)
 
         m_position += translate * dt;
     }
-    //Mouse
+    static bool lockMouse = false;
+    static sf::Clock delay;
+    if (delay.getElapsedTime().asSeconds() > 0.5 && sf::Keyboard::isKeyPressed(sf::Keyboard::L))
+    {
+        delay.restart();
+        lockMouse = !lockMouse;
+    }
+
+
+    //mouse input
+    if (!lockMouse)
     {
         static const auto BOUND = 85;
         static const sf::Vector2i CENTER(window.getSize().x / 2, window.getSize().y / 2);

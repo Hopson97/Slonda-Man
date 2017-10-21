@@ -19,7 +19,7 @@ class Level
 
         void render(MasterRenderer& renderer) const;
 
-        bool collidableAt(int x, int y) const;
+        bool collidableAt(int x, int z) const;
 
     private:
         Terrain       m_terrain;

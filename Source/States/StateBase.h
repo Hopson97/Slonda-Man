@@ -7,6 +7,7 @@
 
 class Game;
 class MasterRenderer;
+class Camera;
 
 class StateBase : public NonCopyable
 {
@@ -19,7 +20,7 @@ class StateBase : public NonCopyable
 
         virtual void handleEvent    (sf::Event e) = 0;
         virtual void handleInput    () = 0;
-        virtual void update         (sf::Time deltaTime) = 0;
+        virtual void update         (sf::Time deltaTime, const Camera& camera) = 0;
         virtual void fixedUpdate    (sf::Time deltaTime) = 0;
         virtual void render         (MasterRenderer& renderer) = 0;
 

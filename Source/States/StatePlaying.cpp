@@ -31,8 +31,12 @@ void StatePlaying::handleInput()
 }
 
 
-void StatePlaying::update(sf::Time deltaTime)
+void StatePlaying::update(sf::Time deltaTime, const Camera& camera)
 {
+    //if (m_level.collidableAt(camera.getPosition().x, camera.getPosition().z))
+    {
+        //std::cout << "Colliding\n";
+    }
 }
 
 void StatePlaying::fixedUpdate(sf::Time deltaTime)

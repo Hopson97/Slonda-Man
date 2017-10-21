@@ -11,7 +11,7 @@ class StatePlaying : public StateBase
 
         void handleEvent    (sf::Event e)                   override;
         void handleInput    ()                              override;
-        void update         (sf::Time deltaTime)            override;
+        void update         (sf::Time deltaTime, const Camera& camera)            override;
         void fixedUpdate    (sf::Time deltaTime)            override;
         void render         (MasterRenderer& renderer)    override;
 
