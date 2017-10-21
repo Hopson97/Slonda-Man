@@ -47,3 +47,35 @@ Before this, I tried using TinyOBJ and Assimp, but neither of those worked.
 | Total Time Programming 	| 6:08:29                                                    	|
 | Total Lines of Code    	| 944                                                           |
 
+### Day 4
+
+Today was started off by getting terrain to be generated and render, and finished off with some
+lighting effects
+
+![Day 4](https://i.imgur.com/fORH4A9.png)
+
+| Title                  	| Data                                                       	|
+|------------------------	|------------------------------------------------------------	|
+| Time programming Today 	| 2:13:10                                                       |
+| Lines of Code Today    	| 242                                                           |
+| Total Time Programming 	| 8:21:39                                                    	|
+| Total Lines of Code    	| 1186                                                           |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                         |
+

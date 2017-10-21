@@ -6,6 +6,7 @@
 #include "../Model/Mesh.h"
 #include "../Model/ModelLoader.h"
 #include "../Terrain/TerrainGenerator.h"
+#include "../Util/Random.h"
 
 StatePlaying::StatePlaying(Game& game)
 :   StateBase       (game)
@@ -14,12 +15,13 @@ StatePlaying::StatePlaying(Game& game)
 {
     Mesh mesh = generateTerrain();
 
+    Random<> rnd;
     std::vector<glm::vec3> pos;
     for (int x = 0; x < 10; x++)
     {
         for (int z = 0; z < 10; z++)
         {
-            pos.emplace_back(x * 15, -1, z * 15);
+            pos.emplace_back(x * rnd.getFloatInRange(5, 7), -1, z * rnd.getFloatInRange(5, 7));
             m_entities.emplace_back(m_testModel2);
             m_entities.back().position = pos.back();
         }

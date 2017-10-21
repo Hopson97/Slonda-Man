@@ -12,15 +12,19 @@ Camera::Camera()
     m_projectionMatrix = createProjectionMatrix();
 }
 
+
 void Camera::update()
 {
-    float yaw   = glm::radians(m_rotation.y);
-    float roll  = glm::radians(m_rotation.x);
-    float pitch = glm::radians(m_rotation.z);
+    static glm::vec3 rot;
+    rot.x++;
 
-    m_direction.x = (-cos(yaw) * sin(pitch) * sin(roll) - sin(yaw) * cos(roll));
-    m_direction.z = (-sin(yaw) * sin(pitch) * sin(roll) + cos(yaw) * cos(roll));
-    m_direction.y = (cos(pitch) * sin(roll));
+    float yaw    = glm::radians(m_rotation.y);
+    float pitch  = glm::radians(m_rotation.x);
+    float roll   = glm::radians(m_rotation.z);
+
+    m_direction.x = -sin(yaw) * cos(pitch);
+    m_direction.z = cos(yaw) * cos(pitch);
+    m_direction.y = sin(pitch);
 
     static sf::Clock c;
     if (c.getElapsedTime().asSeconds() > 0.5)

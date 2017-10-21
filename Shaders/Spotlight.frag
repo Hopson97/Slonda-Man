@@ -17,16 +17,20 @@ float getLight()
     vec3 nNormal        = normalize(passNormalDirection);
     vec3 nVectorToLight = normalize(passVectorToLight);
 
+    //"angle" between direction of object to light, and the light's direction
     float angle = dot(passLightDirection, nVectorToLight);
-/*
     if (angle < 0.7)
     {
         return 0.01f;
     }
-*/
-    float dist = 1 - (passDistanceToLight / MAX_DISTANCE);// / passDistanceToLight;
+
+    //apply an attenuation factor
+    float dist = 1 - (passDistanceToLight / MAX_DISTANCE);
+
+    //angle of surface normal and direction of object to light
     float dir = dot(nNormal, nVectorToLight) * dist;
 
+    //apply ambient light
     float light = max(dir, 0.01);
 
     return light;
