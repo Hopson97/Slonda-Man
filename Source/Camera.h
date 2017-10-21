@@ -6,12 +6,14 @@
 #include <GL/glew.h>
 #include "Maths/GlmIncludes.h"
 
+struct Transform;
+
 class Camera
 {
     public:
         Camera();
 
-        void handleInput(const sf::RenderWindow& window, float dt);
+        void hookTransformable(const Transform* transform);
         void update();
 
         const glm::vec3& getPosition()      const;
@@ -30,6 +32,8 @@ class Camera
         glm::mat4 m_projectionMatrix;
         glm::mat4 m_viewMatrix;
         glm::mat4 m_projectionViewMatrix;
+
+        const Transform* m_pTransform = nullptr;
 };
 
 #endif // CAMERA_H_INCLUDED

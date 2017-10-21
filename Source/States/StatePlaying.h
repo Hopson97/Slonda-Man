@@ -3,11 +3,12 @@
 
 #include "StateBase.h"
 #include "../World/Level.h"
+#include "../World/Player.h"
 
 class StatePlaying : public StateBase
 {
     public:
-        StatePlaying(Game& game);
+        StatePlaying(Game& game, Camera& camera);
 
         void handleEvent    (sf::Event e)                   override;
         void handleInput    ()                              override;
@@ -16,7 +17,8 @@ class StatePlaying : public StateBase
         void render         (MasterRenderer& renderer)    override;
 
     private:
-        Level m_level;
+        Level   m_level;
+        Player  m_player;
 };
 
 #endif // STATEPLAYING_H_INCLUDED

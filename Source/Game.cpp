@@ -12,7 +12,7 @@ Game::Game()
 ,   m_renderer      (m_window.getSize().x, m_window.getSize().y)
 {
     m_window.setFramerateLimit(60);
-    pushState<StatePlaying>(*this);
+    pushState<StatePlaying>(*this, m_camera);
 }
 
 void Game::run()
@@ -38,7 +38,6 @@ void Game::run()
 
         //Real time input
         state.handleInput();
-        m_camera.handleInput(m_window, elapsed.asSeconds());
 
         //Real time update
         state.update(elapsed, m_camera);
