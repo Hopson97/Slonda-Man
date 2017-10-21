@@ -21,7 +21,8 @@ class StatePlaying : public StateBase
 
     private:
         Terrain       m_terrainTest;
-        TexturedModel m_testModel2;
+        TexturedModel m_trees;
+        TexturedModel m_houses;
 
         std::vector<Entity> m_entities;
 

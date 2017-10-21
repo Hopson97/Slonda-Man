@@ -19,11 +19,11 @@ float getLight()
 
     //"angle" between direction of object to light, and the light's direction
     float angle = dot(passLightDirection, nVectorToLight);
-    /*
+
     if (angle < 0.7)
     {
         return 0.01f;
-    }*/
+    }
 
     //apply an attenuation factor
     float dist = 1 - (passDistanceToLight / MAX_DISTANCE);
@@ -32,7 +32,7 @@ float getLight()
     float dir = dot(nNormal, nVectorToLight) * dist;
 
     //apply ambient light
-    float light = max(dir, 0.2);
+    float light = max(dir, 0.05) * angle;
 
     return light;
 }

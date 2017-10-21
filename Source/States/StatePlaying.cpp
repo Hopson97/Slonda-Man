@@ -19,36 +19,37 @@ namespace
 StatePlaying::StatePlaying(Game& game)
 :   StateBase       (game)
 ,   m_terrainTest   ({0, 0, 0})
-,   m_testModel2    ("tree1", "bark")
 {
     sf::Image i;
     i.loadFromFile("res/test.png");
+    std::vector<glm::vec3> housePositions;
+    std::vector<glm::vec3> treePositions;
     for (int z = 0; z < (int)i.getSize().y; z++)
     {
         for (int x = 0; x < (int)i.getSize().x; x++)
         {
-            auto px = i.getPixel(x, z);
-            std::cout << std::hex << toHex(px) << " ";
-        }
-        std::cout << "\n";
-    }
+            glm::vec3 pos = {x * 4, -1, z * 4};
+            auto hex = toHex(i.getPixel(x, z));
 
-
-    Mesh mesh = generateTerrain();
-
-    Random<> rnd;
-    std::vector<glm::vec3> pos;
-    for (int x = 0; x < 25; x++)
-    {
-        for (int z = 0; z < 25; z++)
-        {
-            pos.emplace_back(x * 10, -1, z * 10);
-            m_entities.emplace_back(m_testModel2);
-            m_entities.back().position = pos.back();
+            if (hex == 0x7D3500)
+            {
+                treePositions.push_back(pos);
+            }
+            else if (hex == 0xFF)
+            {
+                housePositions.push_back(pos);
+            }
         }
     }
+    Mesh house  = loadObjModel("house1");
+    Mesh tree   = loadObjModel("tree1");
+    Mesh trees  = createMegaMesh(tree, treePositions);
+    Mesh houses = createMegaMesh(house, housePositions);
 
-    std::cout << "Function end\n";
+    m_trees.create(trees, "bark");
+    m_houses.create(houses, "face");
+    m_entities.emplace_back(m_trees);
+    m_entities.emplace_back(m_houses);
 }
 
 void StatePlaying::handleEvent(sf::Event e)
