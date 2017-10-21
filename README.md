@@ -62,6 +62,28 @@ lighting effects
 | Total Lines of Code    	| 1186                                                           |
 
 
+### Day 5
+
+To begin, I created a level loader. This simply take in a .png image, and then places objects at
+location, using hexadecimal colours.
+
+After this, I begun work on a post processing shader, which crashes, so I was unable to use it.
+
+Failing with that, I also improved how the torch looks, by moving the position of it slightly Down
+and to the right of the camera. This makes it look better as it actually looks like you are
+holding a torch, as opposed to just having light come out your mouth or something.
+
+To finish off, I created a player class, which allows for smoother movement though the use of velocity.
+
+![Day 6](https://i.imgur.com/FjCcsEQ.jpg)
+
+| Title                  	| Data                                                       	|
+|------------------------	|------------------------------------------------------------	|
+| Time programming Today 	| 3:40:49                                                      |
+| Lines of Code Today    	| 245                                                           |
+| Total Time Programming 	| 12:02:28                                                    	|
+| Total Lines of Code    	| 1432                                                           |
+
 
 
 
