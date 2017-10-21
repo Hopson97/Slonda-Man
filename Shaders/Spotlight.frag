@@ -10,7 +10,7 @@ in vec3 passLightDirection;     //Direction of the light source
 in float passDistanceToLight;   //Distance from vertex to light source
 
 uniform sampler2D tex;
-const int MAX_DISTANCE = 25;
+const int MAX_DISTANCE = 15;
 
 float getLight()
 {
