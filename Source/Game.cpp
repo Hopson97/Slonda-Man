@@ -9,6 +9,7 @@ Game::Game()
 ,   m_window        (m_context.window)
 ,   m_fpsCounter    ("FPS", {10, 10})
 ,   m_tpsCounter    ("TPS", {8,  25})
+,   m_renderer      (m_window.getSize().x, m_window.getSize().y)
 {
     m_window.setFramerateLimit(60);
     pushState<StatePlaying>(*this);

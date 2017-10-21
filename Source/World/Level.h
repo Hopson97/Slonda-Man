@@ -21,6 +21,8 @@ class Level
 
         bool collidableAt(int x, int z) const;
 
+        const std::vector<Entity>& getEntities () const;
+
     private:
         void loadLevel();
 

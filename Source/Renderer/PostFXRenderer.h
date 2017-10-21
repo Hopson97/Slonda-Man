@@ -8,17 +8,19 @@
 class PostFXRenderer : public NonCopyable, public NonMovable
 {
     public:
-        PostFXRenderer(int width, int height);
+        PostFXRenderer(GLuint windowWidth, GLuint windowHeight);
         ~PostFXRenderer();
 
         void begin();
         void render();
 
     private:
+        void createBuffers(GLuint windowWidth, GLuint windowHeight);
+
         Model   m_windowQuad;
-        GLuint  m_fbo;
-        GLuint  m_fboTexture;
-        GLuint  m_rbo;
+        GLuint  m_fbo = 0;
+        GLuint  m_fboTexture = 0;
+        GLuint  m_fboDepthTex = 0;
         Shader  m_postFXShader;
 };
 

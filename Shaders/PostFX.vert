@@ -7,6 +7,6 @@ out vec3 passTexCoord;
 
 void main()
 {
-    gl_Position = inVertexCoord;
+    gl_Position = vec4(inVertexCoord, 1.0f);
     passTexCoord = inTextureCoords;
 }

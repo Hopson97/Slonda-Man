@@ -8,14 +8,6 @@
 #include "../Terrain/TerrainGenerator.h"
 #include "../Util/Random.h"
 
-namespace
-{
-    unsigned toHex (sf::Color colour)
-    {
-        return (colour.r << 16) | (colour.g << 8) | colour.b;
-    }
-}
-
 StatePlaying::StatePlaying(Game& game)
 :   StateBase       (game)
 ,   m_level         ("test")
@@ -33,9 +25,15 @@ void StatePlaying::handleInput()
 
 void StatePlaying::update(sf::Time deltaTime, const Camera& camera)
 {
-    if (m_level.collidableAt(camera.getPosition().x, camera.getPosition().z))
+    for (const Entity& entity : m_level.getEntities())
     {
-        std::cout << "Colliding\n";
+        glm::vec2 cam(camera.getPosition().x,   camera.getPosition().z);
+        glm::vec2 ent(entity.position.x,        entity.position.z);
+        float d = glm::distance(cam, ent);
+        if(d < 1)
+        {
+            std::cout << "Collide\n";
+        }
     }
 }
 

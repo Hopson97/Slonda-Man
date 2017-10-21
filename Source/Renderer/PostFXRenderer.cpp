@@ -1,8 +1,11 @@
 #include "PostFXRenderer.h"
 
 #include "../Model/Mesh.h"
+#include "../GLLib/GLFunctions.h"
 
-PostFXRenderer::PostFXRenderer(int width, int height)
+#include <iostream>
+
+PostFXRenderer::PostFXRenderer(GLuint windowWidth, GLuint windowHeight)
 :   m_postFXShader  ("PostFX", "PostFX")
 {
     std::vector<GLfloat> vert
@@ -29,30 +32,14 @@ PostFXRenderer::PostFXRenderer(int width, int height)
 
     m_windowQuad.create({vert, texture, {}, indices});
 
-    glGenFramebuffers(1, &m_fbo);
-    glBindFramebuffer(GL_FRAMEBUFFER, m_fbo);
-
-    glGenTextures   (1, &m_fboTexture);
-    glBindTexture   (GL_TEXTURE_2D, m_fboTexture);
-    glTexImage2D    (GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
-    glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-    glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_fboTexture, 0);
-
-    glGenRenderbuffers      (1, &m_rbo);
-    glBindRenderbuffer      (GL_RENDERBUFFER, rbo);
-    glRenderbufferStorage   (GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, width, height);
-    glBindRenderbuffer      (GL_RENDERBUFFER, 0);
-
-    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, m_rbo);
+    createBuffers(windowWidth, windowHeight);
 }
 
 PostFXRenderer::~PostFXRenderer()
 {
     glDeleteFramebuffers    (1, &m_fbo);
     glDeleteTextures        (1, &m_fboTexture);
-    glDeleteRenderbuffers   (1, &m_rbo);
+    glDeleteTextures        (1, &m_fboDepthTex);
 }
 
 
@@ -64,8 +51,63 @@ void PostFXRenderer::begin()
 void PostFXRenderer::render()
 {
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
     m_windowQuad.bindVAO();
     m_postFXShader.useProgram();
+    glBindTexture(GL_TEXTURE_2D, m_fboTexture);
     GL::drawElements(m_windowQuad.getIndicesCount());
-
+    std::clog << "End draw" << std::endl;
 }
+
+void PostFXRenderer::createBuffers(GLuint windowWidth, GLuint windowHeight)
+{
+    glGenFramebuffers(1, &m_fbo);
+    glBindFramebuffer(GL_FRAMEBUFFER, m_fbo);
+
+    //now for the color buffer
+
+    glGenTextures(1, &m_fboTexture);
+    glBindTexture(GL_TEXTURE_2D, m_fboTexture);
+
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB32F, windowWidth, windowHeight, 0, GL_RGB, GL_FLOAT, NULL);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
+    glBindTexture(GL_TEXTURE_2D, 0);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_fboTexture, 0); //attach it to the frame buffe//and depth buffer
+
+    glGenTextures(1, &m_fboDepthTex);
+    glBindTexture(GL_TEXTURE_2D, m_fboDepthTex);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32F, windowWidth , windowHeight, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+    glGenerateMipmap(GL_TEXTURE_2D);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glBindTexture(GL_TEXTURE_2D, 0);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, m_fboDepthTex, 0);
+
+    glDrawBuffer(GL_COLOR_ATTACHMENT0);
+
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

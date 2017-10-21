@@ -30,7 +30,7 @@ Level::Level(const std::string& name)
         m_collideMap.push_back(false);
 
     loadLevel();
-
+/*
     for (unsigned z = 0; z < m_mapSizeZ * SCALE; z++)
     {
         for (unsigned x = 0; x < m_mapSizeX * SCALE; x++)
@@ -39,8 +39,7 @@ Level::Level(const std::string& name)
         }
         std::cout << "\n";
     }
-
-
+*/
 }
 
 void Level::render(MasterRenderer& renderer) const
@@ -50,6 +49,12 @@ void Level::render(MasterRenderer& renderer) const
     for (auto& entity : m_entities)
         renderer.addObject(entity);
 }
+
+const std::vector<Entity>& Level::getEntities() const
+{
+    return m_entities;
+}
+
 
 bool Level::collidableAt(int x, int z) const
 {

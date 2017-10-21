@@ -1,5 +1,7 @@
 #include "SfmlRenderer.h"
 
+
+#include <iostream>
 #include "../GLLib/GLFunctions.h"
 
 void SfmlRenderer::add(const sf::Drawable& drawable)
@@ -13,6 +15,7 @@ void SfmlRenderer::render(sf::RenderWindow& window)
     GL::unbindAll();
     window.pushGLStates();
     window.resetGLStates();
+
     for (auto& drawable : m_sfmlDrawables)
     {
         window.draw(*drawable);

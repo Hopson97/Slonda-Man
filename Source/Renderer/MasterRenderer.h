@@ -8,6 +8,7 @@
 #include "SfmlRenderer.h"
 #include "EntityRenderer.h"
 #include "TerrainRenderer.h"
+#include "PostFXRenderer.h"
 
 class Camera;
 class Terrain;
@@ -15,6 +16,8 @@ class Terrain;
 class MasterRenderer
 {
     public:
+        MasterRenderer(GLuint windowWidth, GLuint windowHeight);
+
         void addObject(const glm::vec3& location, const glm::vec3& rotation, Primitive type);
         void addObject(const sf::Drawable& drawable);
         void addObject(const Terrain& terrain);
@@ -27,6 +30,7 @@ class MasterRenderer
         SfmlRenderer    m_sfmlRenderer;
         EntityRenderer  m_entityRenderer;
         TerrainRenderer m_terrainRenderer;
+        PostFXRenderer  m_postFXRenderer;
 
 };
 
