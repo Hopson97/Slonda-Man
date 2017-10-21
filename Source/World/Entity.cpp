@@ -1,7 +1,8 @@
 #include "Entity.h"
 
-Entity::Entity(const TexturedModel& model)
-:   m_pTexturedModel    (&model)
+Entity::Entity(const TexturedModel& model, const glm::vec3& position)
+:   position            (position)
+,   m_pTexturedModel    (&model)
 {
 
 }

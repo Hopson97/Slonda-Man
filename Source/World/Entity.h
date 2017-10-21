@@ -7,7 +7,7 @@
 class Entity
 {
     public:
-        Entity(const TexturedModel& model);
+        Entity(const TexturedModel& model, const glm::vec3& position);
 
         const TexturedModel& getModel () const;
 

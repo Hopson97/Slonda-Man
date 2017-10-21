@@ -72,7 +72,7 @@ void Camera::handleInput(const sf::RenderWindow& window, float dt)
         static const auto right     = sf::Keyboard::D;
         static const auto up        = sf::Keyboard::Z;
         static const auto down      = sf::Keyboard::X;
-        auto speed     = 2.1f * sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) ? 3 : 1;
+        auto speed     = 2.1f * sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) ? 10 : 1;
 
         glm::vec3 translate;
 

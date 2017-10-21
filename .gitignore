@@ -6,15 +6,14 @@
 bin/
 obj/
 
-#Makefile stuff
-*.o
-MinecraftWeek
+Slender/
 
 #.dll stuff
 *.dll
 
 #Builds
 *.7z
+*.zip
 Project/
 
 #Profiler

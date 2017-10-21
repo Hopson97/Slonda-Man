@@ -3,6 +3,7 @@
 #include "TerrainGenerator.h"
 
 Terrain::Terrain(const glm::vec3& position)
+:   m_position  (position)
 {
     m_terrainModel.create(generateTerrain());
 }
