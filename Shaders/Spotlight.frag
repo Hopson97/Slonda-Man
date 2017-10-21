@@ -14,6 +14,27 @@ const int MAX_DISTANCE = 15;
 
 float getLight()
 {
+    float distToLight = length(passVectorToLight);
+    vec3 nVectToLight = normalize(passVectorToLight);
+
+    float cosDir = dot(nVectToLight, -passLightDirection);
+    float spotEffect = smoothstep(0.985, 0.978, cosDir);
+
+    float heightAtten = smoothstep(MAX_DISTANCE, 0.0f, distToLight);
+
+    vec3 N = normalize(passNormalDirection);
+
+    float diffuseLight  = max(dot(N, nVectToLight), 0.05);
+    return diffuseLight * spotEffect * heightAtten;
+
+
+
+
+
+
+
+
+
     vec3 nNormal        = normalize(passNormalDirection);
     vec3 nVectorToLight = normalize(passVectorToLight);
 

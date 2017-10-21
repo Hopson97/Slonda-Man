@@ -17,6 +17,11 @@ void MasterRenderer::render(sf::RenderWindow& target, const Camera& camera)
     m_terrainRenderer.render(camera);
 
 
+
+
+
+
+
     m_sfmlRenderer.render(target);
 }
 
