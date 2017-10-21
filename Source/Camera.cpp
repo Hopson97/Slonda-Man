@@ -98,11 +98,11 @@ void Camera::handleInput(const sf::RenderWindow& window, float dt)
 
         if (sf::Keyboard::isKeyPressed(up))
         {
-            translate.y += 0.01;
+            translate.y += speed;
         }
         else if (sf::Keyboard::isKeyPressed(down))
         {
-            translate.y -= 0.01;
+            translate.y -= speed;
         }
 
         m_position += translate * dt;

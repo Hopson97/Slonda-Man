@@ -4,8 +4,8 @@
 
 namespace
 {
-    constexpr GLuint    SIZE                = 512;
-    constexpr GLuint    EDGE_VERTEX_COUNT   = 256;
+    constexpr GLuint    SIZE                = 2048;
+    constexpr GLuint    EDGE_VERTEX_COUNT   = 512;
     constexpr GLuint    AREA                = EDGE_VERTEX_COUNT * EDGE_VERTEX_COUNT;
     constexpr GLfloat   fEDGE_VERTEX_COUNT  = GLfloat(EDGE_VERTEX_COUNT - 1);
 
