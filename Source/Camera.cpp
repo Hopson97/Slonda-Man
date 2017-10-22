@@ -45,6 +45,8 @@ void Camera::update()
 
     m_viewMatrix = createViewMatrix(*this);
     m_projectionViewMatrix = m_projectionMatrix * m_viewMatrix;
+
+    m_frustum.update(m_projectionViewMatrix);
 }
 
 const glm::vec3& Camera::getPosition() const
@@ -81,6 +83,11 @@ const glm::mat4& Camera::getViewMatrix() const
 const glm::mat4& Camera::getProjMatrix() const
 {
     return m_projectionMatrix;
+}
+
+const ViewFrustum& Camera::getFrustum() const
+{
+    return m_frustum;
 }
 
 

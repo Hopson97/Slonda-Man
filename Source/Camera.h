@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 
 #include <GL/glew.h>
-#include "Maths/GlmIncludes.h"
+#include "Maths/Frustum.h"
 
 struct Transform;
 
@@ -25,6 +25,8 @@ class Camera
         const glm::mat4& getViewMatrix      () const;
         const glm::mat4& getProjMatrix      () const;
 
+        const ViewFrustum& getFrustum       () const;
+
     private:
         glm::vec3 m_position;
         glm::vec3 m_torchPosition;
@@ -36,6 +38,8 @@ class Camera
         glm::mat4 m_projectionViewMatrix;
 
         const Transform* m_pTransform = nullptr;
+
+        ViewFrustum m_frustum;
 };
 
 #endif // CAMERA_H_INCLUDED
