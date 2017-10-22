@@ -3,6 +3,10 @@
 
 #include "Mesh.h"
 
-Mesh generateWall(float xSize, float zSize, float height);
+namespace Cube
+{
+    std::vector<GLfloat> generateVertexPositions(GLfloat cubeSize);
+    std::vector<GLuint>  generateIndices();
+}
 
 #endif // GENERATOR_H_INCLUDED
