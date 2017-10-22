@@ -14,7 +14,6 @@ const int MAX_DISTANCE = 17;
 
 float getLight()
 {
-    return 1;
     vec3 nNormal        = normalize(passNormalDirection);
     vec3 nVectorToLight = normalize(passVectorToLight);
 

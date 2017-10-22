@@ -8,6 +8,8 @@
 #include "Entity.h"
 #include "../Model/TexturedModel.h"
 
+constexpr int LEVEL_SIZE = 300;
+
 class MasterRenderer;
 
 class Level

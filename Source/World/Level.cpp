@@ -45,12 +45,6 @@ const std::vector<Entity>& Level::getEntities() const
     return m_entities;
 }
 
-
-bool Level::collidableAt(int x, int z) const
-{
-    return false; //return m_collideMap.at(z * m_mapSizeZ * SCALE + x * SCALE);
-}
-
 void Level::loadLevel()
 {
     Random<> randomisor;

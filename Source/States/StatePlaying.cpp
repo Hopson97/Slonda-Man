@@ -55,9 +55,14 @@ void StatePlaying::render(MasterRenderer& renderer)
 
 void StatePlaying::edgeCollideLevel()
 {
-    if      (m_player.position.x >= 299.5)  m_player.position.x = 299.5;
-    else if (m_player.position.x <= 0.5)     m_player.position.x = 0.5;
+    const static float EDGE = 6.5;
+    if (m_player.position.x > LEVEL_SIZE - EDGE)
+        m_player.position.x = LEVEL_SIZE - EDGE;
+    else if (m_player.position.x < EDGE)
+        m_player.position.x = EDGE;
 
-    if      (m_player.position.z >= 299.5)  m_player.position.z = 299.5;
-    else if (m_player.position.z <= 0.5)     m_player.position.z = 0.5;
+    if (m_player.position.z > LEVEL_SIZE - EDGE)
+        m_player.position.z = LEVEL_SIZE - EDGE;
+    else if (m_player.position.z < EDGE)
+        m_player.position.z = EDGE;
 }
