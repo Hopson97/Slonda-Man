@@ -24,5 +24,5 @@ GLuint Shader::getShaderID() const
 
 GLuint Shader::getUniformLocation(const GLchar* name) const
 {
-    glGetUniformLocation(m_shaderProgram, name);
+    return glGetUniformLocation(m_shaderProgram, name);
 }

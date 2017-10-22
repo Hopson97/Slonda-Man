@@ -45,7 +45,7 @@ void EntityRenderer::render(const Camera& camera)
 
         for (const Entity* entity : modelEntity.second)
         {
-            GL::loadUniform(m_locModelMatrix, createModelMatrix(entity->position, entity->rotation));
+            GL::loadUniform(m_locModelMatrix, entity->getModelMatrix());
             GL::drawElements(modelEntity.first->getModel().getIndicesCount());
         }
     }

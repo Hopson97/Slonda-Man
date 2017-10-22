@@ -11,11 +11,26 @@ class Entity
 
         const TexturedModel& getModel () const;
 
-        glm::vec3 position;
-        glm::vec3 rotation;
+        const glm::mat4& getModelMatrix() const;
+
+        void setPosition(const glm::vec3& position);
+        void setRotation(const glm::vec3& position);
+
+        const glm::vec3& getPosition() const;
+        const glm::vec3& getRotation() const;
+
+
 
     private:
+        void resetModelMatrix();
+
+        glm::vec3 m_position;
+        glm::vec3 m_rotation;
+
         const TexturedModel* m_pTexturedModel;
+
+        glm::mat4 m_modelMatrix;
+
 };
 
 #endif // ENTITY_H_INCLUDED

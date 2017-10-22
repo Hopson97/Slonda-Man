@@ -30,16 +30,6 @@ Level::Level(const std::string& name)
         m_collideMap.push_back(false);
 
     loadLevel();
-/*
-    for (unsigned z = 0; z < m_mapSizeZ * SCALE; z++)
-    {
-        for (unsigned x = 0; x < m_mapSizeX * SCALE; x++)
-        {
-            //std::cout << collidableAt(x, z) << " ";
-        }
-        std::cout << "\n";
-    }
-*/
 }
 
 void Level::render(MasterRenderer& renderer) const
@@ -78,9 +68,7 @@ void Level::loadLevel()
                                 adjPos.z + randomisor.getFloatInRange(-0.5, 0.5));
 
             treePositions.emplace_back(position);
-            //m_collideMap.at(position.z * m_mapSizeZ * SCALE + position.x) = true;
         }
-
         //more models...
     }
 

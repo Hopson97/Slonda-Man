@@ -30,7 +30,7 @@ void StatePlaying::update(sf::Time deltaTime, const Camera& camera)
     for (const Entity& entity : m_level.getEntities())
     {
         glm::vec2 cam(m_player.position.x, m_player.position.z);
-        glm::vec2 ent(entity  .position.x, entity  .position.z);
+        glm::vec2 ent(entity.getPosition().x, entity.getPosition().z);
 
         float d = glm::distance(cam, ent);
         if(d < 1)

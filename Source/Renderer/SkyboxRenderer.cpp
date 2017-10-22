@@ -67,14 +67,7 @@ SkyboxRenderer::SkyboxRenderer()
         20, 21, 22,
         22, 23, 20
     };
-/*
-    #define GL_TEXTURE_CUBE_MAP_POSITIVE_X 0x8515
-    #define GL_TEXTURE_CUBE_MAP_NEGATIVE_X 0x8516
-    #define GL_TEXTURE_CUBE_MAP_POSITIVE_Y 0x8517
-    #define GL_TEXTURE_CUBE_MAP_NEGATIVE_Y 0x8518
-    #define GL_TEXTURE_CUBE_MAP_POSITIVE_Z 0x8519
-    #define GL_TEXTURE_CUBE_MAP_NEGATIVE_Z 0x851A
-*/
+
     m_skyBoxCube.create({vertexCoords, {}, {}, indices});
     m_skyTexture.loadFromFiles({"skyside", "skyside", "sky", "sky", "skyside", "skyside"});
 
@@ -106,28 +99,5 @@ void SkyboxRenderer::loadUnifroms(const Camera& camera)
     GL::loadUniform(m_locationView, view);
     GL::loadUniform(m_locationProj, camera.getProjMatrix());
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

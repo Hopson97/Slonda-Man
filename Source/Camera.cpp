@@ -30,7 +30,6 @@ void Camera::update()
 
     float yaw    = glm::radians(m_rotation.y);
     float pitch  = glm::radians(m_rotation.x);
-    float roll   = glm::radians(m_rotation.z);
 
     m_direction.x = -sin(yaw) * cos(pitch);
     m_direction.z = cos(yaw) * cos(pitch);
