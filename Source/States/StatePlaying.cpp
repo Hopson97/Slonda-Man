@@ -38,6 +38,8 @@ void StatePlaying::update(sf::Time deltaTime, const Camera& camera)
             std::cout << "Collide\n";
         }
     }
+    edgeCollideLevel();
+
 }
 
 void StatePlaying::fixedUpdate(sf::Time deltaTime)
@@ -48,4 +50,14 @@ void StatePlaying::fixedUpdate(sf::Time deltaTime)
 void StatePlaying::render(MasterRenderer& renderer)
 {
     m_level.render(renderer);
+}
+
+
+void StatePlaying::edgeCollideLevel()
+{
+    if      (m_player.position.x >= 299.5)  m_player.position.x = 299.5;
+    else if (m_player.position.x <= 0.5)     m_player.position.x = 0.5;
+
+    if      (m_player.position.z >= 299.5)  m_player.position.z = 299.5;
+    else if (m_player.position.z <= 0.5)     m_player.position.z = 0.5;
 }

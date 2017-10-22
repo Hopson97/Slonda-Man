@@ -78,12 +78,6 @@ void Level::loadLevel()
     {
         m_entities.emplace_back(m_treeModel, pos);
     }
-/*
-
-    Mesh tree       = loadObjModel("tree1");
-    Mesh allTrees   = createMegaMesh(tree, treePositions);
-    m_treeModel.create(allTrees, "bark");
-    m_entities.emplace_back(m_treeModel);*/
 }
 
 

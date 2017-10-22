@@ -69,7 +69,7 @@ SkyboxRenderer::SkyboxRenderer()
     };
 
     m_skyBoxCube.create({vertexCoords, {}, {}, indices});
-    m_skyTexture.loadFromFiles({"skyside", "skyside", "sky", "sky", "skyside", "skyside"});
+    m_skyTexture.loadFromFiles({"skyside", "skyside", "sky", "skyside", "skyside", "skyside"});
 
     m_locationView = m_skyShader.getUniformLocation("viewMatrix");
     m_locationProj = m_skyShader.getUniformLocation("projectionMatrix");

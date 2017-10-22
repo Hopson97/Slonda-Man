@@ -28,6 +28,7 @@ class Level
 
         Terrain       m_terrain;
         TexturedModel m_treeModel;
+        TexturedModel m_houseModel;
 
         sf::Image m_levelImage;
 

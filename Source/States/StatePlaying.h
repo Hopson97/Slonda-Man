@@ -17,6 +17,8 @@ class StatePlaying : public StateBase
         void render         (MasterRenderer& renderer)    override;
 
     private:
+        void edgeCollideLevel();
+
         Level   m_level;
         Player  m_player;
 };

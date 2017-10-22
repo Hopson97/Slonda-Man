@@ -67,6 +67,8 @@ Mesh loadObjModel(const std::string& fileName)
     try
     {
         objFile.open("res/models/" + fileName + ".obj");
+        if  (!objFile.is_open())
+            throw std::runtime_error("Unable to open" + fileName);
         obj << objFile.rdbuf();
         objFile.close();
 

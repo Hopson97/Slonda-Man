@@ -4,14 +4,13 @@
 
 namespace
 {
-    constexpr GLuint    SIZE                = 2048;
+    constexpr GLuint    SIZE                = 300;
     constexpr GLuint    EDGE_VERTEX_COUNT   = 512;
     constexpr GLuint    AREA                = EDGE_VERTEX_COUNT * EDGE_VERTEX_COUNT;
     constexpr GLfloat   fEDGE_VERTEX_COUNT  = GLfloat(EDGE_VERTEX_COUNT - 1);
 
-    void generateTerrainAttributes(Mesh& mesh)
+    void generateTerrainAttributes(Mesh& mesh, HeightFunction heightFunction)
     {
-
         std::vector<GLfloat>& vertexCoords  = mesh.vertexCoords;
         std::vector<GLfloat>& normals       = mesh.normals;
         std::vector<GLfloat>& textureCoords = mesh.texCoords;
@@ -24,7 +23,7 @@ namespace
                 GLfloat fx = static_cast<GLfloat>(x);
 
                 vertexCoords[vertexPtr * 3]     = fx / fEDGE_VERTEX_COUNT * SIZE;
-                vertexCoords[vertexPtr * 3 + 1] = -1;
+                vertexCoords[vertexPtr * 3 + 1] = heightFunction(x, z);
                 vertexCoords[vertexPtr * 3 + 2] = fz / fEDGE_VERTEX_COUNT * SIZE;
 
                 normals[vertexPtr * 3]     = 0.0;
@@ -64,7 +63,7 @@ namespace
     }
 }
 
-Mesh generateTerrain()
+Mesh generateTerrain(HeightFunction heightFunction)
 {
 
     Mesh mesh(AREA * 3,
@@ -73,7 +72,7 @@ Mesh generateTerrain()
               6 * (EDGE_VERTEX_COUNT - 1) * (EDGE_VERTEX_COUNT - 1));
 
 
-    generateTerrainAttributes   (mesh);
+    generateTerrainAttributes   (mesh, heightFunction);
     generateTerrainIndices      (mesh);
 
     return mesh;
