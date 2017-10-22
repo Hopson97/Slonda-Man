@@ -25,6 +25,8 @@ void MasterRenderer::render(sf::RenderWindow& target, const Camera& camera)
     m_entityRenderer .render(camera);
     m_terrainRenderer.render(camera);
 
+    m_skyboxRenderer.render(camera);
+
     //m_postFXRenderer.render();
 
     m_sfmlRenderer.render(target);

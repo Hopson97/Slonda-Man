@@ -74,6 +74,15 @@ const glm::mat4& Camera::getProjViewMatrix() const
     return m_projectionViewMatrix;
 }
 
+const glm::mat4& Camera::getViewMatrix() const
+{
+    return m_viewMatrix;
+}
+
+const glm::mat4& Camera::getProjMatrix() const
+{
+    return m_projectionMatrix;
+}
 
 
 

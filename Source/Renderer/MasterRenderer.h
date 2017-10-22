@@ -9,6 +9,7 @@
 #include "EntityRenderer.h"
 #include "TerrainRenderer.h"
 #include "PostFXRenderer.h"
+#include "SkyboxRenderer.h"
 
 class Camera;
 class Terrain;
@@ -31,7 +32,7 @@ class MasterRenderer
         EntityRenderer  m_entityRenderer;
         TerrainRenderer m_terrainRenderer;
         PostFXRenderer  m_postFXRenderer;
-
+        SkyboxRenderer  m_skyboxRenderer;
 };
 
 

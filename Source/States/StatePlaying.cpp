@@ -24,7 +24,6 @@ void StatePlaying::handleInput()
     m_player.input(m_pGame->getWindow());
 }
 
-
 void StatePlaying::update(sf::Time deltaTime, const Camera& camera)
 {
     m_player.update(deltaTime.asSeconds());
