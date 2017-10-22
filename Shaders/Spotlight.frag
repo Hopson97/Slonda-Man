@@ -20,7 +20,7 @@ float getLight()
     //"angle" between direction of object to light, and the light's direction
     float angle = dot(passLightDirection, nVectorToLight);
 
-    if (angle < 0.7)
+    if (angle < 0.685)
     {
         return 0;
     }
@@ -29,7 +29,11 @@ float getLight()
     float dist = 1 - (passDistanceToLight / MAX_DISTANCE);
 
     //angle of surface normal and direction of object to light
-    return dot(nNormal, nVectorToLight) * dist;
+    float light = dot(nNormal, nVectorToLight) * dist;
+
+    //light *= (1.0 - angle);
+
+    return light;
 }
 
 void main()
