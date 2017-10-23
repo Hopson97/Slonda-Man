@@ -29,7 +29,10 @@ glm::mat4 createViewMatrix(const Camera& camera)
     return matrix;
 }
 
-glm::mat4 createProjectionMatrix()
+glm::mat4 createProjectionMatrix(const sf::RenderWindow& window)
 {
-    return glm::perspective(glm::radians(90.0f), 1280.0f / 720.0f, 0.1f, 1500.0f);
+    return glm::perspective(glm::radians(90.0f),
+                            GLfloat(window.getSize().x / window.getSize().y),
+                            0.1f,
+                            1500.0f);
 }

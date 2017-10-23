@@ -7,11 +7,11 @@
 
 #include "World/Transform.h"
 
-Camera::Camera()
+Camera::Camera(const sf::RenderWindow& window)
 :   m_position  (5, 0.5, 5)
 ,   m_rotation  (0, 0, 0)
 {
-    m_projectionMatrix = createProjectionMatrix();
+    m_projectionMatrix = createProjectionMatrix(window);
 }
 
 

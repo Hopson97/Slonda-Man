@@ -11,7 +11,7 @@ struct Transform;
 class Camera
 {
     public:
-        Camera();
+        Camera(const sf::RenderWindow& window);
 
         void hookTransformable(const Transform* transform);
         void update();
