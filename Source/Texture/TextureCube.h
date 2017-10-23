@@ -20,6 +20,9 @@ class TextureCube : public NonCopyable
         TextureCube() = default;
         TextureCube(const std::array<std::string, 6>& textureFiles);
 
+        TextureCube             (TextureCube&&);
+        TextureCube& operator=  (TextureCube&&);
+
         ~TextureCube();
 
         void loadFromFiles(const std::array<std::string, 6>& textureFiles);

@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "../GLLib/GLFunctions.h"
 
 Texture2D::Texture2D(const std::string& texName)
 {
@@ -22,15 +23,9 @@ void Texture2D::create(const std::string& texName)
     glGenTextures(1, &m_texID);
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, m_texID);
-    glTexImage2D(GL_TEXTURE_2D,
-                 0,
-                 GL_RGBA,
-                 i.getSize().x,
-                 i.getSize().y,
-                 0,
-                 GL_RGBA,
-                 GL_UNSIGNED_BYTE,
-                 i.getPixelsPtr());
+
+    GL::textureImage2D(i, GL::RGBA::RGBA);
+
     glGenerateMipmap(GL_TEXTURE_2D);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_LOD_BIAS, -1);;

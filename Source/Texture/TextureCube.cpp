@@ -7,6 +7,19 @@ TextureCube::TextureCube(const std::array<std::string, 6>& textureFiles)
     loadFromFiles(textureFiles);
 }
 
+TextureCube::TextureCube(TextureCube&& other)
+:   m_textureID (other.m_textureID)
+{
+    other.m_textureID = 0;
+}
+
+TextureCube& TextureCube::operator=(TextureCube&& other)
+{
+    m_textureID = other.m_textureID;
+    other.m_textureID = 0;
+}
+
+
 TextureCube::~TextureCube()
 {
     glDeleteTextures(1, &m_textureID);
