@@ -7,12 +7,17 @@
 #include "../Model/ModelLoader.h"
 #include "../Terrain/TerrainGenerator.h"
 #include "../Util/Random.h"
+#include "../Model/Generator.h"
 
 StatePlaying::StatePlaying(Game& game, Camera& camera)
 :   StateBase       (game)
 ,   m_level         ("test")
 {
     camera.hookTransformable(&m_player);
+
+    Mesh mesh = Quad::generateMesh(7.5);
+    m_slenderTest.create(mesh, "slender");
+    m_slenderEntity.create(m_slenderTest, glm::vec3{25, -1, 25});
 }
 
 void StatePlaying::handleEvent(sf::Event e)
@@ -26,7 +31,12 @@ void StatePlaying::handleInput()
 
 void StatePlaying::update(sf::Time deltaTime, const Camera& camera)
 {
+    static bool isCollide;
+    static glm::vec3 lastPosition;
+
     m_player.update(deltaTime.asSeconds());
+
+    isCollide = false;
     for (const Entity& entity : m_level.getEntities())
     {
         glm::vec2 cam(m_player.position.x, m_player.position.z);
@@ -35,21 +45,27 @@ void StatePlaying::update(sf::Time deltaTime, const Camera& camera)
         float d = glm::distance(cam, ent);
         if(d < 1)
         {
-            std::cout << "Collide\n";
+            isCollide = true;
+            m_player.position = lastPosition;
         }
     }
+
     edgeCollideLevel();
 
+    if (!isCollide)
+        lastPosition = m_player.position;
 }
 
 void StatePlaying::fixedUpdate(sf::Time deltaTime)
 {
-
+    float y = m_player.rotation.y;
+    m_slenderEntity.setRotation({0, -y, 0});
 }
 
 void StatePlaying::render(MasterRenderer& renderer)
 {
     m_level.render(renderer);
+    renderer.addObject(m_slenderEntity);
 }
 
 

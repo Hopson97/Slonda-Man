@@ -6,6 +6,8 @@
 #include "../Maths/GlmIncludes.h"
 #include "GLEnums.h"
 
+#include <SFML/Graphics.hpp>
+
 /*
     These functions are here just for a bit of fun.
 
@@ -20,6 +22,8 @@
 
 namespace GL
 {
+    void textureImage2D(const sf::Image& image, RGBA rbga);
+
     void drawElements(GLuint indicesCount);
 
     void loadUniform(GLuint location, const glm::mat4& matrix);

@@ -29,7 +29,7 @@ void SkyboxRenderer::render(const Camera& camera)
     loadUnifroms(camera);
 
     GL::drawElements(m_skyBoxCube.getIndicesCount());
-    GL::enable(GL::Cap::CullFace);
+    //GL::enable(GL::Cap::CullFace);
 }
 
 void SkyboxRenderer::loadUnifroms(const Camera& camera)

@@ -31,6 +31,12 @@ namespace GL
         Texture2D   = GL_TEXTURE_2D,
         CubeMap     = GL_TEXTURE_CUBE_MAP
     };
+
+    enum class RGBA
+    {
+        RGB = GL_RGB,
+        RGBA = GL_RGBA,
+    };
 }
 
 #endif // GLENUMS_H_INCLUDED

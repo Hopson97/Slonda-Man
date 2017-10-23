@@ -7,7 +7,14 @@
 class Entity
 {
     public:
-        Entity(const TexturedModel& model, const glm::vec3& position);
+        Entity() = default;
+        Entity(const TexturedModel& model,
+               const glm::vec3& position,
+               const glm::vec3& rotation = {0, 0, 0});
+
+        void create(const TexturedModel& model,
+                    const glm::vec3& position,
+                    const glm::vec3& rotation = {0, 0, 0});
 
         const TexturedModel& getModel () const;
 
@@ -18,6 +25,11 @@ class Entity
 
         const glm::vec3& getPosition() const;
         const glm::vec3& getRotation() const;
+
+        void rotate(GLfloat amount)
+        {
+            m_rotation += amount;
+        }
 
 
 

@@ -21,6 +21,9 @@ class StatePlaying : public StateBase
 
         Level   m_level;
         Player  m_player;
+
+        TexturedModel m_slenderTest;
+        Entity          m_slenderEntity;
 };
 
 #endif // STATEPLAYING_H_INCLUDED

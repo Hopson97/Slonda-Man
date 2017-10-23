@@ -3,6 +3,25 @@
 namespace GL
 {
     //
+    //TEXTURES
+    //
+    void textureImage2D(const sf::Image& image, RGBA rbga)
+    {
+        glTexImage2D(GL_TEXTURE_2D,
+                     0,
+                     (GLint)rbga,
+                     image.getSize().x,
+                     image.getSize().y,
+                     0,
+                     (GLenum)rbga,
+                     GL_UNSIGNED_BYTE,
+                     image.getPixelsPtr());
+    }
+
+
+
+
+    //
     //  DRAWING
     //
     void drawElements(GLuint indicesCount)

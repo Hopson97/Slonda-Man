@@ -71,3 +71,65 @@ namespace Cube
         };
     }
 }
+
+namespace Quad
+{
+    Mesh generateMesh(int size)
+    {
+        std::vector<GLfloat> vert
+        {
+            0,      size,   0,
+            0,      0,      0,
+            size,   0,      0,
+            size,   size,   0,
+        };
+
+        std::vector<GLfloat> texure
+        {
+            1, 1,
+            1, 0,
+            0, 0,
+            0, 1,
+        };
+
+        std::vector<GLfloat> normals
+        {
+            0, 0, 1,
+            0, 0, 1,
+            0, 0, 1,
+            0, 0, 1,
+        };
+
+        std::vector<GLuint> indices
+        {
+            0, 1, 2,
+            2, 3, 0,
+        };
+
+        return
+        {
+            vert,
+            texure,
+            normals,
+            indices
+        };
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

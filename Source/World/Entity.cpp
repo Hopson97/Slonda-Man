@@ -2,12 +2,24 @@
 
 #include "../Maths/Matrix.h"
 
-Entity::Entity(const TexturedModel& model, const glm::vec3& position)
+Entity::Entity(const TexturedModel& model, const glm::vec3& position, const glm::vec3& rotation)
 :   m_position          (position)
+,   m_rotation          (rotation)
 ,   m_pTexturedModel    (&model)
 {
     resetModelMatrix();
 }
+
+void Entity::create(const TexturedModel& model, const glm::vec3& position, const glm::vec3& rotation)
+{
+    m_position = position;
+    m_rotation = rotation;
+    m_pTexturedModel = &model;
+
+    resetModelMatrix();
+}
+
+
 
 const TexturedModel& Entity::getModel() const
 {
