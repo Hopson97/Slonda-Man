@@ -85,13 +85,13 @@ To finish off, I created a player class, which allows for smoother movement thou
 | Total Lines of Code    	| 1432                                                           |
 
 
-### Day 5
+### Day 6
 
 Not much was done today because I was busy with other stuff.
 
 However, I made a skybox for some additional ambience, and added an "edge" to the level.
 
-![Day 5](https://i.imgur.com/d4YW8cW.png)
+![Day 6](https://i.imgur.com/d4YW8cW.png)
 
 | Title                  	| Data                                                       	|
 |------------------------	|------------------------------------------------------------	|
@@ -101,7 +101,25 @@ However, I made a skybox for some additional ambience, and added an "edge" to th
 | Total Lines of Code    	| 1432                                                           |
 
 
+### Day 7
 
+Not much was done today because I was busy with other stuff.
+
+One thing I did do was add in slender boi
+
+He does not do much, as for now he is literally a texture that renders to a quad, of which always
+faces the player.
+
+Other things I did was some clean up.
+
+![Day 7](https://i.imgur.com/w6Uq1rD.jpg)
+
+| Title                  	| Data                                                       	|
+|------------------------	|------------------------------------------------------------	|
+| Time programming Today 	| 0:42:12                                                      |
+| Lines of Code Today    	| 473 somehow                                                   |
+| Total Time Programming 	| 14:39:52                                                    	|
+| Total Lines of Code    	| 1905                                                           |
 
 
 

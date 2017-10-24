@@ -10,7 +10,7 @@ in vec3 passLightDirection;     //Direction of the light source
 in float passDistanceToLight;   //Distance from vertex to light source
 
 uniform sampler2D tex;
-const int MAX_DISTANCE = 17;
+const int MAX_DISTANCE = 15;
 
 float getLight(float minAngle)
 {
@@ -37,7 +37,7 @@ float getLight(float minAngle)
 void main()
 {
     outColour = texture(tex, passTexCoord);
-    if (outColour.a < 0.3)
+    if (outColour.a < 0.2)
     {
         discard;
     }
