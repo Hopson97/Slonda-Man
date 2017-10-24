@@ -122,7 +122,18 @@ Other things I did was some clean up.
 | Total Lines of Code    	| 1905                                                           |
 
 
+### Day 8
 
+I added the initial logic of Slenderman himself today.
+
+This is testing whether he is in view, or not.
+
+| Title                  	| Data                                                       	|
+|------------------------	|------------------------------------------------------------	|
+| Time programming Today 	| 0:59:54                                                      |
+| Lines of Code Today    	| 126                                                   |
+| Total Time Programming 	| 15:39:46                                                    	|
+| Total Lines of Code    	| 1905                                                           |
 
 
 

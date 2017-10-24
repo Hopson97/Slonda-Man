@@ -18,7 +18,7 @@ Game::Game()
 
 void Game::run()
 {
-    constexpr   unsigned    TPS             = 25; //ticks per seconds
+    constexpr   unsigned    TPS             = 10; //ticks per seconds
     const       sf::Time    timePerUpdate   = sf::seconds(1.0f / float(TPS));
     unsigned                ticks           = 0;
 

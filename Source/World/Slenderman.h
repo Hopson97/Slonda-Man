@@ -13,6 +13,12 @@ class MasterRenderer;
 
 class Slenderman
 {
+    enum class State
+    {
+        Ghosting,
+        Stalking,
+    };
+
     public:
         Slenderman();
 
@@ -25,6 +31,8 @@ class Slenderman
 
     private:
         void gotoRandomLocation();
+
+        State m_state = State::Stalking;
 
         TexturedModel   m_model;
         Entity          m_entity;

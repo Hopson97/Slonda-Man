@@ -19,7 +19,15 @@ Slenderman::Slenderman()
 
 void Slenderman::update(const Camera& camera)
 {
-    m_entity.setRotation({0, -camera.getRotation().y, 0});
+    if (m_state == State::Stalking)
+    {
+        m_entity.setRotation({0, -camera.getRotation().y, 0});
+    }
+
+    if (glm::distance(m_currLocation, camera.getPosition()) > 20)
+    {
+        m_state = State::Ghosting;
+    }
 
     m_inView = camera.getFrustum().isPointInFrustum(m_currLocation);
 }
@@ -34,7 +42,8 @@ void Slenderman::gotoRandomLocation()
 
 void Slenderman::render(MasterRenderer& renderer)
 {
-    renderer.addObject(m_entity);
+    if (m_state == State::Stalking)
+        renderer.addObject(m_entity);
 }
 
 bool Slenderman::isInView() const
