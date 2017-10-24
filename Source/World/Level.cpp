@@ -17,7 +17,7 @@ namespace
 }
 
 Level::Level(const std::string& name)
-:   m_terrain       ({0, 0, 0})
+:   m_terrain       ({-100, 0, -100})
 {
     m_levelImage.loadFromFile("res/levels/" + name + ".png");
     m_mapSizeZ = m_levelImage.getSize().y;

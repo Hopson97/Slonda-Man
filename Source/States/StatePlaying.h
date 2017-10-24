@@ -4,6 +4,7 @@
 #include "StateBase.h"
 #include "../World/Level.h"
 #include "../World/Player.h"
+#include "../World/Slenderman.h"
 
 class StatePlaying : public StateBase
 {
@@ -12,18 +13,17 @@ class StatePlaying : public StateBase
 
         void handleEvent    (sf::Event e)                   override;
         void handleInput    ()                              override;
-        void update         (sf::Time deltaTime, const Camera& camera)            override;
-        void fixedUpdate    (sf::Time deltaTime)            override;
+        void update         (sf::Time deltaTime, const Camera& camera)  override;
+        void fixedUpdate    (sf::Time deltaTime, const Camera& camera)  override;
         void render         (MasterRenderer& renderer)    override;
 
     private:
+        void entityCollideTest();
         void edgeCollideLevel();
 
         Level   m_level;
         Player  m_player;
-
-        TexturedModel m_slenderTest;
-        Entity          m_slenderEntity;
+        Slenderman      m_slenderman;
 };
 
 #endif // STATEPLAYING_H_INCLUDED

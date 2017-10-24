@@ -96,9 +96,9 @@ However, I made a skybox for some additional ambience, and added an "edge" to th
 | Title                  	| Data                                                       	|
 |------------------------	|------------------------------------------------------------	|
 | Time programming Today 	| 1:55:12                                                      |
-| Lines of Code Today    	| 245                                                           |
+| Lines of Code Today    	| 280                                                           |
 | Total Time Programming 	| 13:57:40                                                    	|
-| Total Lines of Code    	| 1432                                                           |
+| Total Lines of Code    	| 1712                                                           |
 
 
 ### Day 7
@@ -117,7 +117,7 @@ Other things I did was some clean up.
 | Title                  	| Data                                                       	|
 |------------------------	|------------------------------------------------------------	|
 | Time programming Today 	| 0:42:12                                                      |
-| Lines of Code Today    	| 473 somehow                                                   |
+| Lines of Code Today    	| 193                                                   |
 | Total Time Programming 	| 14:39:52                                                    	|
 | Total Lines of Code    	| 1905                                                           |
 

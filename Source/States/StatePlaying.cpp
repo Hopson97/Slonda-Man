@@ -14,10 +14,6 @@ StatePlaying::StatePlaying(Game& game, Camera& camera)
 ,   m_level         ("test")
 {
     camera.hookTransformable(&m_player);
-
-    Mesh mesh = Quad::generateMesh(7.5);
-    m_slenderTest.create(mesh, "slender");
-    m_slenderEntity.create(m_slenderTest, glm::vec3{25, -1, 25});
 }
 
 void StatePlaying::handleEvent(sf::Event e)
@@ -31,12 +27,73 @@ void StatePlaying::handleInput()
 
 void StatePlaying::update(sf::Time deltaTime, const Camera& camera)
 {
-    static bool isCollide;
     static glm::vec3 lastPosition;
 
-    m_player.update(deltaTime.asSeconds());
+    m_player    .update(deltaTime.asSeconds());
+    m_slenderman.update(camera);
 
-    isCollide = false;
+    entityCollideTest();
+    edgeCollideLevel();
+}
+
+void StatePlaying::fixedUpdate(sf::Time deltaTime, const Camera& camera)
+{
+    sf::Clock c;
+    if (m_slenderman.isInView())
+    {
+        glm::vec2 camXZ     = {camera.getPosition       ().x, camera.getPosition        ().z};
+        glm::vec2 slenderXZ = {m_slenderman.getLocation ().x, m_slenderman.getLocation  ().z};
+
+        auto camToSlenderVector = slenderXZ - camXZ;
+        auto normal             = glm::normalize(camToSlenderVector);
+        auto currentStep        = camXZ;
+        glm::vec2 currStepLength;
+
+        bool slenderManIsInView = false;
+        while (glm::length(currStepLength) < glm::length(camToSlenderVector))
+        {
+            currentStep     += normal/ 2.0f;
+            currStepLength  += normal/ 2.0f;;
+            bool collide = false;
+            for (const Entity& entity : m_level.getEntities())
+            {
+                glm::vec2 ent(entity.getPosition().x, entity.getPosition().z);
+
+                float d = glm::distance(currentStep, ent);
+
+                if(d < 0.5)
+                {
+                    collide = true;
+                    break;
+                }
+            }
+            slenderManIsInView = !collide;
+            if (!slenderManIsInView)
+                break;
+        }
+
+        if (slenderManIsInView)
+        {
+            std::cout << "he is in view\n";
+        }
+        else
+        {
+            std::cout << "he is occluded\n";
+        }
+    }
+}
+
+void StatePlaying::render(MasterRenderer& renderer)
+{
+    m_level     .render(renderer);
+    m_slenderman.render(renderer);
+}
+
+void StatePlaying::entityCollideTest()
+{
+    static glm::vec3 lastPosition;
+
+    bool isCollide = false;
     for (const Entity& entity : m_level.getEntities())
     {
         glm::vec2 cam(m_player.position.x, m_player.position.z);
@@ -47,26 +104,14 @@ void StatePlaying::update(sf::Time deltaTime, const Camera& camera)
         {
             isCollide = true;
             m_player.position = lastPosition;
+            break;
         }
     }
-
-    edgeCollideLevel();
 
     if (!isCollide)
         lastPosition = m_player.position;
 }
 
-void StatePlaying::fixedUpdate(sf::Time deltaTime)
-{
-    float y = m_player.rotation.y;
-    m_slenderEntity.setRotation({0, -y, 0});
-}
-
-void StatePlaying::render(MasterRenderer& renderer)
-{
-    m_level.render(renderer);
-    renderer.addObject(m_slenderEntity);
-}
 
 
 void StatePlaying::edgeCollideLevel()

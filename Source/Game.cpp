@@ -50,7 +50,7 @@ void Game::run()
         {
             ticks++;
             lag -= timePerUpdate;
-            state.fixedUpdate(elapsed);
+            state.fixedUpdate(elapsed, m_camera);
             m_tpsCounter.update();
         }
 

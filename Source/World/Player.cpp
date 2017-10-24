@@ -2,7 +2,7 @@
 
 Player::Player()
 {
-    position = {45, 0, 45};
+    position = {150, 0, 150};
 }
 
 void Player::input(const sf::RenderWindow& window)
@@ -87,8 +87,6 @@ void Player::mouseInput(const sf::RenderWindow& window)
 
         rotation.y += mouseMove.x * 0.05;
         rotation.x += mouseMove.y * 0.05;
-
-
 
         if      (rotation.x >  BOUND) rotation.x =  BOUND;
         else if (rotation.x < -BOUND) rotation.x = -BOUND;

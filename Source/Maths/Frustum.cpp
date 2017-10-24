@@ -1,5 +1,6 @@
 #include "Frustum.h"
 
+#include <algorithm>
 enum Planes
 {
     Near,
@@ -65,7 +66,7 @@ void ViewFrustum::update(const glm::mat4& mat) noexcept
 bool ViewFrustum::isBoxInFrustum(const AABB& box) const noexcept
 {
     bool result = true;
-    for (auto& plane : m_planes)
+    for (const auto& plane : m_planes)
     {
         if (plane.distanceToPoint(box.getVP(plane.normal)) < 0)
         {
@@ -77,4 +78,12 @@ bool ViewFrustum::isBoxInFrustum(const AABB& box) const noexcept
         }
     }
     return result;
+}
+
+bool ViewFrustum::isPointInFrustum(const glm::vec3& point) const noexcept
+{
+    return !std::any_of( m_planes.begin(), m_planes.end(),
+                        [&](const Plane& plane) {
+                            return plane.distanceToPoint(point) < 0;
+                        });
 }
