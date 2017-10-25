@@ -56,7 +56,6 @@ void PostFXRenderer::render()
     m_postFXShader.useProgram();
     glBindTexture(GL_TEXTURE_2D, m_fboTexture);
     GL::drawElements(m_windowQuad.getIndicesCount());
-    std::clog << "End draw" << std::endl;
 }
 
 void PostFXRenderer::createBuffers(GLuint windowWidth, GLuint windowHeight)
@@ -81,7 +80,10 @@ void PostFXRenderer::createBuffers(GLuint windowWidth, GLuint windowHeight)
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_fboTexture, 0); //attach it to the frame buffe//and depth buffer
 
     glGenTextures(1, &m_fboDepthTex);
-    glBindTexture(GL_TEXTURE_2D, m_fboDepthTex);
+glUniform1i(glGetUniformLocation(m_postFXShader.getShaderID(), "tex"), 0);
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, m_fboTexture);
+    glActiveTexture(GL_TEXTURE0);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32F, windowWidth , windowHeight, 0, GL_DEPTH_COMPONENT, GL_FLOAT, nullptr);
     glGenerateMipmap(GL_TEXTURE_2D);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);

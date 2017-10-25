@@ -39,7 +39,8 @@ void StatePlaying::fixedUpdate(sf::Time deltaTime, const Camera& camera)
 {
     sf::Clock c;
     m_slenderman.update(camera);
-    if (m_slenderman.isInView())
+    if (m_slenderman.isInView() &&
+        m_slenderman.getState() == Slenderman::State::Stalking)
     {
         glm::vec2 camXZ     = {camera.getPosition       ().x, camera.getPosition        ().z};
         glm::vec2 slenderXZ = {m_slenderman.getLocation ().x, m_slenderman.getLocation  ().z};

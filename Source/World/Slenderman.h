@@ -13,13 +13,13 @@ class MasterRenderer;
 
 class Slenderman
 {
-    enum class State
-    {
-        Ghosting,
-        Stalking,
-    };
-
     public:
+        enum class State
+        {
+            Ghosting,
+            Stalking,
+        };
+
         Slenderman();
 
         void update(const Camera& camera);
@@ -29,17 +29,24 @@ class Slenderman
 
         const glm::vec3& getLocation() const;
 
-    private:
-        void gotoRandomLocation();
+        State getState() const;
 
-        State m_state = State::Stalking;
+    private:
+        void    gotoRandomLocation  ();
+        bool    isInCamerasView     (const Camera& camera);
+        float   distanceToCamera    (const Camera& camera);
+
+        State m_state = State::Ghosting;
+
+
+
+        sf::Clock m_ghostClock; //Used to time next slenderman appearence
+        sf::Clock m_stalkClock; //Used to time slender stalking
 
         TexturedModel   m_model;
         Entity          m_entity;
 
         glm::vec3 m_currLocation;
-
-        sf::Clock m_stayTimer;
 
         bool m_inView;
 

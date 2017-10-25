@@ -1,9 +1,9 @@
 #version 330
 
 layout (location = 0) in vec3 inVertexCoord;
-layout (location = 1) in vec3 inTextureCoords;
+layout (location = 1) in vec2 inTextureCoords;
 
-out vec3 passTexCoord;
+out vec2 passTexCoord;
 
 void main()
 {
