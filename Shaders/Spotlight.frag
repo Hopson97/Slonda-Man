@@ -12,26 +12,40 @@ in float passDistanceToLight;   //Distance from vertex to light source
 uniform sampler2D tex;
 const int MAX_DISTANCE = 17;
 
-float getLight(float minAngle)
+in vec3 passLightPos;
+
+struct Light
 {
+    vec3 position;
+    vec3 direction;
+    float cutoff;
+    float outerCutoff;
+};
+
+Light makeLight(float cutoff, float outerCutoff)
+{
+    Light light;
+    light.position      = passLightPos;
+    light.direction     = passLightDirection;
+    light.cutoff        = cos(radians(cutoff));
+    light.outerCutoff   = cos(radians(outerCutoff));
+    return light;
+}
+
+float getLight()
+{
+    Light light = makeLight(15.5, 30.5);
+
     vec3 nNormal        = normalize(passNormalDirection);
     vec3 nVectorToLight = normalize(passVectorToLight);
 
-    //"angle" between direction of object to light, and the light's direction
-    float angle = dot(passLightDirection, nVectorToLight);
+    float theta = dot (nVectorToLight, light.direction);
+    float epsilon   = light.cutoff - light.outerCutoff;
+    float intensity = clamp((theta - light.outerCutoff) / epsilon, 0.0, 1.0);
 
-    if (angle < minAngle)
-    {
-        return 0;
-    }
-
-    //apply an attenuation factor
     float dist = 1 - (passDistanceToLight / MAX_DISTANCE);
-
-    //angle of surface normal and direction of object to light
-    float light = dot(nNormal, nVectorToLight);
-
-    return light * dist * angle;
+    float diffuse = dot(nNormal, nVectorToLight);
+    return diffuse * intensity * dist;
 }
 
 void main()
@@ -41,7 +55,7 @@ void main()
     {
         discard;
     }
-    outColour *= max(getLight(0.8), 0.09);
+    outColour *= max(getLight(), 0.05);
 }
 
 

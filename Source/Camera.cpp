@@ -36,10 +36,13 @@ void Camera::update()
     m_direction.y = sin(pitch);
 
     glm::vec3 translate;
-    translate.x += glm::cos(glm::radians(m_rotation.y)) * 0.5;
-    translate.z += glm::sin(glm::radians(m_rotation.y)) * 0.5;
+
+    translate.x += glm::cos(glm::radians(m_rotation.y)) * 0.2;
+    translate.z += glm::sin(glm::radians(m_rotation.y)) * 0.2;
+
     translate.x += -glm::cos(glm::radians(m_rotation.y + 90)) * 0.2;
     translate.z += -glm::sin(glm::radians(m_rotation.y + 90)) * 0.2;
+
     translate.y -= 0.1;
     m_torchPosition = m_position + translate;
 

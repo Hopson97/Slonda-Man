@@ -128,6 +128,8 @@ I added the initial logic of Slenderman himself today.
 
 This is testing whether he is in view, or not.
 
+First of all, I test if he inside of the viewing frustum of the player. If he is, the next text is the occlusion test, which is testing if main man is behind an entity, or actually in view.
+
 | Title                  	| Data                                                       	|
 |------------------------	|------------------------------------------------------------	|
 | Time programming Today 	| 0:59:54                                                      |

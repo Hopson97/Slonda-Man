@@ -30,7 +30,6 @@ void StatePlaying::update(sf::Time deltaTime, const Camera& camera)
     static glm::vec3 lastPosition;
 
     m_player    .update(deltaTime.asSeconds());
-    m_slenderman.update(camera);
 
     entityCollideTest();
     edgeCollideLevel();
@@ -39,6 +38,7 @@ void StatePlaying::update(sf::Time deltaTime, const Camera& camera)
 void StatePlaying::fixedUpdate(sf::Time deltaTime, const Camera& camera)
 {
     sf::Clock c;
+    m_slenderman.update(camera);
     if (m_slenderman.isInView())
     {
         glm::vec2 camXZ     = {camera.getPosition       ().x, camera.getPosition        ().z};
@@ -75,6 +75,7 @@ void StatePlaying::fixedUpdate(sf::Time deltaTime, const Camera& camera)
         if (slenderManIsInView)
         {
             std::cout << "he is in view\n";
+            //wstd::cout << c.getElapsedTime().asSeconds() * 1000 << "\n";
         }
         else
         {

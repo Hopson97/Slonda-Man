@@ -16,6 +16,8 @@ out vec3 passVectorToLight;
 out vec3 passLightDirection;
 out float passDistanceToLight;
 
+out vec3 passLightPos;
+
 void main()
 {
     vec4 worldPosition = modelMatrix * vec4(inVertexPosition, 1.0f);
@@ -27,4 +29,6 @@ void main()
     passTexCoord = inTextureCoord;
     passLightDirection = lightDirection;
     passDistanceToLight = distance(worldPosition.xyz, lightPosition);
+
+    passLightPos = lightPosition;
 }

@@ -24,9 +24,9 @@ void Slenderman::update(const Camera& camera)
         m_entity.setRotation({0, -camera.getRotation().y, 0});
     }
 
-    if (glm::distance(m_currLocation, camera.getPosition()) > 20)
+    if (glm::distance(m_currLocation, camera.getPosition()) > 30)
     {
-        m_state = State::Ghosting;
+        //m_state = State::Ghosting;
     }
 
     m_inView = camera.getFrustum().isPointInFrustum(m_currLocation);
