@@ -17,6 +17,7 @@ TextureCube& TextureCube::operator=(TextureCube&& other)
 {
     m_textureID = other.m_textureID;
     other.m_textureID = 0;
+    return *this;
 }
 
 

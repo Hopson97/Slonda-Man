@@ -42,7 +42,6 @@ void EntityRenderer::render(const Camera& camera)
     {
         modelEntity.first->getModel().bindVAO();
         modelEntity.first->getTexture().bind();
-
         for (const Entity* entity : modelEntity.second)
         {
             GL::loadUniform(m_locModelMatrix, entity->getModelMatrix());

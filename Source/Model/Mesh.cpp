@@ -13,7 +13,6 @@ Mesh createMegaMesh(Mesh& mesh, std::vector<glm::vec3>& positions)
     newMesh.indices         .reserve(mesh.indices       .size() * positions.size());
 
     GLuint index = 0;
-    std::cout <<mesh.indices.size() << "\n";
     for (auto& pos : positions)
     {
         for (unsigned i = 0; i < mesh.vertexCoords.size();)

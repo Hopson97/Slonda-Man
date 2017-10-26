@@ -2,6 +2,8 @@
 #define LEVEL_H_INCLUDED
 
 #include <vector>
+#include <iostream>
+#include <memory>
 #include <unordered_map>
 #include <SFML/Graphics.hpp>
 
@@ -24,11 +26,11 @@ class Level
         {
             m_id = ++ID;
         }
+
         std::string modelFile;
         std::string texture;
         int         colour;
-        float       offsetX;
-        float       offsetY;
+        float       offset;
 
         struct Hash
         {
@@ -45,7 +47,7 @@ class Level
 
         private:
             static int ID;
-            int m_id;
+            int m_id = 0;
     };
 
     constexpr static float SCALE = 3;
@@ -65,9 +67,9 @@ class Level
 
         sf::Image m_levelImage;
 
-        std::vector<TexturedModel>  m_models;
-        std::vector<Entity>         m_entities;
-        std::unordered_map<int, LevelEntity> m_levelEntities;
+        std::vector<std::unique_ptr<TexturedModel>> m_models;
+        std::vector<Entity>                         m_entities;
+        std::unordered_map<int, LevelEntity>        m_levelEntities;
 
         unsigned m_mapSizeX;
         unsigned m_mapSizeZ;

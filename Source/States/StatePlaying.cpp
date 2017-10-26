@@ -37,7 +37,6 @@ void StatePlaying::update(sf::Time deltaTime, const Camera& camera)
 
 void StatePlaying::fixedUpdate(sf::Time deltaTime, const Camera& camera)
 {
-    sf::Clock c;
     m_slenderman.update(camera);
     if (m_slenderman.isInView() &&
         m_slenderman.getState() == Slenderman::State::Stalking)
@@ -76,7 +75,6 @@ void StatePlaying::fixedUpdate(sf::Time deltaTime, const Camera& camera)
         if (slenderManIsInView)
         {
             std::cout << "he is in view\n";
-            //wstd::cout << c.getElapsedTime().asSeconds() * 1000 << "\n";
         }
         else
         {

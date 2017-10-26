@@ -72,17 +72,12 @@ void Level::loadEntityInfo()
                 {
                     inFile >> std::hex >> entity.colour;
                 }
-                else if (line == "offsetx")
+                else if (line == "offset")
                 {
-                    inFile >> entity.offsetX;
-                    std::cout << entity.offsetX << std::endl;
-                }
-                else if (line == "offsety")
-                {
-                    inFile >> entity.offsetY;
+                    inFile >> entity.offset;
                 }
             }
-            m_levelEntities[entity.colour] = entity;
+            m_levelEntities.emplace(entity.colour, entity);
         }
     }
 }
@@ -91,7 +86,9 @@ void Level::loadLevel()
 {
     loadEntityInfo();
 
-    Random<> randomisor;
+    Random<> rng;
+
+    //Reads the level's image file and uses the level entity info to create it
     std::unordered_map<LevelEntity, std::vector<glm::vec3>, LevelEntity::Hash> entityLocations;
     for (unsigned z = 0; z < m_mapSizeZ; z++)
     for (unsigned x = 0; x < m_mapSizeX; x++)
@@ -104,28 +101,39 @@ void Level::loadLevel()
             continue;
         }
 
-        LevelEntity& e = m_levelEntities[colourHex];
+        const auto& e = m_levelEntities[colourHex];
         if (entityLocations.find(e) == entityLocations.end())
         {
-            entityLocations[e] = std::vector<glm::vec3>();
+            entityLocations.emplace(e, std::vector<glm::vec3>{});
         }
 
-        glm::vec3 entityLocation (location.x + randomisor.getFloatInRange(e.offsetX, e.offsetX),
+        glm::vec3 entityLocation (location.x + rng.getFloatInRange(-e.offset, e.offset),
                                   location.y,
-                                  location.z + randomisor.getFloatInRange(e.offsetY, e.offsetY));
-        std::cout << entityLocation.x << " " << location.x << "\n";
+                                  location.z + rng.getFloatInRange(-e.offset, e.offset));
 
-        entityLocations[e].push_back(entityLocation);
+        entityLocations.at(e).push_back(entityLocation);
     }
 
+    ///@TODO
+    /**
+        So...
+        I am having to store my models as a heap allocation
+        This is because I get some VERY STRANGe behaviour otherwise.
+        For example, some models get a VAO value 2425235345
+
+        Likely cause:
+            Move constructor mistake potentially
+                Model.cpp
+                TexturedModel.cpp
+    */
     for (auto& lEntity : entityLocations)
     {
-        const LevelEntity& e = lEntity.first;
-        std::cout << e.modelFile << "\n";
-        m_models.emplace_back(e.modelFile, e.texture);
+        const auto& levelEntity = lEntity.first;
+        m_models.push_back(std::make_unique<TexturedModel>(levelEntity.modelFile, levelEntity.texture));
+        //m_models.emplace_back(levelEntity.modelFile, levelEntity.texture);
         for (glm::vec3& location : lEntity.second)
         {
-            m_entities.emplace_back(m_models.back(), location);
+            m_entities.emplace_back(*m_models.at(m_models.size() - 1), location);
         }
     }
 }

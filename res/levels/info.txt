@@ -2,14 +2,12 @@ entity
 obj tree1
 texture bark
 colour 7F3300
-offsetx 0.5
-offsety 0.5
+offset 0.7
 end
 
 entity
 obj box
 texture leaf
 colour 11FF
-offsetx 0
-offsety 0
+offset 0.5
 end

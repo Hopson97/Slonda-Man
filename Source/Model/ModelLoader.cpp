@@ -132,7 +132,6 @@ Mesh loadObjModel(const std::string& fileName)
         for (int v = 0; v < 3; v++)
             outMesh.indices.push_back(indexCount++);
     }
-
     return outMesh;
 }
 
