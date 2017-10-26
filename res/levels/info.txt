@@ -1,0 +1,7 @@
+entity
+obj tree1
+texture bark
+colour 0x7F3300
+offsetx 0.5
+offsety 0.5
+end

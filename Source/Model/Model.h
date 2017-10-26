@@ -14,6 +14,9 @@ class Model : public NonCopyable
         Model() = default;
         Model(const Mesh& mesh);
 
+        Model               (Model&& other);
+        Model& operator =   (Model&& other);
+
         void create(const Mesh& mesh);
 
         void addVBO(int dim, const std::vector<GLfloat>& data);

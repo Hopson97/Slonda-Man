@@ -10,6 +10,32 @@ Model::Model(const Mesh& mesh)
     create(mesh);
 }
 
+        std::vector<GLuint> m_VBOs;
+        GLuint m_VAO = 0;
+        GLuint m_indicesCount = 0;
+
+Model::Model(Model&& other)
+:   m_VBOs          (std::move(other.m_VBOs))
+,   m_VAO           (other.m_VAO)
+,   m_indicesCount  (other.m_indicesCount)
+{
+    other.m_VAO = 0;
+    other.m_indicesCount = 0;
+}
+
+Model& Model::operator=(Model&& other)
+{
+    m_VBOs          = std::move(other.m_VBOs);
+    m_VAO           = other.m_VAO;
+    m_indicesCount  = other.m_indicesCount;
+
+    other.m_VAO = 0;
+    other.m_indicesCount = 0;
+
+    return *this;
+}
+
+
 void Model::create(const Mesh& mesh)
 {
     glGenVertexArrays(1, &m_VAO);

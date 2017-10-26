@@ -7,14 +7,14 @@
 #include "../Util/NonCopyable.h"
 #include "../Util/NonMoveable.h"
 
-class Texture2D : public NonCopyable, public NonMovable
+class Texture2D : public NonCopyable
 {
     public:
         Texture2D() = default;
         Texture2D(const std::string& texName);
 
-        Texture2D(const Texture2D& other);
-        Texture2D(Texture2D&& other);
+        Texture2D& operator =   (Texture2D&& other);
+        Texture2D               (Texture2D&& other);
 
         ~Texture2D();
 
@@ -24,8 +24,6 @@ class Texture2D : public NonCopyable, public NonMovable
 
     private:
         GLuint m_texID;
-
-
 };
 
 #endif // TEXTURE2D_H_INCLUDED

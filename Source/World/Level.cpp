@@ -5,6 +5,7 @@
 #include "../Renderer/MasterRenderer.h"
 
 #include <iostream>
+#include <fstream>
 
 namespace
 {
@@ -15,6 +16,8 @@ namespace
 
     //Tree = 0x7F3300;
 }
+
+int Level::LevelEntity::ID = 0;
 
 Level::Level(const std::string& name)
 :   m_terrain       ({-100, 0, -100})
@@ -39,32 +42,86 @@ const std::vector<Entity>& Level::getEntities() const
     return m_entities;
 }
 
+void Level::loadEntityInfo()
+{
+    std::ifstream inFile;
+    inFile.open("res/levels/info.txt");
+    if (!inFile.is_open())
+    {
+        throw std::runtime_error("Unable to open entity info file!");
+    }
+
+    std::string line;
+    while (std::getline(inFile, line))
+    {
+        if (line == "entity")
+        {
+            LevelEntity entity;
+            while (line != "end")
+            {
+                inFile >> line;
+                if (line == "obj")
+                {
+                    inFile >> entity.modelFile;
+                }
+                else if (line == "texture")
+                {
+                    inFile >> entity.texture;
+                }
+                else if (line == "colour")
+                {
+                    inFile >> entity.colour;
+                }
+                else if (line == "offsetx")
+                {
+                    inFile >> entity.offsetX;
+                }
+                else if (line == "offsety")
+                {
+                    inFile >> entity.offsetY;
+                }
+            }
+            m_levelEntities[entity.colour] = entity;
+        }
+    }
+
+
+}
+
 void Level::loadLevel()
 {
+    loadEntityInfo();
     Random<> randomisor;
 
-    std::vector<glm::vec3> treePositions;
+    std::unordered_map<LevelEntity, std::vector<glm::vec3>, LevelEntity::Hash> entityLocations;
     for (unsigned z = 0; z < m_mapSizeZ; z++)
     for (unsigned x = 0; x < m_mapSizeX; x++)
     {
-        glm::vec3 adjPos(x * SCALE, -1, z * SCALE);
+        glm::vec3 location(x * SCALE, -1, z * SCALE);
         unsigned colourHex = toHex(m_levelImage.getPixel(x, z));
-        if (colourHex == 0x7F3300)
-        {
-            glm::vec3 position(adjPos.x + randomisor.getFloatInRange(-0.5, 0.5),
-                                -1,
-                                adjPos.z + randomisor.getFloatInRange(-0.5, 0.5));
 
-            treePositions.emplace_back(position);
+        if (m_levelEntities.find(colourHex) == m_levelEntities.end())
+        {
+            continue;
         }
-        //more models...
+
+        LevelEntity& e = m_levelEntities[colourHex];
+        if (entityLocations.find(e) == entityLocations.end())
+        {
+            entityLocations[e] = std::vector<glm::vec3>();
+        }
+
+        glm::vec3 entityLocation (location.x + randomisor.getFloatInRange(e.offsetX, e.offsetX),
+                                  location.y,
+                                  location.z + randomisor.getFloatInRange(e.offsetY, e.offsetY));
+
+        entityLocations[e].push_back(entityLocation);
     }
 
-    m_treeModel.create("tree1", "bark");
-
-    for (auto& pos : treePositions)
+    for (auto& lEnity : entityLocations)
     {
-        m_entities.emplace_back(m_treeModel, pos);
+        const LevelEntity& e = lEnity.first;
+        m_models.emplace_back(e.modelFile, e.texture);
     }
 }
 

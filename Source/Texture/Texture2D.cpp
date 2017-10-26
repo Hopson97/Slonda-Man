@@ -36,6 +36,19 @@ void Texture2D::bind() const
     glBindTexture(GL_TEXTURE_2D, m_texID);
 }
 
+Texture2D& Texture2D::operator=(Texture2D&& other)
+{
+    m_texID = other.m_texID;
+    other.m_texID = 0;
+    return *this;
+}
+
+Texture2D::Texture2D(Texture2D&& other)
+:   m_texID (other.m_texID)
+{
+    other.m_texID = 0;
+}
+
 
 
 
