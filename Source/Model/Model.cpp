@@ -10,10 +10,6 @@ Model::Model(const Mesh& mesh)
     create(mesh);
 }
 
-        std::vector<GLuint> m_VBOs;
-        GLuint m_VAO = 0;
-        GLuint m_indicesCount = 0;
-
 Model::Model(Model&& other)
 :   m_VBOs          (std::move(other.m_VBOs))
 ,   m_VAO           (other.m_VAO)
@@ -35,7 +31,6 @@ Model& Model::operator=(Model&& other)
     return *this;
 }
 
-
 void Model::create(const Mesh& mesh)
 {
     glGenVertexArrays(1, &m_VAO);
@@ -45,6 +40,7 @@ void Model::create(const Mesh& mesh)
     addVBO(2, mesh.texCoords);
     addVBO(3, mesh.normals);
     createEBO(mesh.indices);
+    std::cout << "create model with VAO: " << m_VAO << "\n";
 }
 
 void Model::addVBO(int dim, const std::vector<GLfloat>& data)
@@ -60,7 +56,6 @@ void Model::addVBO(int dim, const std::vector<GLfloat>& data)
     m_VBOs.push_back(vbo);
 }
 
-
 void Model::createEBO(const std::vector<GLuint>& indices)
 {
     m_indicesCount = indices.size();
@@ -71,7 +66,6 @@ void Model::createEBO(const std::vector<GLuint>& indices)
 
     m_VBOs.push_back(ebo);
 }
-
 
 void Model::bindVAO() const
 {

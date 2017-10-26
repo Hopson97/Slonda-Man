@@ -71,11 +71,11 @@ void Level::loadEntityInfo()
                 else if (line == "colour")
                 {
                     inFile >> std::hex >> entity.colour;
-                    std::cout << std::hex << "Colour: " << entity.colour << "\n";
                 }
                 else if (line == "offsetx")
                 {
                     inFile >> entity.offsetX;
+                    std::cout << entity.offsetX << std::endl;
                 }
                 else if (line == "offsety")
                 {
@@ -90,8 +90,8 @@ void Level::loadEntityInfo()
 void Level::loadLevel()
 {
     loadEntityInfo();
-    Random<> randomisor;
 
+    Random<> randomisor;
     std::unordered_map<LevelEntity, std::vector<glm::vec3>, LevelEntity::Hash> entityLocations;
     for (unsigned z = 0; z < m_mapSizeZ; z++)
     for (unsigned x = 0; x < m_mapSizeX; x++)
@@ -113,34 +113,22 @@ void Level::loadLevel()
         glm::vec3 entityLocation (location.x + randomisor.getFloatInRange(e.offsetX, e.offsetX),
                                   location.y,
                                   location.z + randomisor.getFloatInRange(e.offsetY, e.offsetY));
+        std::cout << entityLocation.x << " " << location.x << "\n";
 
         entityLocations[e].push_back(entityLocation);
     }
 
-    for (auto& lEnity : entityLocations)
+    for (auto& lEntity : entityLocations)
     {
-        const LevelEntity& e = lEnity.first;
+        const LevelEntity& e = lEntity.first;
+        std::cout << e.modelFile << "\n";
         m_models.emplace_back(e.modelFile, e.texture);
-        for (glm::vec3& location : lEnity.second)
+        for (glm::vec3& location : lEntity.second)
         {
             m_entities.emplace_back(m_models.back(), location);
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
