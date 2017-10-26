@@ -15,11 +15,19 @@ constexpr int LEVEL_SIZE = 300;
 
 class MasterRenderer;
 
+struct Objective
+{
+    template<typename... Args>
+    Objective(Args&&... args)
+    :   entity  (std::forward<Args>(args)...)
+    { }
 
+    Entity entity;
+    bool isCollected = false;
+};
 
 class Level
 {
-
     struct LevelEntity
     {
         LevelEntity()
@@ -59,6 +67,8 @@ class Level
 
         const std::vector<Entity>& getEntities () const;
 
+        bool hasCollectedObjective(const Player& player);
+
     private:
         void loadEntityInfo();
         void loadLevel();
@@ -67,9 +77,11 @@ class Level
 
         sf::Image m_levelImage;
 
-        std::vector<std::unique_ptr<TexturedModel>> m_models;
-        std::vector<Entity>                         m_entities;
+        std::vector<Entity>     m_entities;
+        std::vector<Objective>  m_objectiveEntities;
+
         std::unordered_map<int, LevelEntity>        m_levelEntities;
+        std::vector<std::unique_ptr<TexturedModel>> m_models;
 
         unsigned m_mapSizeX;
         unsigned m_mapSizeZ;

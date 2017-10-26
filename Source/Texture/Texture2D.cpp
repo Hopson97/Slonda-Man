@@ -9,6 +9,23 @@ Texture2D::Texture2D(const std::string& texName)
     create(texName);
 }
 
+Texture2D& Texture2D::operator=(Texture2D&& other)
+{
+    m_texID = other.m_texID;
+    other.m_texID = 0;
+    return *this;
+}
+
+Texture2D::Texture2D(Texture2D&& other)
+:   m_texID (other.m_texID)
+{
+    other.m_texID = 0;
+}
+
+
+
+
+
 Texture2D::~Texture2D()
 {
     glDeleteTextures(1, &m_texID);
@@ -35,23 +52,6 @@ void Texture2D::bind() const
 {
     glBindTexture(GL_TEXTURE_2D, m_texID);
 }
-
-Texture2D& Texture2D::operator=(Texture2D&& other)
-{
-    m_texID = other.m_texID;
-    other.m_texID = 0;
-    return *this;
-}
-
-Texture2D::Texture2D(Texture2D&& other)
-:   m_texID (other.m_texID)
-{
-    other.m_texID = 0;
-}
-
-
-
-
 
 
 
