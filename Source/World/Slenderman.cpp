@@ -9,46 +9,48 @@
 
 Slenderman::Slenderman()
 {
-    Mesh mesh = Quad::generateMesh(5.5);
+    Mesh mesh = Quad::generateMesh(7.0);
     m_model.create(mesh, "slender");
     m_entity.create(m_model, m_currLocation);
 }
 
 void Slenderman::update(const Camera& camera)
 {
-    if (m_state == State::Stalking)
+    switch (m_state)
     {
-        m_entity.setRotation({0, -camera.getRotation().y, 0});
-        if (distanceToCamera(camera) > MAX_DISTANCE || (!m_inView && m_stalkClock.getElapsedTime() > sf::seconds(5)))
-        {
-            std::cout << "Slender is finding a new spot\n";
-            m_state = State::Ghosting;
-            m_ghostClock.restart();
-        }
-        else if (m_inView)
-        {
-            m_stalkClock.restart();
-        }
-    }
-    else
-    {
-        if (m_ghostClock.getElapsedTime() > sf::seconds(5))
-        {
-            bool success = false;
-            while (!success)
+        case State::Stalking:
+            m_entity.setRotation({0, -camera.getRotation().y, 0});
+            if (shouldMoveSpot(camera))
             {
-                gotoRandomLocation();
-                if (distanceToCamera(camera) > MAX_DISTANCE) continue;
-                if (distanceToCamera(camera) < MIN_DISTANCE) continue;
-                if (isInCamerasView (camera))                continue;
-                success= true;
-
+                std::cout << "Slender is finding a new spot\n";
+                m_state = State::Ghosting;
+                m_ghostClock.restart();
             }
+            else if (m_inView)
+            {
+                m_stalkClock.restart();
+            }
+            break;
 
-            std::cout << "Slender has moved to a random spot\n";
-            m_state = State::Stalking;
-            m_stalkClock.restart();
-        }
+        case State::Ghosting:
+            if (m_ghostClock.getElapsedTime() > sf::seconds(5))
+            {
+                bool success = false;
+                while (!success)
+                {
+                    gotoRandomLocation();
+                    if (distanceToCamera(camera) > MAX_DISTANCE) continue;
+                    if (distanceToCamera(camera) < MIN_DISTANCE) continue;
+                    if (isInCamerasView (camera))                continue;
+                    success= true;
+
+                }
+
+                std::cout << "Slender has moved to a random spot\n";
+                m_state = State::Stalking;
+                m_stalkClock.restart();
+            }
+            break;
     }
 
     m_inView = isInCamerasView(camera);
@@ -58,6 +60,13 @@ bool Slenderman::isInCamerasView(const Camera& camera)
 {
     return camera.getFrustum().isPointInFrustum(m_currLocation);
 }
+
+bool Slenderman::shouldMoveSpot(const Camera& camera)
+{
+    return distanceToCamera(camera) > MAX_DISTANCE ||
+         (!m_inView && m_stalkClock.getElapsedTime() > sf::seconds(5));
+}
+
 
 float Slenderman::distanceToCamera(const Camera& camera)
 {

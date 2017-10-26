@@ -21,8 +21,6 @@ class Level
 
         void render(MasterRenderer& renderer) const;
 
-        bool collidableAt(int x, int z) const;
-
         const std::vector<Entity>& getEntities () const;
 
     private:
@@ -35,7 +33,6 @@ class Level
         sf::Image m_levelImage;
 
         std::vector<Entity> m_entities;
-        std::vector<bool>   m_collideMap;
 
         unsigned m_mapSizeX;
         unsigned m_mapSizeZ;

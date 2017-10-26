@@ -23,12 +23,6 @@ Level::Level(const std::string& name)
     m_mapSizeZ = m_levelImage.getSize().y;
     m_mapSizeX = m_levelImage.getSize().x;
 
-    m_collideMap.reserve(m_mapSizeZ * m_mapSizeX * SCALE * SCALE);
-
-    for (unsigned z = 0; z < m_mapSizeZ * SCALE; z++)
-    for (unsigned x = 0; x < m_mapSizeX * SCALE; x++)
-        m_collideMap.push_back(false);
-
     loadLevel();
 }
 

@@ -37,13 +37,12 @@ class Slenderman
     private:
         void    gotoRandomLocation  ();
         bool    isInCamerasView     (const Camera& camera);
+        bool    shouldMoveSpot      (const Camera& camera);
         float   distanceToCamera    (const Camera& camera);
 
         State m_state = State::Ghosting;
 
-
-
-        sf::Clock m_ghostClock; //Used to time next slenderman appearence
+        sf::Clock m_ghostClock; //Used to time next Slenderman appearance
         sf::Clock m_stalkClock; //Used to time slender stalking
 
         TexturedModel   m_model;
