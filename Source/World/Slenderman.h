@@ -13,6 +13,9 @@ class MasterRenderer;
 
 class Slenderman
 {
+    constexpr static float MAX_DISTANCE = 40;
+    constexpr static float MIN_DISTANCE = 10;
+
     public:
         enum class State
         {

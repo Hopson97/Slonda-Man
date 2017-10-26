@@ -137,6 +137,21 @@ First of all, I test if he inside of the viewing frustum of the player. If he is
 | Total Time Programming 	| 15:39:46                                                    	|
 | Total Lines of Code    	| 1905                                                           |
 
+### Day 9
+
+Today, I added "logic" to Slenderman, which means he now actually stalks the player.
+
+This was done using a couple of clocks and an enum.
+
+Slenderman has two states: Ghosting, which is where he looking for a new spot; and Stalking, which is where he is stalking the player.
+
+
+| Title                  	| Data                                                       	|
+|------------------------	|------------------------------------------------------------	|
+| Time programming Today 	| 1:05:32                                                      |
+| Lines of Code Today    	| 168                                                   |
+| Total Time Programming 	| 16:45:18                                                    	|
+| Total Lines of Code    	| 2073                                                           |
 
 
 

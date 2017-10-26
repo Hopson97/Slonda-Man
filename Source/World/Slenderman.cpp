@@ -9,10 +9,7 @@
 
 Slenderman::Slenderman()
 {
-    m_currLocation = {150, -1.1, 150};
-    //gotoRandomLocation();
-
-    Mesh mesh = Quad::generateMesh(7.5);
+    Mesh mesh = Quad::generateMesh(5.5);
     m_model.create(mesh, "slender");
     m_entity.create(m_model, m_currLocation);
 }
@@ -22,7 +19,7 @@ void Slenderman::update(const Camera& camera)
     if (m_state == State::Stalking)
     {
         m_entity.setRotation({0, -camera.getRotation().y, 0});
-        if (distanceToCamera(camera) > 30 || (!m_inView && m_stalkClock.getElapsedTime() > sf::seconds(5)))
+        if (distanceToCamera(camera) > MAX_DISTANCE || (!m_inView && m_stalkClock.getElapsedTime() > sf::seconds(5)))
         {
             std::cout << "Slender is finding a new spot\n";
             m_state = State::Ghosting;
@@ -41,8 +38,9 @@ void Slenderman::update(const Camera& camera)
             while (!success)
             {
                 gotoRandomLocation();
-                if (distanceToCamera(camera) > 30)  continue;
-                if (isInCamerasView (camera))       continue;
+                if (distanceToCamera(camera) > MAX_DISTANCE) continue;
+                if (distanceToCamera(camera) < MIN_DISTANCE) continue;
+                if (isInCamerasView (camera))                continue;
                 success= true;
 
             }
