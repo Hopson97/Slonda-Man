@@ -70,7 +70,8 @@ void Level::loadEntityInfo()
                 }
                 else if (line == "colour")
                 {
-                    inFile >> entity.colour;
+                    inFile >> std::hex >> entity.colour;
+                    std::cout << std::hex << "Colour: " << entity.colour << "\n";
                 }
                 else if (line == "offsetx")
                 {
@@ -84,8 +85,6 @@ void Level::loadEntityInfo()
             m_levelEntities[entity.colour] = entity;
         }
     }
-
-
 }
 
 void Level::loadLevel()
@@ -122,6 +121,10 @@ void Level::loadLevel()
     {
         const LevelEntity& e = lEnity.first;
         m_models.emplace_back(e.modelFile, e.texture);
+        for (glm::vec3& location : lEnity.second)
+        {
+            m_entities.emplace_back(m_models.back(), location);
+        }
     }
 }
 
