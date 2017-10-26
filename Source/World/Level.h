@@ -14,6 +14,7 @@
 constexpr int LEVEL_SIZE = 300;
 
 class MasterRenderer;
+class Player;
 
 struct Objective
 {

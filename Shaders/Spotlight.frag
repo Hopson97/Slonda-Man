@@ -34,7 +34,7 @@ Light makeLight(float cutoff, float outerCutoff)
 
 float getLight()
 {
-    return 1;
+    //return 1;
     Light light = makeLight(18.0, 25.0);
 
     vec3 nNormal        = normalize(passNormalDirection);

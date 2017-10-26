@@ -1,11 +1,12 @@
 #include "Level.h"
 
+#include <iostream>
+#include <fstream>
+
 #include "../Util/Random.h"
 #include "../Model/ModelLoader.h"
 #include "../Renderer/MasterRenderer.h"
-
-#include <iostream>
-#include <fstream>
+#include "Player.h"
 
 namespace
 {
@@ -20,7 +21,7 @@ namespace
 int Level::LevelEntity::ID = 0;
 
 Level::Level(const std::string& name)
-:   m_terrain       ({-100, 0, -100})
+:   m_terrain ({-100, 0, -100})
 {
     m_levelImage.loadFromFile("res/levels/" + name + ".png");
     m_mapSizeZ = m_levelImage.getSize().y;
@@ -50,10 +51,13 @@ const std::vector<Entity>& Level::getEntities() const
 
 bool Level::hasCollectedObjective(const Player& player)
 {
-    for (const auto& obj : m_objectiveEntities)
+    for (auto& obj : m_objectiveEntities)
     {
-        glm::vec3& epos = obj.entity.getPosition();
-        glm::vec3& ppos = obj.entity.getPosition();
+        if (obj.isCollected)
+            continue;
+
+        glm::vec2 epos(obj.entity.getPosition().x, obj.entity.getPosition().z);
+        glm::vec2 ppos(player.position.x, player.position.z);
 
         if (glm::distance(epos, ppos) < 0.5)
         {
@@ -116,12 +120,12 @@ void Level::loadLevel()
                 Model.cpp
                 TexturedModel.cpp
     */
-    for (auto& lEntity : entityLocations)
+    for (const auto& lEntity : entityLocations)
     {
         const auto& levelEntity = lEntity.first;
         m_models.push_back(std::make_unique<TexturedModel>(levelEntity.modelFile, levelEntity.texture));
         //m_models.emplace_back(levelEntity.modelFile, levelEntity.texture);
-        for (glm::vec3& location : lEntity.second)
+        for (const auto& location : lEntity.second)
         {
             m_entities.emplace_back(*m_models.at(m_models.size() - 1), location);
         }

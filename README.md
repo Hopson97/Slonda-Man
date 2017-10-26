@@ -153,6 +153,23 @@ Slenderman has two states: Ghosting, which is where he looking for a new spot; a
 | Total Time Programming 	| 16:45:18                                                    	|
 | Total Lines of Code    	| 2073                                                           |
 
+### Day 10
+
+To start off, I improved the level loading. This meant that if I wanted to add a new model into the game, I do not need to hard code it in.
+
+Instead, I simply can edit a Config file (res/levels/info.txt) and then I can add instances as needed.
+
+To finish off, I started initial work on an objective to collect. For this, I used a teddy bear model. Once the teddy bear has been walked over, it dissappears.
+
+
+![Day 10](https://i.imgur.com/6yQrk9j.png)
+
+| Title                  	| Data                                                       	|
+|------------------------	|------------------------------------------------------------	|
+| Time programming Today 	| 2:45:32                                                      |
+| Lines of Code Today    	| 172                                                   |
+| Total Time Programming 	| 19:30:50                                                    	|
+| Total Lines of Code    	| 2245                                                           |
 
 
 

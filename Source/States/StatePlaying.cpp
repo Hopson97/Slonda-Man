@@ -37,6 +37,11 @@ void StatePlaying::update(sf::Time deltaTime, const Camera& camera)
 
 void StatePlaying::fixedUpdate(sf::Time deltaTime, const Camera& camera)
 {
+    if(m_level.hasCollectedObjective(m_player))
+    {
+        std::cout << "Objective collected!\n";
+    }
+
     m_slenderman.update(camera);
     if (m_slenderman.isInView() &&
         m_slenderman.getState() == Slenderman::State::Stalking)
