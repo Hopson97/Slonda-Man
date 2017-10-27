@@ -70,6 +70,9 @@ class Level
 
         bool hasCollectedObjective(const Player& player);
 
+        int getTotalObjectives() const;
+        int getObjectivesFound() const;
+
     private:
         void loadEntityInfo();
         void loadLevel();
@@ -79,7 +82,7 @@ class Level
         sf::Image m_levelImage;
 
         std::vector<Entity>     m_entities;
-        std::vector<Objective>  m_objectiveEntities;
+        std::vector<Objective>  m_objectives;
 
         std::unordered_map<int, LevelEntity>        m_levelEntities;
         std::vector<std::unique_ptr<TexturedModel>> m_models;

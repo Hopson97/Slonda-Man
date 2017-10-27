@@ -39,7 +39,16 @@ void StatePlaying::fixedUpdate(sf::Time deltaTime, const Camera& camera)
 {
     if(m_level.hasCollectedObjective(m_player))
     {
-        std::cout << "Objective collected!\n";
+        int found = m_level.getObjectivesFound();
+        int total = m_level.getTotalObjectives();
+
+
+
+        //All objectives found!
+        if (found == total)
+        {
+
+        }
     }
 
     m_slenderman.update(camera);

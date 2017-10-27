@@ -37,7 +37,7 @@ void Level::render(MasterRenderer& renderer) const
     for (const auto& entity : m_entities)
         renderer.addObject(entity);
 
-    for (const auto& objective : m_objectiveEntities)
+    for (const auto& objective : m_objectives)
     {
         if (!objective.isCollected)
             renderer.addObject(objective.entity);
@@ -51,7 +51,7 @@ const std::vector<Entity>& Level::getEntities() const
 
 bool Level::hasCollectedObjective(const Player& player)
 {
-    for (auto& obj : m_objectiveEntities)
+    for (auto& obj : m_objectives)
     {
         if (obj.isCollected)
             continue;
@@ -68,6 +68,18 @@ bool Level::hasCollectedObjective(const Player& player)
     return false;
 }
 
+int Level::getTotalObjectives() const
+{
+    return m_objectives.size();
+}
+
+int Level::getObjectivesFound() const
+{
+    return std::count_if(m_objectives.cbegin(), m_objectives.cend(),
+                            [](const Objective& o) {
+                                return o.isCollected;
+                            });
+}
 
 
 void Level::loadLevel()
@@ -134,7 +146,7 @@ void Level::loadLevel()
     m_models.push_back(std::make_unique<TexturedModel>("bear", "fluff"));
     for (auto& location : objectiveLocations)
     {
-        m_objectiveEntities.emplace_back(*m_models.back(), location);
+        m_objectives.emplace_back(*m_models.back(), location);
     }
 }
 
