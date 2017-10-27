@@ -10,7 +10,7 @@ in vec3 passLightDirection;     //Direction of the light source
 in float passDistanceToLight;   //Distance from vertex to light source
 
 uniform sampler2D tex;
-const int MAX_DISTANCE = 25;
+const int MAX_DISTANCE = 45;
 
 in vec3 passLightPos;
 
@@ -35,7 +35,7 @@ Light makeLight(float cutoff, float outerCutoff)
 float getLight()
 {
     //return 1;
-    Light light = makeLight(18.0, 25.0);
+    Light light = makeLight(12.0, 15.0);
 
     vec3 nNormal        = normalize(passNormalDirection);
     vec3 nVectorToLight = normalize(passVectorToLight);

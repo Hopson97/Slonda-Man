@@ -40,7 +40,7 @@ class Game
         MasterRenderer  m_renderer;
         Camera          m_camera;
 
-        bool m_shouldPop = false;
+        int m_popCount = 0;
 
 
 

@@ -22,10 +22,14 @@ class StatePlaying : public StateBase
         void entityCollideTest();
         void edgeCollideLevel();
 
-        Level       m_level;
-        Player      m_player;
-        Slenderman  m_slenderman;
-        ObjectiveText    m_objectiveText;
+        Level           m_level;
+        Player          m_player;
+        Slenderman      m_slenderman;
+        ObjectiveText   m_objectiveText;
+
+        sf::Clock   m_gameTimer;
+        bool        m_isAllObjectivesFound = false;
+        sf::Text    m_congratsText;
 };
 
 #endif // STATEPLAYING_H_INCLUDED

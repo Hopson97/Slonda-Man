@@ -75,9 +75,10 @@ void Game::run()
 
 void Game::tryPop()
 {
-    if (m_shouldPop)
+    while (m_popCount != 0)
     {
         m_states.pop_back();
+        m_popCount--;
     }
 }
 
@@ -119,7 +120,7 @@ StateBase& Game::getCurrentState()
 
 void Game::popState()
 {
-    m_shouldPop = true;
+    m_popCount++;
 }
 
 const sf::RenderWindow& Game::getWindow() const

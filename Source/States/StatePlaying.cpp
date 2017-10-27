@@ -8,6 +8,7 @@
 #include "../Terrain/TerrainGenerator.h"
 #include "../Util/Random.h"
 #include "../Model/Generator.h"
+#include "../ResourceManager/ResourceHolder.h"
 
 StatePlaying::StatePlaying(Game& game, Camera& camera)
 :   StateBase       (game)
@@ -15,6 +16,15 @@ StatePlaying::StatePlaying(Game& game, Camera& camera)
 ,   m_objectiveText (game.getWindow())
 {
     camera.hookTransformable(&m_player);
+
+    m_congratsText.setOutlineColor (sf::Color::Black);
+    m_congratsText.setOutlineThickness (1);
+    m_congratsText.setFillColor (sf::Color::White);
+    m_congratsText.setFont (ResourceHolder::get().fonts.get("arial"));
+    m_congratsText.setString ("Congratulations on completing! Time taken: nnnn seconds");
+    auto offset = m_congratsText.getGlobalBounds().width / 2;
+    m_congratsText.setPosition(game.getWindow().getSize().x / 2 - offset,
+                               game.getWindow().getSize().y / 2);
 }
 
 void StatePlaying::handleEvent(sf::Event e)
@@ -28,16 +38,29 @@ void StatePlaying::handleInput()
 
 void StatePlaying::update(sf::Time deltaTime, const Camera& camera)
 {
-    static glm::vec3 lastPosition;
+    if (!m_isAllObjectivesFound)
+    {
+        static glm::vec3 lastPosition;
 
-    m_player    .update(deltaTime.asSeconds());
+        m_player.update(deltaTime.asSeconds());
 
-    entityCollideTest();
-    edgeCollideLevel();
+        entityCollideTest();
+        edgeCollideLevel();
+    }
+    else
+    {
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+        {
+            m_pGame->popState();
+        }
+    }
 }
 
 void StatePlaying::fixedUpdate(sf::Time deltaTime, const Camera& camera)
 {
+    if (m_isAllObjectivesFound)
+        return;
+
     if(m_level.hasCollectedObjective(m_player))
     {
         int found = m_level.getObjectivesFound();
@@ -48,7 +71,13 @@ void StatePlaying::fixedUpdate(sf::Time deltaTime, const Camera& camera)
         //All objectives found!
         if (found == total)
         {
-            std::cout << "Game over!\n";
+            typedef std::string s;
+            float time = m_gameTimer.getElapsedTime().asSeconds();
+            std::string endStr = s("Congratulations on completing Slender2Weeks!\n") +
+                                 s("Time taken: ") + std::to_string(time) + s(" seconds!\n") +
+                                 s("Press space bar to exit :)");
+            m_isAllObjectivesFound = true;
+            m_congratsText.setString(endStr);
         }
     }
 
@@ -56,13 +85,15 @@ void StatePlaying::fixedUpdate(sf::Time deltaTime, const Camera& camera)
     if (m_slenderman.isInView() &&
         m_slenderman.getState() == Slenderman::State::Stalking)
     {
-        glm::vec2 camXZ     = {camera.getPosition       ().x, camera.getPosition        ().z};
-        glm::vec2 slenderXZ = {m_slenderman.getLocation ().x, m_slenderman.getLocation  ().z};
+        auto cameraPos = camera.getPosition();
+        glm::vec3 slenderPos(m_slenderman.getLocation().x,
+                             m_slenderman.getLocation().y + 3,
+                             m_slenderman.getLocation().z);
 
-        auto camToSlenderVector = slenderXZ - camXZ;
+        auto camToSlenderVector = slenderPos - cameraPos;
         auto normal             = glm::normalize(camToSlenderVector);
-        auto currentStep        = camXZ;
-        glm::vec2 currStepLength;
+        auto currentStep        = cameraPos;
+        glm::vec3 currStepLength;
 
         bool slenderManIsInView = false;
         while (glm::length(currStepLength) < glm::length(camToSlenderVector))
@@ -74,7 +105,7 @@ void StatePlaying::fixedUpdate(sf::Time deltaTime, const Camera& camera)
             {
                 glm::vec2 ent(entity.getPosition().x, entity.getPosition().z);
 
-                float d = glm::distance(currentStep, ent);
+                float d = glm::distance({currentStep.x, currentStep.z}, ent);
 
                 if(d < 0.5)
                 {
@@ -102,7 +133,11 @@ void StatePlaying::render(MasterRenderer& renderer)
 {
     m_level         .render(renderer);
     m_slenderman    .render(renderer);
-    m_objectiveText .render(renderer);
+
+    if (m_isAllObjectivesFound)
+        renderer.addObject(m_congratsText);
+    else
+        m_objectiveText .render(renderer);
 }
 
 void StatePlaying::entityCollideTest()
