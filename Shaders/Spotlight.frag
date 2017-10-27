@@ -56,7 +56,7 @@ void main()
     {
         discard;
     }
-    outColour *= max(getLight(), 0.08);
+    outColour *= max(getLight(), 0.1);
 }
 
 

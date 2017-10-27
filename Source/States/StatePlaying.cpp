@@ -12,6 +12,7 @@
 StatePlaying::StatePlaying(Game& game, Camera& camera)
 :   StateBase       (game)
 ,   m_level         ("test")
+,   m_objectiveText (game.getWindow())
 {
     camera.hookTransformable(&m_player);
 }
@@ -42,12 +43,12 @@ void StatePlaying::fixedUpdate(sf::Time deltaTime, const Camera& camera)
         int found = m_level.getObjectivesFound();
         int total = m_level.getTotalObjectives();
 
-
+        m_objectiveText.update(found, total);
 
         //All objectives found!
         if (found == total)
         {
-
+            std::cout << "Game over!\n";
         }
     }
 
@@ -99,8 +100,9 @@ void StatePlaying::fixedUpdate(sf::Time deltaTime, const Camera& camera)
 
 void StatePlaying::render(MasterRenderer& renderer)
 {
-    m_level     .render(renderer);
-    m_slenderman.render(renderer);
+    m_level         .render(renderer);
+    m_slenderman    .render(renderer);
+    m_objectiveText .render(renderer);
 }
 
 void StatePlaying::entityCollideTest()
