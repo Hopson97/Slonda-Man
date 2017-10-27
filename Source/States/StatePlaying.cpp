@@ -150,12 +150,13 @@ void StatePlaying::endGame()
 
 void StatePlaying::slenderLogic()
 {
+    //This function basically tests if Slenderman is in the player's line of sight
     if (m_slenderman.isInView() &&
         m_slenderman.getState() == Slenderman::State::Stalking)
     {
         auto cameraPos = m_player.position;
         glm::vec3 slenderPos(m_slenderman.getLocation().x,
-                             m_slenderman.getLocation().y + 3,
+                             m_slenderman.getLocation().y + 3, //eye height?
                              m_slenderman.getLocation().z);
 
         auto camToSlenderVector = slenderPos - cameraPos;
