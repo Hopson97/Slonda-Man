@@ -21,10 +21,6 @@ StatePlaying::StatePlaying(Game& game, Camera& camera)
     m_congratsText.setOutlineThickness (1);
     m_congratsText.setFillColor (sf::Color::White);
     m_congratsText.setFont (ResourceHolder::get().fonts.get("arial"));
-    m_congratsText.setString ("Congratulations on completing! Time taken: nnnn seconds");
-    auto offset = m_congratsText.getGlobalBounds().width / 2;
-    m_congratsText.setPosition(game.getWindow().getSize().x / 2 - offset,
-                               game.getWindow().getSize().y / 2);
 }
 
 void StatePlaying::handleEvent(sf::Event e)
@@ -63,70 +59,11 @@ void StatePlaying::fixedUpdate(sf::Time deltaTime, const Camera& camera)
 
     if(m_level.hasCollectedObjective(m_player))
     {
-        int found = m_level.getObjectivesFound();
-        int total = m_level.getTotalObjectives();
-
-        m_objectiveText.update(found, total);
-
-        //All objectives found!
-        if (found == total)
-        {
-            typedef std::string s;
-            float time = m_gameTimer.getElapsedTime().asSeconds();
-            std::string endStr = s("Congratulations on completing Slender2Weeks!\n") +
-                                 s("Time taken: ") + std::to_string(time) + s(" seconds!\n") +
-                                 s("Press space bar to exit :)");
-            m_isAllObjectivesFound = true;
-            m_congratsText.setString(endStr);
-        }
+        collectObjective();
     }
 
     m_slenderman.update(camera);
-    if (m_slenderman.isInView() &&
-        m_slenderman.getState() == Slenderman::State::Stalking)
-    {
-        auto cameraPos = camera.getPosition();
-        glm::vec3 slenderPos(m_slenderman.getLocation().x,
-                             m_slenderman.getLocation().y + 3,
-                             m_slenderman.getLocation().z);
-
-        auto camToSlenderVector = slenderPos - cameraPos;
-        auto normal             = glm::normalize(camToSlenderVector);
-        auto currentStep        = cameraPos;
-        glm::vec3 currStepLength;
-
-        bool slenderManIsInView = false;
-        while (glm::length(currStepLength) < glm::length(camToSlenderVector))
-        {
-            currentStep     += normal/ 2.0f;
-            currStepLength  += normal/ 2.0f;;
-            bool collide = false;
-            for (const Entity& entity : m_level.getEntities())
-            {
-                glm::vec2 ent(entity.getPosition().x, entity.getPosition().z);
-
-                float d = glm::distance({currentStep.x, currentStep.z}, ent);
-
-                if(d < 0.5)
-                {
-                    collide = true;
-                    break;
-                }
-            }
-            slenderManIsInView = !collide;
-            if (!slenderManIsInView)
-                break;
-        }
-
-        if (slenderManIsInView)
-        {
-            std::cout << "he is in view\n";
-        }
-        else
-        {
-            std::cout << "he is occluded\n";
-        }
-    }
+    slenderLogic();
 }
 
 void StatePlaying::render(MasterRenderer& renderer)
@@ -177,4 +114,85 @@ void StatePlaying::edgeCollideLevel()
         m_player.position.z = LEVEL_SIZE - EDGE;
     else if (m_player.position.z < EDGE)
         m_player.position.z = EDGE;
+}
+
+void StatePlaying::collectObjective()
+{
+    int found = m_level.getObjectivesFound();
+    int total = m_level.getTotalObjectives();
+
+    m_objectiveText.update(found, total);
+
+    //All objectives found!
+    if (found == total)
+    {
+        endGame();
+    }
+}
+
+void StatePlaying::endGame()
+{
+    typedef std::string s;
+    float time = m_gameTimer.getElapsedTime().asSeconds();
+    std::string endStr = s("Congratulations on completing Slender2Weeks by finding all ") +
+                         std::to_string(m_level.getTotalObjectives()) +
+                         s("!\n") +
+                         s("Time taken: ") + std::to_string(time) + s(" seconds!\n") +
+                         s("Created by Matthew Hopson\n") +
+                         s("Press space bar to exit :)");
+    m_isAllObjectivesFound = true;
+    m_congratsText.setString(endStr);
+
+    auto offset = m_congratsText.getGlobalBounds().width / 2;
+    m_congratsText.setPosition(m_pGame->getWindow().getSize().x / 2 - offset,
+                            m_pGame->getWindow().getSize().y / 2);
+}
+
+void StatePlaying::slenderLogic()
+{
+    if (m_slenderman.isInView() &&
+        m_slenderman.getState() == Slenderman::State::Stalking)
+    {
+        auto cameraPos = m_player.position;
+        glm::vec3 slenderPos(m_slenderman.getLocation().x,
+                             m_slenderman.getLocation().y + 3,
+                             m_slenderman.getLocation().z);
+
+        auto camToSlenderVector = slenderPos - cameraPos;
+        auto normal             = glm::normalize(camToSlenderVector);
+        auto currentStep        = cameraPos;
+        glm::vec3 currStepLength;
+
+        bool slenderManIsInView = false;
+        while (glm::length(currStepLength) < glm::length(camToSlenderVector))
+        {
+            currentStep     += normal/ 2.0f;
+            currStepLength  += normal/ 2.0f;;
+            bool collide = false;
+            for (const Entity& entity : m_level.getEntities())
+            {
+                glm::vec2 ent(entity.getPosition().x, entity.getPosition().z);
+
+                float d = glm::distance({currentStep.x, currentStep.z}, ent);
+
+                if(d < 0.5)
+                {
+                    collide = true;
+                    break;
+                }
+            }
+            slenderManIsInView = !collide;
+            if (!slenderManIsInView)
+                break;
+        }
+
+        if (slenderManIsInView)
+        {
+            std::cout << "he is in view\n";
+        }
+        else
+        {
+            std::cout << "he is occluded\n";
+        }
+    }
 }

@@ -21,6 +21,10 @@ class StatePlaying : public StateBase
     private:
         void entityCollideTest();
         void edgeCollideLevel();
+        void collectObjective();
+        void endGame();
+
+        void slenderLogic();
 
         Level           m_level;
         Player          m_player;
