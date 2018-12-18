@@ -1,6 +1,6 @@
 #include "Context.h"
 
-#include <GL/glew.h>
+#include "Glad/glad.h"
 #include "GLLib/GLFunctions.h"
 
 Context::Context()
@@ -15,13 +15,8 @@ Context::Context()
     //window.create(sf::VideoMode::getDesktopMode(), "Slender", sf::Style::Fullscreen, settings);
     window.create({1422, 800}, "Slender", sf::Style::Close, settings);
     window.setMouseCursorVisible(false);
-    glewExperimental = GL_TRUE;
-    GLenum error = glewInit();
-
-    if(error != GLEW_OK)
-    {
-        throw std::runtime_error("Unable to init glew");
-    }
+    
+    gladLoadGL();
 
     glViewport(0, 0, window.getSize().x, window.getSize().y);
     GL::enable(GL::Cap::DepthTest);

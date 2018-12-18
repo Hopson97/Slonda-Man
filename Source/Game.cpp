@@ -2,7 +2,7 @@
 
 #include "States/StatePlaying.h"
 
-#include <GL/glew.h>
+#include "Glad/glad.h"
 
 Game::Game()
 :   m_context       ()

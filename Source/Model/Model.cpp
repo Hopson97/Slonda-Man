@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-#include "../GLlib/GLFunctions.h"
+#include "../GLLib/GLFunctions.h"
 #include "Mesh.h"
 
 Model::Model(const Mesh& mesh)

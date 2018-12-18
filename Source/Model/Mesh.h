@@ -2,7 +2,7 @@
 #define MESH_H_INCLUDED
 
 #include <vector>
-#include <GL/glew.h>
+#include "../Glad/glad.h"
 #include "../Maths/GlmIncludes.h"
 
 struct Mesh

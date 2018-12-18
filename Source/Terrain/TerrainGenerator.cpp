@@ -1,6 +1,6 @@
 #include "TerrainGenerator.h"
 
-#include <GL/glew.h>
+#include "../Glad/glad.h"
 
 namespace
 {

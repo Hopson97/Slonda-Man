@@ -1,23 +1,8 @@
+### CMake ###
+CMakeCache.txt
+CMakeFiles
+Makefile
+cmake_install.cmake
 
-#CodeBLocks stuff
-*.layout
-*.depend
-*.cbp
-bin/
-obj/
-
-Slender/
-
-#.dll stuff
-*.dll
-
-#Builds
-*.7z
-*.zip
-Project/
-
-#Profiler
-*.out
-
-#exe
-*.exe
+#Executable (Linux)
+slender-man

@@ -1,7 +1,7 @@
 #ifndef MASTERRENDERER_H_INCLUDED
 #define MASTERRENDERER_H_INCLUDED
 
-#include <GL/glew.h>
+#include "../Glad/glad.h"
 #include "../Maths/GlmIncludes.h"
 
 #include "PrimitiveRenderer.h"

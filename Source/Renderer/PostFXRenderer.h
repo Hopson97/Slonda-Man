@@ -1,7 +1,7 @@
 #ifndef POSTFXRENDERER_H_INCLUDED
 #define POSTFXRENDERER_H_INCLUDED
 
-#include <GL/glew.h>
+#include "../Glad/glad.h"
 #include "../Model/Model.h"
 #include "../Shaders/Shader.h"
 

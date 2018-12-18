@@ -4,7 +4,7 @@
 
 glm::mat4 createModelMatrix(const glm::vec3& position, const glm::vec3& rotation)
 {
-    glm::mat4 matrix;
+    glm::mat4 matrix{1.0f};
 
     matrix = glm::translate(matrix, position);
     matrix = glm::rotate(matrix, glm::radians(rotation.x), {1, 0, 0});
@@ -18,7 +18,7 @@ glm::mat4 createModelMatrix(const glm::vec3& position, const glm::vec3& rotation
 
 glm::mat4 createViewMatrix(const Camera& camera)
 {
-    glm::mat4 matrix;
+    glm::mat4 matrix{1.0f};;
 
     matrix = glm::rotate(matrix, glm::radians(camera.getRotation().x), {1, 0, 0});
     matrix = glm::rotate(matrix, glm::radians(camera.getRotation().y), {0, 1, 0});

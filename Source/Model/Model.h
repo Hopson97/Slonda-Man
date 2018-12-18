@@ -4,7 +4,7 @@
 #include <vector>
 
 #include "../Util/NonCopyable.h"
-#include <GL/glew.h>
+#include "../Glad/glad.h"
 
 class Mesh;
 

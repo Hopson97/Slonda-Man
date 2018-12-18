@@ -2,7 +2,7 @@
 #define TEXTURE2D_H_INCLUDED
 
 #include <string>
-#include <GL/glew.h>
+#include "../Glad/glad.h"
 
 #include "../Util/NonCopyable.h"
 #include "../Util/NonMoveable.h"

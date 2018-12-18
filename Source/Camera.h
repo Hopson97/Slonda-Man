@@ -3,7 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include <GL/glew.h>
+#include "Glad/glad.h"
 #include "Maths/Frustum.h"
 
 struct Transform;
@@ -28,14 +28,14 @@ class Camera
         const ViewFrustum& getFrustum       () const;
 
     private:
-        glm::vec3 m_position;
-        glm::vec3 m_torchPosition;
-        glm::vec3 m_rotation;
-        glm::vec3 m_direction;
+        glm::vec3 m_position        {0.0f};
+        glm::vec3 m_torchPosition   {0.0f};
+        glm::vec3 m_rotation        {0.0f};
+        glm::vec3 m_direction       {0.0f};
 
-        glm::mat4 m_projectionMatrix;
-        glm::mat4 m_viewMatrix;
-        glm::mat4 m_projectionViewMatrix;
+        glm::mat4 m_projectionMatrix    {1.0f};
+        glm::mat4 m_viewMatrix          {1.0f};
+        glm::mat4 m_projectionViewMatrix{1.0f};
 
         const Transform* m_pTransform = nullptr;
 

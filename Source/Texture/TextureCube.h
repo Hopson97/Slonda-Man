@@ -1,7 +1,7 @@
 #ifndef TEXTURECUBE_H_INCLUDED
 #define TEXTURECUBE_H_INCLUDED
 
-#include <GL/glew.h>
+#include "../Glad/glad.h"
 #include <array>
 #include <string>
 

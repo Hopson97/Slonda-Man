@@ -8,7 +8,7 @@
 #include <iostream>
 
 #include "../Maths/GlmIncludes.h"
-#include <GL/glew.h>
+#include "../Glad/glad.h"
 #include <array>
 
 namespace
