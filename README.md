@@ -1,10 +1,8 @@
-# SlenderMan
+# Slonda Man
 
-A slenderman game like Slender: The Eight Pages.
+A game like Slender: The Eight Pages.
 
-I started creating this on 17th October 2017, and my goal as to complete it in 2 weeks (In time for Halloween)
-
-Made using C++/ OpenGL.
+I started creating this on 17th October 2017, and my goal as to complete it in 2 weeks (In time for Halloween). However, I never finished it because I became ill, but here is the source code after 10 days.
 
 ### Building:
 <coming soon>
