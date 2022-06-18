@@ -157,7 +157,7 @@ To start off, I improved the level loading. This meant that if I wanted to add a
 
 Instead, I simply can edit a Config file (res/levels/info.txt) and then I can add instances as needed.
 
-To finish off, I started initial work on an objective to collect. For this, I used a teddy bear model. Once the teddy bear has been walked over, it dissappears.
+To finish off, I started initial work on an objective to collect. For this, I used a teddy bear model. Once the teddy bear has been walked over, it disappears.
 
 
 ![Day 10](https://i.imgur.com/6yQrk9j.png)
@@ -176,4 +176,5 @@ To finish off, I started initial work on an objective to collect. For this, I us
 
 
                                                          |
+
 
