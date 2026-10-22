@@ -5,16 +5,17 @@
 
 #include <array>
 
-class Keyboard {
-    public:
-        Keyboard();
-        
-        void update(sf::Event e);
+class Keyboard
+{
+  public:
+    Keyboard();
 
-        bool isKeyDown(sf::Keyboard::Key key) const;
-        bool keyReleased(sf::Keyboard::Key key) const;
+    void update(sf::Event e);
 
-    private:
-        std::array<bool, sf::Keyboard::KeyCount> m_keys;
-        sf::Keyboard::Key m_recentlyReleased;
+    bool isKeyDown(sf::Keyboard::Key key) const;
+    bool keyReleased(sf::Keyboard::Key key) const;
+
+  private:
+    std::array<bool, sf::Keyboard::KeyCount> m_keys;
+    sf::Keyboard::Key m_recentlyReleased = sf::Keyboard::Key::Unknown;
 };

@@ -74,7 +74,7 @@ namespace Cube
 
 namespace Quad
 {
-    Mesh generateMesh(int size)
+    Mesh generateMesh(float size)
     {
         std::vector<GLfloat> vert
         {

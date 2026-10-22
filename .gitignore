@@ -1,8 +1,28 @@
-### CMake ###
-CMakeCache.txt
-CMakeFiles
-Makefile
-cmake_install.cmake
+# Linux
+build/
 
-#Executable (Linux)
-slender-man
+# Windows
+*.dll
+*.exe
+*.filters
+*.user
+*.vs
+.vscode
+Debug/
+Release/
+
+# Misc
+*.zip
+*.temp
+*.srctrlprj
+*.srctrldb
+*.srctrlbm
+
+# Vcpkg
+vcpkg_installed/
+
+PROJECT_NAME_PLACEHOLDER/
+
+*.blend
+*.blend1
+urbania

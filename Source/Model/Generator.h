@@ -11,7 +11,7 @@ namespace Cube
 
 namespace Quad
 {
-    Mesh generateMesh(int size);
+    Mesh generateMesh(float size);
 }
 
 #endif // GENERATOR_H_INCLUDED

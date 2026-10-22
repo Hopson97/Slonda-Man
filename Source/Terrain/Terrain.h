@@ -9,7 +9,7 @@
 
 typedef std::function<GLfloat(int, int)> HeightFunction;
 
-class Mesh;
+struct Mesh;
 
 class Terrain
 {

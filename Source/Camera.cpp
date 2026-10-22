@@ -35,7 +35,7 @@ void Camera::update()
     m_direction.z = cos(yaw) * cos(pitch);
     m_direction.y = sin(pitch);
 
-    glm::vec3 translate;
+    glm::vec3 translate{1.0f};
 
     translate.x += glm::cos(glm::radians(m_rotation.y)) * 0.2;
     translate.z += glm::sin(glm::radians(m_rotation.y)) * 0.2;

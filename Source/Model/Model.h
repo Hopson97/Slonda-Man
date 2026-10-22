@@ -6,7 +6,7 @@
 #include "../Util/NonCopyable.h"
 #include "../Glad/glad.h"
 
-class Mesh;
+struct Mesh;
 
 class Model : public NonCopyable
 {

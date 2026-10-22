@@ -7,15 +7,14 @@
 #include "../ResourceManager/ResourceHolder.h"
 
 ObjectiveText::ObjectiveText(const sf::RenderWindow& window)
+    : m_objectiveText(ResourceHolder::get().fonts.get("arial"))
 {
     m_objectiveText.setOutlineColor     (sf::Color::Black);
     m_objectiveText.setOutlineThickness (1);
     m_objectiveText.setFillColor        (sf::Color::White);
-    m_objectiveText.setFont             (ResourceHolder::get().fonts.get("arial"));
     m_objectiveText.setString           ("Found XY/ XY teddy bears!");
-    auto offset = m_objectiveText.getGlobalBounds().width / 2;
-    m_objectiveText.setPosition(window.getSize().x / 2 - offset,
-                                window.getSize().y / 2);
+    auto offset = m_objectiveText.getGlobalBounds().size.x / 2;
+    m_objectiveText.setPosition({(float)window.getSize().x / 2 - offset, (float)window.getSize().y / 2});
 }
 
 void ObjectiveText::update(int found, int total)

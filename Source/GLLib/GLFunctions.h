@@ -2,7 +2,7 @@
 #define GLFUNCTIONS_H_INCLUDED
 
 #include <vector>
-#include "../Glad/glad.h"
+#include <glad/glad.h>
 #include "../Maths/GlmIncludes.h"
 #include "GLEnums.h"
 

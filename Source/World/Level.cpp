@@ -95,7 +95,7 @@ void Level::loadLevel()
     for (unsigned x = 0; x < m_mapSizeX; x++)
     {
         glm::vec3 location(x * SCALE, -1, z * SCALE);
-        unsigned colourHex = toHex(m_levelImage.getPixel(x, z));
+        unsigned colourHex = toHex(m_levelImage.getPixel({x, z}));
 
         if (m_levelEntities.find(colourHex) == m_levelEntities.end())
         {

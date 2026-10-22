@@ -1,7 +1,7 @@
 #ifndef GLENUMS_H_INCLUDED
 #define GLENUMS_H_INCLUDED
 
-#include "../Glad/glad.h"
+#include <glad/glad.h>
 
 namespace GL
 {

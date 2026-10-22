@@ -6,12 +6,12 @@
 
 FPSCounter::FPSCounter(const std::string& name, const sf::Vector2f& position)
 :   m_name  (name)
+    , m_text(ResourceHolder::get().fonts.get("arial"))
 {
     m_text.move(position);
     m_text.setOutlineColor (sf::Color::Black);
     m_text.setFillColor({255,255,255});
     m_text.setOutlineThickness  (2);
-    m_text.setFont(ResourceHolder::get().fonts.get("arial"));
     m_text.setCharacterSize(15);
 }
 

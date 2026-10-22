@@ -14,13 +14,13 @@ StatePlaying::StatePlaying(Game& game, Camera& camera)
 :   StateBase       (game)
 ,   m_level         ("test")
 ,   m_objectiveText (game.getWindow())
+    , m_congratsText(ResourceHolder::get().fonts.get("arial"))
 {
     camera.hookTransformable(&m_player);
 
     m_congratsText.setOutlineColor (sf::Color::Black);
     m_congratsText.setOutlineThickness (1);
     m_congratsText.setFillColor (sf::Color::White);
-    m_congratsText.setFont (ResourceHolder::get().fonts.get("arial"));
 }
 
 void StatePlaying::handleEvent(sf::Event e)
@@ -45,7 +45,7 @@ void StatePlaying::update(sf::Time deltaTime, const Camera& camera)
     }
     else
     {
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
         {
             m_pGame->popState();
         }
@@ -143,9 +143,9 @@ void StatePlaying::endGame()
     m_isAllObjectivesFound = true;
     m_congratsText.setString(endStr);
 
-    auto offset = m_congratsText.getGlobalBounds().width / 2;
-    m_congratsText.setPosition(m_pGame->getWindow().getSize().x / 2 - offset,
-                            m_pGame->getWindow().getSize().y / 2);
+    auto offset = m_congratsText.getGlobalBounds().size.x / 2;
+    m_congratsText.setPosition({(float)m_pGame->getWindow().getSize().x / 2 - offset,
+                                (float)m_pGame->getWindow().getSize().y / 2});
 }
 
 void StatePlaying::slenderLogic()

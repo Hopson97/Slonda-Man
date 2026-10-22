@@ -40,11 +40,11 @@ void Button::handleEvent(sf::Event e, const sf::RenderWindow& window)
 {
     auto pos = sf::Mouse::getPosition(window);
 
-    if (m_button.getGlobalBounds().contains(pos.x, pos.y))
+    if (m_button.getGlobalBounds().contains({pos.x, pos.y}))
     {
-        if (e.type == sf::Event::MouseButtonPressed)
+        if (auto mouse = e.getIf<sf::Event::MouseButtonPressed>())
         {
-            if (e.mouseButton.button == sf::Mouse::Left)
+            if (mouse->button == sf::Mouse::Button::Left)
             {
                 m_function();
             }
@@ -70,11 +70,9 @@ void Button::setPosition(const sf::Vector2f& pos)
 
 void Button::updateText()
 {
-    m_text.setOrigin(m_text.getGlobalBounds().width  / 2,
-                     m_text.getGlobalBounds().height / 2);
+    m_text.setOrigin({m_text.getGlobalBounds().size.x / 2, m_text.getGlobalBounds().size.y / 2});
 
-    m_text.move(m_button.getGlobalBounds().width  / 2,
-                m_button.getGlobalBounds().height / 2.5);
+    m_text.move({m_button.getGlobalBounds().size.x / 2, m_button.getGlobalBounds().size.y / 2.5});
 }
 
 

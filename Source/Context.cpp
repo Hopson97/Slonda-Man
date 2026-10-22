@@ -6,14 +6,16 @@
 Context::Context()
 {
     sf::ContextSettings settings;
-    settings.antialiasingLevel = 0;
+    settings.antiAliasingLevel = 0;
     settings.majorVersion = 3;
     settings.minorVersion = 3;
     settings.depthBits = 24;
     settings.stencilBits = 8;
+    settings.attributeFlags = sf::ContextSettings::Default;
 
     //window.create(sf::VideoMode::getDesktopMode(), "Slender", sf::Style::Fullscreen, settings);
-    window.create({1422, 800}, "Slender", sf::Style::Close, settings);
+    window.create(sf::VideoMode{{1600, 900}}, "Slonder", sf::Style::Close, sf::State::Windowed,
+                  settings);
     window.setMouseCursorVisible(false);
     
     gladLoadGL();

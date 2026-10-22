@@ -43,16 +43,16 @@ void TextBox::setPosition(const sf::Vector2f& pos)
 
     m_rect.setPosition(m_position);
     m_label.setPosition(m_position.x,
-                        m_position.y + m_label.getGlobalBounds().height -
-                                       m_rect.getGlobalBounds().height / 2);
+                        m_position.y + m_label.getGlobalBounds().size.y -
+                                       m_rect.getGlobalBounds().size.y / 2);
     m_text.setPosition  (m_position);
-    m_text.move(5, m_rect.getGlobalBounds().height / 2.5);
+    m_text.move(5, m_rect.getGlobalBounds().size.y / 2.5);
 }
 
 sf::Vector2f TextBox::getSize() const
 {
     return  {m_rect.getSize().x,
-             m_rect.getSize().y + m_label.getGlobalBounds().height};
+             m_rect.getSize().y + m_label.getGlobalBounds().size.y};
 }
 
 void TextBox::handleClick (sf::Event e, const sf::RenderWindow& window)

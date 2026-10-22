@@ -5,12 +5,12 @@
 #include "Glad/glad.h"
 
 Game::Game()
-:   m_context       ()
-,   m_window        (m_context.window)
-,   m_fpsCounter    ("FPS", {10, 10})
-,   m_tpsCounter    ("TPS", {8,  25})
-,   m_renderer      (m_window.getSize().x, m_window.getSize().y)
-,   m_camera        (m_window)
+    : m_context()
+    , m_window(m_context.window)
+    , m_fpsCounter("FPS", {10, 10})
+    , m_tpsCounter("TPS", {8, 25})
+    , m_renderer(m_window.getSize().x, m_window.getSize().y)
+    , m_camera(m_window)
 {
     m_window.setFramerateLimit(60);
     pushState<StatePlaying>(*this, m_camera);
@@ -18,34 +18,34 @@ Game::Game()
 
 void Game::run()
 {
-    constexpr   unsigned    TPS             = 10; //ticks per seconds
-    const       sf::Time    timePerUpdate   = sf::seconds(1.0f / float(TPS));
-    unsigned                ticks           = 0;
+    constexpr unsigned TPS = 10; // ticks per seconds
+    const sf::Time timePerUpdate = sf::seconds(1.0f / float(TPS));
+    unsigned ticks = 0;
 
     sf::Clock timer;
     auto lastTime = sf::Time::Zero;
-    auto lag      = sf::Time::Zero;
+    auto lag = sf::Time::Zero;
 
     while (m_window.isOpen() && !m_states.empty())
     {
         auto& state = getCurrentState();
 
-        //Get times
+        // Get times
         auto time = timer.getElapsedTime();
         auto elapsed = time - lastTime;
 
         lastTime = time;
         lag += elapsed;
 
-        //Real time input
+        // Real time input
         state.handleInput();
 
-        //Real time update
+        // Real time update
         state.update(elapsed, m_camera);
         m_fpsCounter.update();
         m_camera.update();
 
-        //Fixed time update
+        // Fixed time update
         while (lag >= timePerUpdate)
         {
             ticks++;
@@ -54,8 +54,8 @@ void Game::run()
             m_tpsCounter.update();
         }
 
-        //Render
-        glClearColor(0.05, 0.05, 0.1, 1);
+        // Render
+        glClearColor(0.05f, 0.05f, 0.1f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         state.render(m_renderer);
@@ -66,8 +66,7 @@ void Game::run()
 
         m_window.display();
 
-
-        //Handle window events
+        // Handle window events
         handleEvent();
         tryPop();
     }
@@ -84,31 +83,28 @@ void Game::tryPop()
 
 void Game::handleEvent()
 {
-    sf::Event e;
-
-    while (m_window.pollEvent(e))
+    while (auto event = m_window.pollEvent())
     {
-        getCurrentState().handleEvent(e);
-        switch (e.type)
+        getCurrentState().handleEvent(*event);
+
+        if (event->is<sf::Event::Closed>())
         {
-            case sf::Event::Closed:
-                m_window.close();
-                break;
+            m_window.close();
+        }
+        else if (auto key = event->getIf<sf::Event::KeyPressed>())
+        {
+            switch (key->code)
+            {
+                case sf::Keyboard::Key::Escape:
+                    m_window.close();
+                    break;
+                case sf::Keyboard::Key::Q:
+                    m_window.close();
+                    break;
 
-            case sf::Event::KeyPressed:
-                switch(e.key.code)
-                {
-                    case sf::Keyboard::Q:
-                        m_window.close();
-                        break;
-
-                    default:
-                        break;
-                }
-
-            default:
-                break;
-
+                default:
+                    break;
+            }
         }
     }
 }

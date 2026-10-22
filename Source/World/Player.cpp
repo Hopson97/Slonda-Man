@@ -19,15 +19,15 @@ void Player::update(float dt)
 
 void Player::keyboardInput()
 {
-    static const auto forwards  = sf::Keyboard::W;
-    static const auto back      = sf::Keyboard::S;
-    static const auto left      = sf::Keyboard::A;
-    static const auto right     = sf::Keyboard::D;
-    static const auto up        = sf::Keyboard::Z;
-    static const auto down      = sf::Keyboard::X;
-    auto speed     = 0.00005f * sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) ? 10 : 1;
+    static const auto forwards  = sf::Keyboard::Key::W;
+    static const auto back      = sf::Keyboard::Key::S;
+    static const auto left      = sf::Keyboard::Key::A;
+    static const auto right     = sf::Keyboard::Key::D;
+    static const auto up        = sf::Keyboard::Key::Z;
+    static const auto down      = sf::Keyboard::Key::X;
+    auto speed     = 0.00005f * sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LControl) ? 10 : 1;
 
-    glm::vec3 translate;
+    glm::vec3 translate{0.0f};
     float yaw   = glm::radians(rotation.y);
     float yaw90 = glm::radians(rotation.y + 90);
 
@@ -69,7 +69,7 @@ void Player::mouseInput(const sf::RenderWindow& window)
 {
     static bool lockMouse = false;
     static sf::Clock delay;
-    if (delay.getElapsedTime().asSeconds() > 0.5 && sf::Keyboard::isKeyPressed(sf::Keyboard::L))
+    if (delay.getElapsedTime().asSeconds() > 0.5 && sf::Keyboard::isKeyPressed(sf::Keyboard::Key::L))
     {
         delay.restart();
         lockMouse = !lockMouse;
@@ -85,8 +85,8 @@ void Player::mouseInput(const sf::RenderWindow& window)
         static sf::Vector2i lastMousePosition = sf::Mouse::getPosition(window);
         auto mouseMove = sf::Mouse::getPosition(window) - lastMousePosition;
 
-        rotation.y += mouseMove.x * 0.05;
-        rotation.x += mouseMove.y * 0.05;
+        rotation.y += mouseMove.x * 0.05f;
+        rotation.x += mouseMove.y * 0.05f;
 
         if      (rotation.x >  BOUND) rotation.x =  BOUND;
         else if (rotation.x < -BOUND) rotation.x = -BOUND;

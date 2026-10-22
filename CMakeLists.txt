@@ -1,14 +1,13 @@
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.10)
 
-project(slender-man)
-#Set up the C++ flags
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_LIBRARIES -lstdc++fs)
-set(CMAKE_CXX_FLAGS "-Wall -Wextra")
-set(CMAKE_CXX_FLAGS_DEBUG "-g")
-set(CMAKE_CXX_FLAGS_RELEASE "-O3")
+project(
+    slonda-man 
+    VERSION 1.0
+)
 
-set(SOURCES
+include("$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake")
+
+add_executable(${PROJECT_NAME}
 	Source/Main.cpp
 	Source/Camera.cpp
 	Source/Context.cpp
@@ -32,10 +31,10 @@ set(SOURCES
 	Source/Shaders/ShaderLoader.cpp
 	Source/Terrain/TerrainGenerator.cpp
 	Source/Terrain/Terrain.cpp
-	Source/GUI/StackMenu.cpp
-	Source/GUI/Button.cpp
-	Source/GUI/Textbox.cpp
-	Source/GUI/Widget.cpp
+	# Source/GUI/StackMenu.cpp
+	# Source/GUI/Button.cpp
+	# Source/GUI/Textbox.cpp
+	# Source/GUI/Widget.cpp
 	Source/Input/Keyboard.cpp
 	Source/Model/Model.cpp
 	Source/Model/TexturedModel.cpp
@@ -51,18 +50,34 @@ set(SOURCES
 	Source/Renderer/MasterRenderer.cpp
 	Source/Renderer/EntityRenderer.cpp
 	Source/Renderer/TerrainRenderer.cpp
-	Source/Glad/glad.c
 )
 
-add_executable(${PROJECT_NAME} ${SOURCES})
+target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_23)
+set_target_properties(${PROJECT_NAME} PROPERTIES CXX_EXTENSIONS OFF)
 
-#Find the SFML package
-set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
-find_package(SFML REQUIRED audio network graphics window system)
-#For using GLAD (or opengl), Unix requires an additional '-ldl' flag
-SET(ADDITIONAL_LINK_FLAGS)
-if(UNIX)
-    list(APPEND ADDITIONAL_LINK_FLAGS dl)
-endif(UNIX)
-find_package(Threads)
-target_link_libraries(${PROJECT_NAME} Threads::Threads ${SFML_LIBRARIES} ${SFML_DEPENDENCIES} ${ADDITIONAL_LINK_FLAGS})
+target_compile_definitions(${PROJECT_NAME} PRIVATE GLM_ENABLE_EXPERIMENTAL)
+
+if(MSVC)
+    set(CMAKE_CXX_FLAGS_RELEASE "/O2")
+    set(CMAKE_CXX_FLAGS_RELEASE "/Ox")
+  	target_compile_options(${PROJECT_NAME} PRIVATE /W4 _CRT_SECURE_NO_WARNINGS)
+else()
+  	target_compile_options(${PROJECT_NAME} PRIVATE 
+		-Wall -Wextra -pedantic)		
+endif()
+
+find_package(glm CONFIG REQUIRED)
+find_package(SFML COMPONENTS system audio network window graphics CONFIG REQUIRED)
+
+add_subdirectory(deps)
+target_include_directories(
+    ${PROJECT_NAME}
+    PRIVATE
+    deps
+)
+
+target_link_libraries(${PROJECT_NAME} PRIVATE
+    sfml-system sfml-audio sfml-network sfml-graphics sfml-window
+    glm::glm
+    glad 
+)

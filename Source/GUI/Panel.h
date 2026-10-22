@@ -1,6 +1,8 @@
 #ifndef PANEL_H_INCLUDED
 #define PANEL_H_INCLUDED
 
+#include <SFML/Window/Event.hpp>
+
 namespace gui
 {
     class Panel
